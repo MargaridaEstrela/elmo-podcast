@@ -1,0 +1,5 @@
+freesimplegui
+netifaces
+opencv-python
+rmn
+PyQt5
