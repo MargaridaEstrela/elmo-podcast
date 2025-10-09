@@ -8,6 +8,9 @@ import collections
 import sounddevice as sd
 import logging
 import threading
+import random
+from elmo_server import ElmoServer
+from emoshow_logger import EmoShowLogger
 
 
 
@@ -20,7 +23,10 @@ CHUNK = int(RATE * FRAME_DURATION / 1000)  # 10ms frames
 TIMEOUT = 0.8  # Timeout period in seconds to determine end of speech
 PODCAST_ID = 0
 
-robot_angles = {0: None, 1: -40, 2: 0 , 3: 40}
+
+global elmo, elmo_ip, elmo_port, client_ip, robot_angles, speakers
+
+robot_angles = {0: [None, None], 1: [-40,-10], 2: [0, -10] , 3: [40, -10]}
 
 speakers = {0: False, 1: False, 2: False, 3:False}
 
@@ -67,6 +73,7 @@ def find_input_device_index(device):
     return None
 
 def vb_control(input_device_index, speaker):
+    global speakers
     logger = setup_logger(f"vb_{speaker}")
     vad = webrtcvad.Vad(1)  # Change for more aggressive filtering
     print(f"Listening on channel {speaker}...")
@@ -100,22 +107,53 @@ def vb_control(input_device_index, speaker):
     except Exception as e:
         print(f"Error during listening: {e}")
 
-
 def nvb_autonomous_control():
-    while True:
+    global elmo, elmo_ip, elmo_port, client_ip, robot_angles, speakers
+
+    
+    debug_mode = False
+    connect_mode = False
+
+
+    # Start logger
+    log_path = "logs/elmo-app.log"
+
+    os.makedirs(os.path.dirname(log_path), exist_ok=True)
+
+    # Create the file only if it does not exist
+    if not os.path.exists(log_path):
+        with open(log_path, "w") as f:
+            f.write("")  # optional: f.write("Log started\n")
+
+    logger = EmoShowLogger(log_file=log_path)
+    print("eu estive aqui")
+    # Start server
+    elmo = ElmoServer(
+        elmo_ip, int(elmo_port), client_ip, logger, debug_mode, connect_mode
+    )
+    
+    """while True:
         active_angles = [robot_angles[k] for k, v in speakers.items() if v]
-
-
-
+        #print(active_angles)
+        if len(active_angles) > 1:
+            active_angles = random.choice(active_angles)
+        if len(active_angles) == 1:
+            if active_angles[0][0] != None:
+                elmo.move_pan(active_angles[0][0])
+                elmo.move_tilt(active_angles[0][1])
+                print(active_angles)   
+            else:
+                pass"""
 def main():
-    """print(sys.argv)
-    if len(sys.argv) != 4:
-        print("Usage: python ___.py <host_ip> <robot_ip>")
-        sys.exit(1)
+
+    global elmo, elmo_ip, elmo_port, client_ip
+
+    if len(sys.argv) == 4:
+        elmo_ip, elmo_port, client_ip = sys.argv[1:4]
+    
     else:
-        HOST_IP = sys.argv[1]
-        ROBOT_IP = sys.argv[2]
-        PORT = sys.argv[3]"""
+        print("Usage: python3 main.py <elmo_ip> <elmo_port> <my_ip>")
+        return
 
     logger = setup_logger("main")
 
@@ -137,11 +175,26 @@ def main():
 
     #channel = 3  # Skip L and R channels
     
+    threads = []
     for speaker in range(4):
-        threading.Thread(target=vb_control, args=(input_device_index, speaker, )).start()
+        t = threading.Thread(target=vb_control, args=(input_device_index, speaker, ), daemon=True)
+        t.start()
+        threads.append(t)
         logger.info(f'START: {str(speaker)}')
 
-    threading.Thread(target=nvb_autonomous_control, args=( )).start()
+
+    nvb_thread = threading.Thread(target=nvb_autonomous_control, args=( ), daemon=True)
+    nvb_thread.start()
+    threads.append(nvb_thread)
+    logger.info(f'START: autonoums control')
+
+    try:
+        for t in threads:
+            t.join()
+    except KeyboardInterrupt:
+        print("\nInterrupted, shutting down...")
+        for t in threads:
+            t.join(timeout=5)
 
 if __name__ == "__main__":
     main()
