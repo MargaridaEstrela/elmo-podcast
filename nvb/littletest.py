@@ -29,7 +29,7 @@ elmo = ElmoServer(
 )
 
 print("Autonomous control initialized")
-
+elmo.toggle_motors()
 elmo.move_tilt(-7)
 #elmo.set_forever_icon("fast_loading.gif")
 

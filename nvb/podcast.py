@@ -14,15 +14,19 @@ from elmo_server import ElmoServer
 from emoshow_logger import EmoShowLogger
 from fastapi import FastAPI
 from uvicorn import Config, Server
+import torch
 
 
 
 # Audio recording parameters
-RATE = 16000
+SAMPLE_RATE = 16000
 FRAME_DURATION = 10  # 10ms
-CHUNK = int(RATE * FRAME_DURATION / 1000)  # 10ms frames
-TIMEOUT = 0.8  # Timeout period in seconds to determine end of speech
+CHUNK = 512 # must be 512 samples for VAD at 16kHz
+SILENCE_FRAMES_THRESHOLD = 30
 PODCAST_ID = 0
+
+MAX_CHUNK_DURATION = 5  # seconds
+MAX_CHUNK_SAMPLES = SAMPLE_RATE * MAX_CHUNK_DURATION
 
 # Global variables
 elmo = None
@@ -32,7 +36,7 @@ client_ip = None
 shutdown_event = threading.Event()
 
 
-robot_angles = {0: [None, None], 1: [40, -7], 2: [0, -7], 3: [-40, -7]}
+robot_angles = {0: [None, None], 1: [35, -7], 2: [0, -7], 3: [-35, -7]}
 speakers = {0: False, 1: False, 2: False, 3: False}
 
 global flag, robot_position, api_server
@@ -75,7 +79,7 @@ def find_input_device_index(device):
             return i
     return None
 
-def vb_control(input_device_index, speaker):
+"""def vb_control(input_device_index, speaker):
     global speakers, shutdown_event
     logger = setup_logger(f"vb_{speaker}")
     vad = webrtcvad.Vad(1)  # Change for more aggressive filtering
@@ -116,7 +120,72 @@ def vb_control(input_device_index, speaker):
     except Exception as e:
         logger.error(f"Error during listening on speaker {speaker}: {e}")
     finally:
-        logger.info(f"Speaker {speaker} control thread cleaned up")
+        logger.info(f"Speaker {speaker} control thread cleaned up")"""
+
+def detect_speech(audio, accumulated_audio, vad_model):
+    """Detects speech segments using Silero VAD."""
+    accumulated_audio.extend(audio)
+    if len(accumulated_audio) < 512:
+        return False
+
+    audio_tensor = torch.tensor(accumulated_audio[-512:], dtype=torch.float32)
+    
+    # Normalize audio
+    if torch.max(torch.abs(audio_tensor)) > 0:
+        audio_tensor /= torch.max(torch.abs(audio_tensor))
+    
+    audio_tensor = audio_tensor.unsqueeze(0)
+
+    speech_prob = vad_model(audio_tensor, SAMPLE_RATE).item()
+
+    return speech_prob > 0.2  # Adjust threshold (lower = more sensitive)
+
+
+def vb_control(input_device_index, speaker):
+    logger = setup_logger(f"vb_{speaker}")
+    print("Loading VAD model...")
+    vad_model, _ = torch.hub.load("snakers4/silero-vad", "silero_vad")
+    logger.info("VAD model loaded.")
+    
+    chunk_buffer = []  # Stores speech audio
+    recording = False  # Flag to track when we are recording speech
+    silence_counter = 0  # Tracks silence duration
+    accumulated_audio = []  # Collects audio for VAD
+    
+    logger.info("Listening...")
+    
+    def callback(indata, frames, time, status):
+        """Real-time audio callback function."""
+        nonlocal speaker, chunk_buffer, recording, silence_counter, accumulated_audio, vad_model
+        if status:
+            print(f"Audio error: {status}")
+
+        audio_chunk = indata[:, speaker+2]  # Take mono channel
+
+        if detect_speech(audio_chunk, accumulated_audio, vad_model):
+            if not recording:
+                recording = True           
+            
+            silence_counter = 0  # Reset silence counter when voice is detected
+            speakers[speaker] = True
+        else:
+            silence_counter += 1
+
+            # Only stop recording if silence is detected for multiple frames
+            if recording and silence_counter > SILENCE_FRAMES_THRESHOLD:                
+                accumulated_audio.clear()
+                silence_counter = 0
+                speakers[speaker] = False
+
+    with sd.InputStream(device=input_device_index, samplerate=SAMPLE_RATE, channels=6, dtype="float32", 
+                        callback=callback, blocksize=CHUNK):
+        try:
+            while True:
+                time.sleep(0.1)
+        except KeyboardInterrupt:
+            logger.info("Stopping listening.")
+
+
 
 def nvb_autonomous_control():
     global robot_position, flag
@@ -139,8 +208,8 @@ def nvb_autonomous_control():
     elmo = ElmoServer(
         elmo_ip, int(elmo_port), client_ip, elmo_logger, debug_mode, connect_mode
     )
-    elmo.toggle_motors()
-    elmo.toggle_behaviour()
+    #elmo.toggle_motors()
+    #elmo.toggle_behaviour()
     elmo.set_image("blink.gif")
     elmo.move_tilt(-7)
 
@@ -152,7 +221,7 @@ def nvb_autonomous_control():
     time_listening = 0
     time_count = 0
     s_talking = None
-    current_position = [0, -5]
+    current_position = [0, -7]
     #print("pan")
     
     try:
@@ -170,51 +239,58 @@ def nvb_autonomous_control():
 
                         if 0 in [k for k, v in active_angles]:
                             print("elmo is talking")
-                            elmo.set_icon("speaking.gif")
+                            elmo.set_icon("speaking.png")
 
                         #if the person that was talking previously is stil talking look at that person                     
                         elif s_talking != None and s_talking in [k for k, v in active_angles]:
                             print("kip looking")
-                            elmo.set_icon("listening.gif") 
+                            elmo.set_icon("listening.png") 
                         # else choose a rondom person
                         else:
                             active_angles = [random.choice(active_angles)]
                             print("choose random")
-                            elmo.set_icon("listening.gif")
+                            elmo.set_icon("listening.png")
 
 
                     #print(f"{s_talking} {active_angles[0][0]}")
                     # if one person is speaking and it is not the robot
                     if len(active_angles) == 1 and active_angles[0][0] != 0:
-                        elmo.set_icon("listening.gif")
+                        elmo.set_icon("listening.png")
                         print(time.time() - time_listening)
                         #start talking
                         if (time_listening == 0 and s_talking == None) or (time_listening != 0 and s_talking != active_angles[0][0]):
-                            time_listening = time.time()
+                            
                             s_talking = active_angles[0][0]
                             elmo.move_pan(active_angles[0][1][0])
                             elmo.move_tilt(active_angles[0][1][1])
-                            current_position = [active_angles[0][1][0],active_angles[0][1][1]]
+
+                            if current_position != [active_angles[0][1][0],active_angles[0][1][1]]:
+                                time_listening = time.time()
+                                current_position = [active_angles[0][1][0],active_angles[0][1][1]]
+                            
                             time.sleep(2)
                             print("start talking")
                     
                 
                         # if is still talking
                         elif time_listening != 0 and s_talking == active_angles[0][0] and time.time() - time_listening >= 5:
-                                elmo.set_icon("listening.gif")
-                                elmo.move_tilt(active_angles[0][1][1]+10)
-                                elmo.set_icon("listening.gif")
-                                time.sleep(2)
-                                elmo.set_icon("listening.gif")
-                                elmo.move_tilt(active_angles[0][1][1])
-                                elmo.set_icon("listening.gif")
-                                time.sleep(2)
-                                elmo.set_icon("listening.gif")
+                                elmo.set_icon("listening.png")
+                                elmo.toggle_behaviour()
+                                print(elmo.get_control_behaviour())
+                                #elmo.move_tilt(active_angles[0][1][1]+10)    
+                                time.sleep(2)   
+                                #elmo.move_tilt(active_angles[0][1][1])  
+                                #time.sleep(2)
+                                elmo.toggle_behaviour()
+                                print(elmo.get_control_behaviour())
+                                elmo.move_pan(active_angles[0][1][0])
+                                elmo.move_tilt(active_angles[0][1][1]) 
+                                current_position = [active_angles[0][1][0],active_angles[0][1][1]] 
                                 print("backchanneling")
                                 time_listening = time.time()
                         
                     elif len(active_angles) == 1 and active_angles[0][0] == 0:
-                        elmo.set_icon("speaking.gif")
+                        elmo.set_icon("speaking.png")
                         if s_talking != 0:
                             time_listening = time.time()
                             s_talking = active_angles[0][0]
@@ -223,9 +299,9 @@ def nvb_autonomous_control():
                     
                     elif len(active_angles) == 0:
                         print("nada")
-                        time_listening = 0
+                        #time_listening = 0
                         s_talking = None
-                        #elmo.set_icon("black.png")
+                        elmo.set_icon("black.png")
                     
                     #TODO: WHAT ROBO DO WHEN TALKING
                 
@@ -252,7 +328,7 @@ def nvb_autonomous_control():
                 if shutdown_event.is_set():
                     break
             
-            time.sleep(0.5)
+            time.sleep(1)
         
         logger.info("Autonomous control stopping...")
         
@@ -266,17 +342,17 @@ def action(command: str):
     print(f"Received command: {command}")
     flag = False
     if command == "s1":
-        robot_position = [-40, -5, None, None]
+        robot_position = [40, -7, None, None]
     elif command == "s2":
-        robot_position = [0, -5, None, None]
+        robot_position = [0, -7, None, None]
     elif command == "s3":
-        robot_position = [40, -5, None, None]
+        robot_position = [-40, -7, None, None]
     elif command == "backchanneling":
         robot_position = [None, None, None, None]
     elif command == "listening":
-        robot_position = [None, None, None, "listening.gif"]
+        robot_position = [None, None, None, "listening.png"]
     elif command == "speaking":
-        robot_position = [None, None, None, "speaking.gif"]
+        robot_position = [None, None, None, "speaking.png"]
     elif command == "blush":
         robot_position = [None, None, "blush.png", None]
     elif command == "cry":
@@ -294,7 +370,7 @@ def action(command: str):
     elif command == "thinking":
         robot_position = [None, None, "thinking.png", None]
     elif command == "idle":
-        robot_position = [0, -5, "blink.gif", "black.png"]
+        robot_position = [0, -7, "blink.gif", "black.png"]
     else:
         pass
     return {"status": "ok", "command": command}
