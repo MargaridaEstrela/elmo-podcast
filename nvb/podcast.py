@@ -35,11 +35,11 @@ elmo_port = None
 client_ip = None
 shutdown_event = threading.Event()
 
-
-robot_angles = {0: [None, None], 1: [35, -7], 2: [0, -7], 3: [-35, -7]}
+global flag, robot_position, api_server, robot_angles
+robot_angles = {0: [None, None], 1: [35, -10], 2: [0, -10], 3: [-35, -10]}
 speakers = {0: False, 1: False, 2: False, 3: False}
 
-global flag, robot_position, api_server
+
 flag = True
 robot_position = [None,None,None,None]
 api_server = None
@@ -138,7 +138,7 @@ def detect_speech(audio, accumulated_audio, vad_model):
 
     speech_prob = vad_model(audio_tensor, SAMPLE_RATE).item()
 
-    return speech_prob > 0.2  # Adjust threshold (lower = more sensitive)
+    return speech_prob > 0.3  # Adjust threshold (lower = more sensitive)
 
 
 def vb_control(input_device_index, speaker):
@@ -188,7 +188,7 @@ def vb_control(input_device_index, speaker):
 
 
 def nvb_autonomous_control():
-    global robot_position, flag
+    global robot_position, flag, robot_angles
     logger = setup_logger(f"nvd_autonomous")
     debug_mode = False
     connect_mode = False
@@ -238,17 +238,17 @@ def nvb_autonomous_control():
                     if len(active_angles) > 1:
 
                         if 0 in [k for k, v in active_angles]:
-                            print("elmo is talking")
+                            #print("elmo is talking")
                             elmo.set_icon("speaking.png")
 
                         #if the person that was talking previously is stil talking look at that person                     
                         elif s_talking != None and s_talking in [k for k, v in active_angles]:
-                            print("kip looking")
+                            #print("kip looking")
                             elmo.set_icon("listening.png") 
                         # else choose a rondom person
                         else:
                             active_angles = [random.choice(active_angles)]
-                            print("choose random")
+                            #print("choose random")
                             elmo.set_icon("listening.png")
 
 
@@ -261,31 +261,32 @@ def nvb_autonomous_control():
                         if (time_listening == 0 and s_talking == None) or (time_listening != 0 and s_talking != active_angles[0][0]):
                             
                             s_talking = active_angles[0][0]
+                            time_listening = time.time()
+                            current_position = active_angles[0][1]
                             elmo.move_pan(active_angles[0][1][0])
                             elmo.move_tilt(active_angles[0][1][1])
-
-                            if current_position != [active_angles[0][1][0],active_angles[0][1][1]]:
-                                time_listening = time.time()
-                                current_position = [active_angles[0][1][0],active_angles[0][1][1]]
+                            print("try center")
+                            elmo.center_player()
+                            print("try center end")
                             
-                            time.sleep(2)
-                            print("start talking")
+                            #time.sleep(2)
+                            #print("start talking")
                     
                 
                         # if is still talking
-                        elif time_listening != 0 and s_talking == active_angles[0][0] and time.time() - time_listening >= 5:
+                        elif time_listening != 0 and s_talking == active_angles[0][0] and time.time() - time_listening >= 10:
+                                print("beginning backchanneling")
                                 elmo.set_icon("listening.png")
                                 elmo.toggle_behaviour()
-                                print(elmo.get_control_behaviour())
-                                #elmo.move_tilt(active_angles[0][1][1]+10)    
                                 time.sleep(2)   
-                                #elmo.move_tilt(active_angles[0][1][1])  
-                                #time.sleep(2)
                                 elmo.toggle_behaviour()
-                                print(elmo.get_control_behaviour())
-                                elmo.move_pan(active_angles[0][1][0])
-                                elmo.move_tilt(active_angles[0][1][1]) 
-                                current_position = [active_angles[0][1][0],active_angles[0][1][1]] 
+                                #print(elmo.get_control_behaviour())
+                                #elmo.move_pan(active_angles[0][1][0])
+                                #elmo.move_tilt(active_angles[0][1][1])
+                                print("try center")
+                                elmo.center_player()
+                                print("try center end")
+                                #current_position = [active_angles[0][1][0],active_angles[0][1][1]] 
                                 print("backchanneling")
                                 time_listening = time.time()
                         
@@ -294,11 +295,11 @@ def nvb_autonomous_control():
                         if s_talking != 0:
                             time_listening = time.time()
                             s_talking = active_angles[0][0]
-                            print("robot star talking")
+                            #print("robot star talking")
                             
                     
                     elif len(active_angles) == 0:
-                        print("nada")
+                        #print("nada")
                         #time_listening = 0
                         s_talking = None
                         elmo.set_icon("black.png")
@@ -306,20 +307,26 @@ def nvb_autonomous_control():
                     #TODO: WHAT ROBO DO WHEN TALKING
                 
                 if not flag:
+                    if robot_position[4] == True:
+                        elmo.toggle_motors()
+                    if robot_position[5] == True:
+                        elmo.toggle_behaviour()
                     if robot_position[0] != None:
                         elmo.move_pan(robot_position[0])
                         current_position[0] = robot_position[0]
                     if robot_position[1] != None:
                         elmo.move_tilt(robot_position[1])
+                        elmo.center_player()
                         current_position[1] = robot_position[1]
                     if robot_position[2] != None:
                         elmo.set_image(robot_position[2])
                     if robot_position[3] != None:
                         elmo.set_icon(robot_position[3])
-                    if robot_position == [None,None,None,None]:
-                        elmo.move_tilt(current_position[1]+10)
-                        time.sleep(2)
-                        elmo.move_tilt(current_position[1])
+                    if robot_position == [None, None, None, None, None, None]:
+                        elmo.toggle_behaviour()
+                        time.sleep(2)   
+                        elmo.toggle_behaviour()
+                        elmo.center_player()
                     time.sleep(2)
                     flag = True
                 
@@ -336,44 +343,56 @@ def nvb_autonomous_control():
         logger.error(f"Fatal error in autonomous control: {e}")
 
 
-@app.get("/action/{command}")
-def action(command: str):
-    global robot_position, flag
-    print(f"Received command: {command}")
+@app.get("/action/{command}/{args}")
+def action(command: str, args:str):
+    global robot_position, flag, robot_angles
+    print(f"Received command: {command} / {args}")
     flag = False
     if command == "s1":
-        robot_position = [40, -7, None, None]
+        robot_position = [robot_angles[1][0], robot_angles[1][1], None, None, None, None]
     elif command == "s2":
-        robot_position = [0, -7, None, None]
+        robot_position = [robot_angles[2][0], robot_angles[2][1], None, None, None, None]
     elif command == "s3":
-        robot_position = [-40, -7, None, None]
+        robot_position = [robot_angles[3][0], robot_angles[3][1], None, None, None, None]
     elif command == "backchanneling":
-        robot_position = [None, None, None, None]
+        robot_position = [None, None, None, None, None, None]
     elif command == "listening":
-        robot_position = [None, None, None, "listening.png"]
+        robot_position = [None, None, None, "listening.png", None, None]
     elif command == "speaking":
-        robot_position = [None, None, None, "speaking.png"]
+        robot_position = [None, None, None, "speaking.png", None, None]
     elif command == "blush":
-        robot_position = [None, None, "blush.png", None]
+        robot_position = [None, None, "blush.png", None, None, None]
     elif command == "cry":
-        robot_position = [None, None, "cry.png", None]
+        robot_position = [None, None, "cry.png", None, None, None]
     elif command == "effort":
-        robot_position = [None, None, "effort.png", None]
+        robot_position = [None, None, "effort.png", None, None, None]
     elif command == "love":
-        robot_position = [None, None, "love.png", None]
+        robot_position = [None, None, "love.png", None, None, None]
     elif command == "normal":
-        robot_position = [None, None, "blink.gif", None]
+        robot_position = [None, None, "blink.gif", None, None, None]
     elif command == "sad":
-        robot_position = [None, None, "sad.png", None]
+        robot_position = [None, None, "sad.png", None, None, None]
     elif command == "star":
-        robot_position = [None, None, "star.png", None]
+        robot_position = [None, None, "star.png", None, None, None]
     elif command == "thinking":
-        robot_position = [None, None, "thinking.png", None]
+        robot_position = [None, None, "thinking.png", None, None, None]
+    elif command == "wink":
+        robot_position = [None, None, "wink.gif", None, None, None]
     elif command == "idle":
-        robot_position = [0, -7, "blink.gif", "black.png"]
+        robot_position = [0, -7, "blink.gif", "black.png", None, None]
+    elif command == "sets1":
+        robot_angles[1] = [int(args.split(",")[0]), int(args.split(",")[1])]
+    elif command == "sets2":
+        robot_angles[2] = [int(args.split(",")[0]), int(args.split(",")[1])]
+    elif command == "sets3":
+        robot_angles[3] = [int(args.split(",")[0]), int(args.split(",")[1])]
+    elif command == "toggle_motors":
+        robot_position = [None, None, None, None, True, None]
+    elif command == "toggle_behaviours":
+        robot_position = [None, None, None, None, None, True]
     else:
         pass
-    return {"status": "ok", "command": command}
+    return {"status": "ok", "command": command, "args": args}
 
 @app.get("/stop")
 def stop():

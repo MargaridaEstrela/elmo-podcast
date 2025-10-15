@@ -2,6 +2,8 @@ import socket
 import cv2
 import numpy as np
 import requests
+import time
+
 
 
 class ElmoServer:
@@ -97,6 +99,8 @@ class ElmoServer:
         self.set_icon("black.png")
         self.move_pan(0)
         self.move_tilt(0)
+
+        self.face_classifier = cv2.CascadeClassifier(cv2.data.haarcascades + "haarcascade_frontalface_default.xml")
 
     def set_default_pan_left(self, pan_angle):
         """
@@ -459,6 +463,62 @@ class ElmoServer:
             sound (str): The source name of the sound to be played.
         """
         self.send_message(f"sound::{sound}")
+
+
+    def center_player(self):
+        """
+        Centers the player's face in the frame by adjusting the robot's pan and
+        tilt angles. If no faces detected, returns and continues the game.
+        """
+        
+        frame = self.grab_image()
+        
+        gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
+        print("chego aquiiiiiii")
+        #cv2.imshow('Gaze Direction Detector', gray)
+        faces = self.face_classifier.detectMultiScale(gray, 1.1, 5, minSize=(100, 100))
+
+        if len(faces) == 0:
+            print("Cannot center player. No faces detected.")
+            return
+        print("TÊNHO UMA CARA")
+        # Get frame center and dimensions
+        frame_width, frame_height = frame.shape[1], frame.shape[0]
+        frame_center_x = frame_width / 2
+        frame_center_y = frame_height / 2
+
+        # Extract face bounding box
+        x, y, w, h = faces[0]
+        cv2.rectangle(frame, (x, y), (x + w, y + h), (0, 255, 0), 2)
+
+        # Compute offsets
+        face_center_x = x + w / 2
+        face_center_y = y + h / 2
+        horizontal_offset = face_center_x - frame_center_x
+        vertical_offset = frame_center_y - face_center_y
+
+        # Get current pan and tilt angles
+        current_pan_angle = self.get_current_pan_angle()
+        current_tilt_angle = self.get_current_tilt_angle()
+
+        # Convert pixel offsets to angle corrections using camera FOV
+        horizontal_adjustment = (horizontal_offset / frame_width) * 62.2  # Use 62.2° FOV for pan
+        vertical_adjustment = (vertical_offset / frame_height) * 48.8  # Use 48.8° FOV for tilt
+
+        # Apply angle corrections and update default values
+        new_pan_angle = round(current_pan_angle - horizontal_adjustment)
+        new_tilt_angle = round(current_tilt_angle - vertical_adjustment)
+
+        # Check if values are within valid range
+        new_pan_angle = self.check_pan_angle(new_pan_angle)
+        new_tilt_angle = self.check_tilt_angle(new_tilt_angle)
+
+        self.move_pan(new_pan_angle)
+        time.sleep(2)
+        self.move_tilt(new_tilt_angle)
+
+        print("Olhei para a cara")
+
 
     def close_all(self):
         """
