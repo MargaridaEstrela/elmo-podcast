@@ -2,12 +2,39 @@ import streamlit as st
 import httpx
 import asyncio
 import sys
+import logging
+import os
 
 S1 = S2 = S3 = ""
 if len(sys.argv) == 4:
     S1, S2, S3 = sys.argv[1], sys.argv[2], sys.argv[3]
 
 BASE_URL = "http://127.0.0.1:8000"
+PODCAST_ID = 0
+
+def setup_logger(process_name):
+    directory = str(PODCAST_ID)
+    log_dir = os.path.join("logs", directory)
+    log_file = os.path.join(log_dir, process_name + ".log")
+    
+    # Ensure the directory exists
+    os.makedirs(log_dir, exist_ok=True)
+    
+    # Create a logger
+    logger = logging.getLogger(process_name)
+    logger.setLevel(logging.INFO)
+
+    # Prevent duplicate handlers if logger already exists
+    if not logger.handlers:
+        file_handler = logging.FileHandler(log_file, mode='w')
+        file_handler.setLevel(logging.INFO)
+        formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
+        file_handler.setFormatter(formatter)
+        logger.addHandler(file_handler)
+    
+    return logger
+
+logger = setup_logger("interface")
 
 async def send_command(cmd, args):
     async with httpx.AsyncClient(timeout=2) as client:
@@ -15,6 +42,8 @@ async def send_command(cmd, args):
 
 def run_command(cmd, args=None):
     asyncio.run(send_command(cmd, args))
+    logger.info(f"send: {cmd} : {args}")
+
 
 
 st.set_page_config(page_title="Elmo Control", layout="wide", initial_sidebar_state="collapsed")

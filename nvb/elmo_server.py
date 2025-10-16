@@ -234,7 +234,7 @@ class ElmoServer:
             message (str): The message to be sent.
         """
         self.logger.log_message(message)
-
+        print(message)
         if self.debug == True:
             return "debug"
 
@@ -252,7 +252,7 @@ class ElmoServer:
             try:
                 url = "http://" + self.elmo_ip + ":8001/command"
                 kwargs["op"] = command
-                # print(kwargs)
+                #print(kwargs)
                 res = requests.post(url, json=kwargs, timeout=1).json()
                 if not res["success"]:
                     return
@@ -474,14 +474,14 @@ class ElmoServer:
         frame = self.grab_image()
         
         gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
-        print("chego aquiiiiiii")
+        #print("chego aquiiiiiii")
         #cv2.imshow('Gaze Direction Detector', gray)
         faces = self.face_classifier.detectMultiScale(gray, 1.1, 5, minSize=(100, 100))
 
         if len(faces) == 0:
             print("Cannot center player. No faces detected.")
             return
-        print("TÊNHO UMA CARA")
+        #print("TÊNHO UMA CARA")
         # Get frame center and dimensions
         frame_width, frame_height = frame.shape[1], frame.shape[0]
         frame_center_x = frame_width / 2

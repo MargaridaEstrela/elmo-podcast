@@ -17,6 +17,33 @@ from uvicorn import Config, Server
 import torch
 
 
+class LockedValue:
+    def __init__(self, value=None):
+        self._value = value
+        self._lock = threading.Lock()
+
+    def get(self, n):
+        with self._lock:
+            # Return a copy if it's a list to prevent external modifications
+            val = self._value[n]
+            return val.copy() if isinstance(val, list) else val
+    
+    def getAll(self):
+        with self._lock:
+            # Return a deep copy of the entire structure
+            import copy
+            return copy.deepcopy(self._value)
+
+    def set(self, n, value):
+        with self._lock:
+            # Store a copy to prevent external modifications
+            self._value[n] = value.copy() if isinstance(value, list) else value
+
+    def setAll(self, value):
+        with self._lock:
+            import copy
+            self._value = copy.deepcopy(value)
+
 
 # Audio recording parameters
 SAMPLE_RATE = 16000
@@ -36,12 +63,12 @@ client_ip = None
 shutdown_event = threading.Event()
 
 global flag, robot_position, api_server, robot_angles
-robot_angles = {0: [None, None], 1: [35, -10], 2: [0, -10], 3: [-35, -10]}
+robot_angles = LockedValue({0: [None, None], 1: [35, -10], 2: [0, -10], 3: [-35, -10]})
 speakers = {0: False, 1: False, 2: False, 3: False}
 
 
 flag = True
-robot_position = [None,None,None,None]
+robot_position = LockedValue([None,None,None,None])
 api_server = None
 app = FastAPI()
 
@@ -138,7 +165,7 @@ def detect_speech(audio, accumulated_audio, vad_model):
 
     speech_prob = vad_model(audio_tensor, SAMPLE_RATE).item()
 
-    return speech_prob > 0.3  # Adjust threshold (lower = more sensitive)
+    return speech_prob > 0.2  # Adjust threshold (lower = more sensitive)
 
 
 def vb_control(input_device_index, speaker):
@@ -176,6 +203,8 @@ def vb_control(input_device_index, speaker):
                 accumulated_audio.clear()
                 silence_counter = 0
                 speakers[speaker] = False
+
+        logger.info(speakers)
 
     with sd.InputStream(device=input_device_index, samplerate=SAMPLE_RATE, channels=6, dtype="float32", 
                         callback=callback, blocksize=CHUNK):
@@ -223,113 +252,157 @@ def nvb_autonomous_control():
     s_talking = None
     current_position = [0, -7]
     #print("pan")
+    do_nothing = True
     
     try:
         while not shutdown_event.is_set():
             try:
-                    
+                
+                print(robot_angles.getAll())    
                 if flag:    
                     # find the persons that are talking
-                    active_angles = [[k, robot_angles[k]] for k, v in speakers.items() if v]
+                    active_angles = [[k, robot_angles.get(k)] for k, v in speakers.items() if v]
                     print(active_angles)
+                    logger.info(f"Active speakers: {active_angles}")
                     
                     # if theres more that one 
                     # TODO: gaze detection
                     if len(active_angles) > 1:
-
+                        do_nothing = True
                         if 0 in [k for k, v in active_angles]:
                             #print("elmo is talking")
                             elmo.set_icon("speaking.png")
+                            logger.info(f"More than one person speaking: Robot is speaking")
 
                         #if the person that was talking previously is stil talking look at that person                     
                         elif s_talking != None and s_talking in [k for k, v in active_angles]:
                             #print("kip looking")
                             elmo.set_icon("listening.png") 
+                            logger.info(f"More than one person speaking: keeps looking at: {s_talking}")
                         # else choose a rondom person
                         else:
                             active_angles = [random.choice(active_angles)]
                             #print("choose random")
                             elmo.set_icon("listening.png")
-
+                            logger.info(f"More than one person speaking: Choose random: {s_talking}")
+                    
 
                     #print(f"{s_talking} {active_angles[0][0]}")
                     # if one person is speaking and it is not the robot
                     if len(active_angles) == 1 and active_angles[0][0] != 0:
-                        elmo.set_icon("listening.png")
-                        print(time.time() - time_listening)
+                        
+                        #print(time.time() - time_listening)
                         #start talking
                         if (time_listening == 0 and s_talking == None) or (time_listening != 0 and s_talking != active_angles[0][0]):
-                            
+                            elmo.set_icon("listening.png")
                             s_talking = active_angles[0][0]
                             time_listening = time.time()
+                            logger.info(f"Start Talking: {s_talking}")
+
                             current_position = active_angles[0][1]
                             elmo.move_pan(active_angles[0][1][0])
                             elmo.move_tilt(active_angles[0][1][1])
-                            print("try center")
+                            logger.info(f"Move to: {current_position}")
+                            time.sleep(2)
+                            #print("try center")
                             elmo.center_player()
-                            print("try center end")
+                            logger.info(f"Center player: {s_talking}")
+                            #print("try center end")
                             
                             #time.sleep(2)
                             #print("start talking")
-                    
+                            do_nothing = True
+                            
                 
                         # if is still talking
                         elif time_listening != 0 and s_talking == active_angles[0][0] and time.time() - time_listening >= 10:
-                                print("beginning backchanneling")
-                                elmo.set_icon("listening.png")
+                                #print("beginning backchanneling")
+                                #elmo.set_icon("listening.png")
                                 elmo.toggle_behaviour()
                                 time.sleep(2)   
                                 elmo.toggle_behaviour()
+                                logger.info(f"Backchanneling to: {s_talking}")
                                 #print(elmo.get_control_behaviour())
                                 #elmo.move_pan(active_angles[0][1][0])
                                 #elmo.move_tilt(active_angles[0][1][1])
-                                print("try center")
+                                #print("try center")
+                                time.sleep(2)
                                 elmo.center_player()
-                                print("try center end")
+                                logger.info(f"Center player: {s_talking}")
+                                #print("try center end")
                                 #current_position = [active_angles[0][1][0],active_angles[0][1][1]] 
-                                print("backchanneling")
+                                #print("backchanneling")
                                 time_listening = time.time()
+                                
                         
                     elif len(active_angles) == 1 and active_angles[0][0] == 0:
-                        elmo.set_icon("speaking.png")
+                        
                         if s_talking != 0:
+                            elmo.set_icon("speaking.png")
                             time_listening = time.time()
                             s_talking = active_angles[0][0]
+                            do_nothing = True
                             #print("robot star talking")
+                            logger.info(f"Robot start talking")
                             
                     
                     elif len(active_angles) == 0:
                         #print("nada")
                         #time_listening = 0
-                        s_talking = None
-                        elmo.set_icon("black.png")
+                        if do_nothing:
+                            s_talking = None
+                            elmo.set_icon("black.png")
+                            do_nothing = False
+                            logger.info(f"No one talking")
                     
                     #TODO: WHAT ROBO DO WHEN TALKING
                 
                 if not flag:
-                    if robot_position[4] == True:
+                    flag = True
+                    print("start-flag")
+                    print(robot_position.get(0))
+                    if robot_position.get(4) == True:
                         elmo.toggle_motors()
-                    if robot_position[5] == True:
+                        logger.info(f"Toggle Motors")
+
+                    if robot_position.get(5) == True:
                         elmo.toggle_behaviour()
-                    if robot_position[0] != None:
-                        elmo.move_pan(robot_position[0])
-                        current_position[0] = robot_position[0]
-                    if robot_position[1] != None:
-                        elmo.move_tilt(robot_position[1])
+                        logger.info(f"Toggle Behaviours")
+
+                    if robot_position.get(0) != None:
+                        elmo.move_pan(robot_position.get(0))
+                        current_position[0] = robot_position.get(0)
+                        logger.info(f"Move pan to: {current_position[0]}")
+
+                    if robot_position.get(1) != None:
+                        elmo.move_tilt(robot_position.get(1))
+                        logger.info(f"Move tilt to: {current_position[1]}")
+                        time.sleep(2)
                         elmo.center_player()
-                        current_position[1] = robot_position[1]
-                    if robot_position[2] != None:
-                        elmo.set_image(robot_position[2])
-                    if robot_position[3] != None:
-                        elmo.set_icon(robot_position[3])
-                    if robot_position == [None, None, None, None, None, None]:
+                        logger.info(f"Center player")
+                        current_position[1] = robot_position.get(1)
+                        
+
+                    if robot_position.get(2) != None:
+                        elmo.set_image(robot_position.get(2))
+                        logger.info(f"Set image to: {robot_position.get(2)}")
+
+                    if robot_position.get(3) != None:
+                        elmo.set_icon(robot_position.get(3))
+                        logger.info(f"Set icon to: {robot_position.get(3)}")
+
+                    if robot_position.getAll() == [None, None, None, None, None, None]:
                         elmo.toggle_behaviour()
                         time.sleep(2)   
                         elmo.toggle_behaviour()
+                        logger.info(f"Backchanneling")
+                        time.sleep(2)
                         elmo.center_player()
+                        logger.info(f"Center player")
+                    
                     time.sleep(2)
-                    flag = True
-                
+                    print("end flag")
+
             except Exception as e:
                 logger.error(f"Error in autonomous control loop: {e}")
                 if shutdown_event.is_set():
@@ -349,47 +422,50 @@ def action(command: str, args:str):
     print(f"Received command: {command} / {args}")
     flag = False
     if command == "s1":
-        robot_position = [robot_angles[1][0], robot_angles[1][1], None, None, None, None]
+        robot_position.setAll([robot_angles.get(1)[0], robot_angles.get(1)[1], None, None, None, None])
     elif command == "s2":
-        robot_position = [robot_angles[2][0], robot_angles[2][1], None, None, None, None]
+        robot_position.setAll([robot_angles.get(2)[0], robot_angles.get(2)[1], None, None, None, None])
     elif command == "s3":
-        robot_position = [robot_angles[3][0], robot_angles[3][1], None, None, None, None]
+        robot_position.setAll([robot_angles.get(3)[0], robot_angles.get(3)[1], None, None, None, None])
     elif command == "backchanneling":
-        robot_position = [None, None, None, None, None, None]
+        robot_position.setAll([None, None, None, None, None, None])
     elif command == "listening":
-        robot_position = [None, None, None, "listening.png", None, None]
+        robot_position.setAll([None, None, None, "listening.png", None, None])
     elif command == "speaking":
-        robot_position = [None, None, None, "speaking.png", None, None]
+        robot_position.setAll([None, None, None, "speaking.png", None, None])
     elif command == "blush":
-        robot_position = [None, None, "blush.png", None, None, None]
+        robot_position.setAll([None, None, "blush.png", None, None, None])
     elif command == "cry":
-        robot_position = [None, None, "cry.png", None, None, None]
+        robot_position.setAll([None, None, "cry.png", None, None, None])
     elif command == "effort":
-        robot_position = [None, None, "effort.png", None, None, None]
+        robot_position.setAll([None, None, "effort.png", None, None, None])
     elif command == "love":
-        robot_position = [None, None, "love.png", None, None, None]
+        robot_position.setAll([None, None, "love.png", None, None, None])
     elif command == "normal":
-        robot_position = [None, None, "blink.gif", None, None, None]
+        robot_position.setAll([None, None, "blink.gif", None, None, None])
     elif command == "sad":
-        robot_position = [None, None, "sad.png", None, None, None]
+        robot_position.setAll([None, None, "sad.png", None, None, None])
     elif command == "star":
-        robot_position = [None, None, "star.png", None, None, None]
+        robot_position.setAll([None, None, "star.png", None, None, None])
     elif command == "thinking":
-        robot_position = [None, None, "thinking.png", None, None, None]
+        robot_position.setAll([None, None, "thinking.png", None, None, None])
     elif command == "wink":
-        robot_position = [None, None, "wink.gif", None, None, None]
+        robot_position.setAll([None, None, "wink-2.gif", None, None, None])
     elif command == "idle":
-        robot_position = [0, -7, "blink.gif", "black.png", None, None]
+        robot_position.setAll([0, -7, "blink.gif", "black.png", None, None])
     elif command == "sets1":
-        robot_angles[1] = [int(args.split(",")[0]), int(args.split(",")[1])]
+        robot_angles.set(1, [int(args.split(",")[0]), int(args.split(",")[1])])
+        robot_position.setAll([robot_angles.get(1)[0], robot_angles.get(1)[1], None, None, None, None])
     elif command == "sets2":
-        robot_angles[2] = [int(args.split(",")[0]), int(args.split(",")[1])]
+        robot_angles.set(2, [int(args.split(",")[0]), int(args.split(",")[1])])
+        robot_position.setAll([robot_angles.get(2)[0], robot_angles.get(2)[1], None, None, None, None])
     elif command == "sets3":
-        robot_angles[3] = [int(args.split(",")[0]), int(args.split(",")[1])]
+        robot_angles.set(3, [int(args.split(",")[0]), int(args.split(",")[1])])
+        robot_position.setAll([robot_angles.get(3)[0], robot_angles.get(3)[1], None, None, None, None])
     elif command == "toggle_motors":
-        robot_position = [None, None, None, None, True, None]
+        robot_position.setAll([None, None, None, None, True, None])
     elif command == "toggle_behaviours":
-        robot_position = [None, None, None, None, None, True]
+        robot_position.setAll([None, None, None, None, None, True])
     else:
         pass
     return {"status": "ok", "command": command, "args": args}
