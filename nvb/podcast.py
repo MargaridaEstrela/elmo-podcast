@@ -258,7 +258,7 @@ def nvb_autonomous_control():
         while not shutdown_event.is_set():
             try:
                 
-                print(robot_angles.getAll())    
+                #print(robot_angles.getAll())    
                 if flag:    
                     # find the persons that are talking
                     active_angles = [[k, robot_angles.get(k)] for k, v in speakers.items() if v]

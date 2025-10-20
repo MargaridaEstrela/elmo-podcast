@@ -208,7 +208,8 @@ class ElmoServer:
         Returns:
             int: The current tilt angle.
         """
-        return self.current_tilt
+        print(self.send_request_command("tilt", name="current_angle", control=False))
+        return self.send_request_command("tilt", name="current_angle", control=False)
     
     def get_current_pan_angle(self):
         """
@@ -217,7 +218,8 @@ class ElmoServer:
         Returns:
             int: The current pan angle.
         """
-        return self.current_pan
+        print(self.send_request_command("pan", name="current_angle", control=False))
+        return self.send_request_command("pan", name="current_angle", control=False)
 
     def connect_elmo(self):
         """
@@ -234,7 +236,7 @@ class ElmoServer:
             message (str): The message to be sent.
         """
         self.logger.log_message(message)
-        print(message)
+        #print(message)
         if self.debug == True:
             return "debug"
 
