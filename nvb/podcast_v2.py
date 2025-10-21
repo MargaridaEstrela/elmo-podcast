@@ -62,6 +62,7 @@ robot_angles = LockedValue({0: [-35, -3], 1: [-35, -3], 2: [None, None], 3: [35,
 robot_command_queue = queue.Queue()
 
 flag = LockedValue(True)
+delay_mode = LockedValue(False)
 rest_api_input = LockedValue([None, None, None, None, None, None])
 api_server = None
 app = FastAPI()
@@ -199,36 +200,26 @@ def audio_callback(indata, frames, time_info, status, vad_model, channel_offset=
 
 
 def robot_command_executor(elmo, logger):
-    current = [0, -3, 'blink.gif', 'black.png']
     """Execute robot commands from the queue with delays"""
     while not shutdown_event.is_set():
         try:
             # Get command from queue (timeout to check shutdown_event)
             command_data = robot_command_queue.get(timeout=0.5)
             #
-            print(current)
             command_type = command_data.get('type')
             delay_after = command_data.get('delay_after', 0)
             
             if command_type == 'set_icon':
                 icon = command_data.get('icon')
-                if icon != current[3]:
-                    elmo.set_icon(icon)
-                    logger.info(f"Set icon: {icon}")
-                    print(f"Set icon: {icon}")
-                    current[3] = icon
-                    if delay_after > 0:
-                        time.sleep(delay_after)
+                elmo.set_icon(icon)
+                logger.info(f"Set icon: {icon}")
+                print(f"Set icon: {icon}")
             
             elif command_type == 'move_pan':
                 angle = command_data.get('angle')
-                
                 elmo.move_pan(angle)
                 logger.info(f"Move pan: {angle}")
                 print(f"Move pan: {angle}")
-                current[0] = angle
-                if delay_after > 0:
-                    time.sleep(delay_after)
             
             elif command_type == 'move_tilt':
                 angle = command_data.get('angle')
@@ -236,41 +227,29 @@ def robot_command_executor(elmo, logger):
                 elmo.move_tilt(angle)
                 logger.info(f"Move tilt: {angle}")
                 print(f"Move tilt: {angle}")
-                current[1] = angle
-                if delay_after > 0:
-                    time.sleep(delay_after)
             
             elif command_type == 'toggle_behaviour':
                 elmo.toggle_behaviour()
                 logger.info(f"Toggle behaviour")
-                #current[0] = elmo.get_current_pan_angle()
-                #current[1] = elmo.get_current_tilt_angle()
                 print(f"Toggle behaviour")
-                if delay_after > 0:
-                    time.sleep(delay_after)
             
             elif command_type == 'set_image':
                 image = command_data.get('image')
-                if image != current[2]:
-                    elmo.set_image(image)
-                    logger.info(f"Set image: {image}")
-                    current[2] = image
-                    print(f"Set image: {image}")
-                    if delay_after > 0:
-                        time.sleep(delay_after)
-                    
-                    if image == "wink-2.gif":
-                        elmo.set_image("blink.gif")
-                        time.sleep(1)
+                elmo.set_image(image)
+                logger.info(f"Set image: {image}")
+                print(f"Set image: {image}")    
+                if image == "wink-2.gif":
+                    time.sleep(2)
+                    elmo.set_image("blink.gif")
                 
             elif command_type == 'toggle_motors':
                 elmo.toggle_motors()
                 logger.info(f"Toggle motors")
                 print(f"Toggle motors")
-                if delay_after > 0:
-                    time.sleep(delay_after)
             
-        
+            if delay_after > 0:
+                time.sleep(delay_after)
+                    
         except queue.Empty:
             continue
         except Exception as e:
@@ -292,17 +271,30 @@ def add_robot_command(command_type, delay_after=2, **kwargs):
     }
     robot_command_queue.put(command_data)
 
+def delay_mode_loop(elmo, logger):
+    """Loop that sets delay.gif every 2 seconds while delay_mode is active"""
+    global delay_mode
+    while not shutdown_event.is_set():
+        if delay_mode.get():
+            try:
+                elmo.set_icon("loading.gif")
+                logger.info("Delay mode: setting loading.gif")
+                print("Delay mode: setting loading.gif")
+                time.sleep(1.8)
+            except Exception as e:
+                logger.error(f"Error in delay mode loop: {e}")
+                time.sleep(0.5)
+        else:
+            time.sleep(0.5)
 
 def nvb_autonomous_control(elmo):
-    global elmo_ip, elmo_port, client_ip, robot_angles, flag, rest_api_input
+    global elmo_ip, elmo_port, client_ip, robot_angles, flag, rest_api_input, delay_mode
     logger = setup_logger(f"nvd_autonomous")
     
     logger.info("Autonomous control initialized")
     print("Autonomous control initialized")
 
     # Initialize robot
-    add_robot_command('set_image', delay_after=0, image='blink.gif')
-    add_robot_command('move_tilt', delay_after=2, angle=-3)
 
     time.sleep(5)
 
@@ -318,6 +310,11 @@ def nvb_autonomous_control(elmo):
 
     try:
         while not shutdown_event.is_set():
+
+            if delay_mode.get():
+                time.sleep(0.5)
+                continue
+
             if flag.get():
                 levels = loudness_levels.get()
                 detections = speech_detected.get()
@@ -331,7 +328,7 @@ def nvb_autonomous_control(elmo):
                 else:
                     loudest_speaker = -1
 
-                tiny_memory = (tiny_memory[-10:] if len(tiny_memory) >= 10 else tiny_memory) + [loudest_speaker]
+                tiny_memory = (tiny_memory[-7:] if len(tiny_memory) >= 7 else tiny_memory) + [loudest_speaker]
                 #print(f"Memory: {tiny_memory}, Current: {loudest_speaker}, Time talking: {current_speaker_start_time}")
                 
                 loudest_speaker = Counter(tiny_memory).most_common(1)[0][0]
@@ -342,7 +339,7 @@ def nvb_autonomous_control(elmo):
                 if loudest_speaker == 2:
                     if not robot_speaking:
                         do_nothing = False
-                        add_robot_command('set_icon', delay_after=0, icon='speaking.png')
+                        add_robot_command('set_icon', delay_after=2, icon='speaking.png')
                         logger.info(f"Robot start talking")
                         print(f"Robot start talking")
                         robot_speaking = True
@@ -356,7 +353,7 @@ def nvb_autonomous_control(elmo):
                     # NEW SPEAKER DETECTED
                     if loudest_speaker != previous or current_speaker_start_time is None:
                         current_speaker_start_time = time.time()
-                        add_robot_command('set_icon', delay_after=0, icon='listening.png')
+                        add_robot_command('set_icon', delay_after=2, icon='listening.png')
                         logger.info(f"Start Talking: {loudest_speaker}")
                         print(f"Start Talking: {loudest_speaker}")
                         add_robot_command('move_pan', delay_after=2, angle=robot_angles.get(loudest_speaker)[0])
@@ -372,16 +369,17 @@ def nvb_autonomous_control(elmo):
                         
                         if time_talking >= 5 and time_since_last_backchannel >= backchannel_interval:
                             add_robot_command('toggle_behaviour', delay_after=4)
-                            add_robot_command('toggle_behaviour', delay_after=0)
+                            add_robot_command('toggle_behaviour', delay_after=1)
                             logger.info(f"Backchanneling to: {robot_angles.get(loudest_speaker)}")
                             #print(f"Backchanneling to speaker {loudest_speaker} after {time_talking:.1f}s")
                             last_backchannel_time = time.time()
                 
                 # SILENCE
                 if loudest_speaker == -1 and previous == -1:
+                    robot_speaking = False
                     if not do_nothing:
                         robot_speaking = False
-                        add_robot_command('set_icon', delay_after=0, icon='black.png')
+                        add_robot_command('set_icon', delay_after=2, icon='black.png')
                         do_nothing = True
                         logger.info(f"No one talking")
                         current_speaker_start_time = None
@@ -409,16 +407,16 @@ def nvb_autonomous_control(elmo):
                     logger.info(f"Move tilt to: {rest_api_input.get(1)}")
 
                 if rest_api_input.get(2) != None:
-                    add_robot_command('set_image', delay_after=0, image=rest_api_input.get(2))
+                    add_robot_command('set_image', delay_after=2, image=rest_api_input.get(2))
                     logger.info(f"Set image to: {rest_api_input.get(2)}")
 
                 if rest_api_input.get(3) != None:
-                    add_robot_command('set_icon', delay_after=0, icon=rest_api_input.get(3))
+                    add_robot_command('set_icon', delay_after=2, icon=rest_api_input.get(3))
                     logger.info(f"Set icon to: {rest_api_input.get(3)}")
 
-                if rest_api_input.getAll() == [None, None, None, None, None, None]:
+                if rest_api_input.get() == [None, None, None, None, None, None]:
                     add_robot_command('toggle_behaviour', delay_after=4)
-                    add_robot_command('toggle_behaviour', delay_after=0)  
+                    add_robot_command('toggle_behaviour', delay_after=2)  
                     logger.info(f"Backchanneling")
                    
 
@@ -429,13 +427,27 @@ def nvb_autonomous_control(elmo):
 
 @app.get("/action/{command}/{args}")
 def action(command: str, args:str):
-    global rest_api_input, flag, robot_angles
+    global rest_api_input, flag, robot_angles, delay_mode
     print(f"Received command: {command} / {args}")
+
+    if command == "delay":
+        current_delay_state = delay_mode.get()
+        delay_mode.setAll(not current_delay_state)
+        flag.setAll(False)
+        if not current_delay_state:
+            print("Delay mode ACTIVATED")
+            return {"status": "ok", "command": "delay", "state": "activated"}
+        else:
+            print("Delay mode DEACTIVATED")
+            flag.setAll(True)
+            return {"status": "ok", "command": "delay", "state": "deactivated"}
+    
+
     flag.setAll(False)
     if command == "s1":
-        rest_api_input.setAll([robot_angles.get(1)[0], robot_angles.get(1)[1], None, None, None, None])
+        rest_api_input.setAll([robot_angles.get(0)[0], robot_angles.get(0)[1], None, None, None, None])
     elif command == "s2":
-        rest_api_input.setAll([robot_angles.get(2)[0], robot_angles.get(2)[1], None, None, None, None])
+        rest_api_input.setAll([robot_angles.get(1)[0], robot_angles.get(1)[1], None, None, None, None])
     elif command == "s3":
         rest_api_input.setAll([robot_angles.get(3)[0], robot_angles.get(3)[1], None, None, None, None])
     elif command == "backchanneling":
@@ -444,32 +456,24 @@ def action(command: str, args:str):
         rest_api_input.setAll([None, None, None, "listening.png", None, None])
     elif command == "speaking":
         rest_api_input.setAll([None, None, None, "speaking.png", None, None])
-    elif command == "blush":
-        rest_api_input.setAll([None, None, "blush.png", None, None, None])
     elif command == "cry":
         rest_api_input.setAll([None, None, "cry.png", None, None, None])
     elif command == "effort":
         rest_api_input.setAll([None, None, "effort.png", None, None, None])
-    elif command == "love":
-        rest_api_input.setAll([None, None, "love.png", None, None, None])
     elif command == "normal":
         rest_api_input.setAll([None, None, "blink.gif", None, None, None])
     elif command == "sad":
         rest_api_input.setAll([None, None, "sad.png", None, None, None])
-    elif command == "star":
-        rest_api_input.setAll([None, None, "star.png", None, None, None])
-    elif command == "thinking":
-        rest_api_input.setAll([None, None, "thinking.png", None, None, None])
     elif command == "wink":
         rest_api_input.setAll([None, None, "wink-2.gif", None, None, None])
     elif command == "idle":
         rest_api_input.setAll([0, -7, "blink.gif", "black.png", None, None])
     elif command == "sets1":
         robot_angles.set(1, [int(args.split(",")[0]), int(args.split(",")[1])])
-        rest_api_input.setAll([robot_angles.get(1)[0], robot_angles.get(1)[1], None, None, None, None])
+        rest_api_input.setAll([robot_angles.get(0)[0], robot_angles.get(0)[1], None, None, None, None])
     elif command == "sets2":
         robot_angles.set(2, [int(args.split(",")[0]), int(args.split(",")[1])])
-        rest_api_input.setAll([robot_angles.get(2)[0], robot_angles.get(2)[1], None, None, None, None])
+        rest_api_input.setAll([robot_angles.get(1)[0], robot_angles.get(1)[1], None, None, None, None])
     elif command == "sets3":
         robot_angles.set(3, [int(args.split(",")[0]), int(args.split(",")[1])])
         rest_api_input.setAll([robot_angles.get(3)[0], robot_angles.get(3)[1], None, None, None, None])
@@ -477,6 +481,8 @@ def action(command: str, args:str):
         rest_api_input.setAll([None, None, None, None, True, None])
     elif command == "toggle_behaviour":
         rest_api_input.setAll([None, None, None, None, None, True])
+    elif command == "front":
+        rest_api_input.setAll([0, -3, None, None, None, None])
     else:
         pass
     return {"status": "ok", "command": command, "args": args}
@@ -558,9 +564,17 @@ def main():
             elmo_ip, int(elmo_port), client_ip, elmo_logger, debug_mode, connect_mode
         )
 
+        elmo.set_image("blink.gif")
+        elmo.move_tilt(-3)
+        time.sleep(2)
+
         # Start robot command executor thread
         executor_thread = threading.Thread(target=robot_command_executor, args=(elmo, logger), daemon=True)
         executor_thread.start()
+
+        delay_thread = threading.Thread(target=delay_mode_loop, args=(elmo, logger), daemon=True)
+        delay_thread.start()
+        logger.info("Started delay mode loop thread")
 
         # Start autonomous control thread
         control_thread = threading.Thread(target=nvb_autonomous_control, args=(elmo,), daemon=True)
