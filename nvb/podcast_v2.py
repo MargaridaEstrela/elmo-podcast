@@ -8,11 +8,11 @@ import os
 import numpy as np
 import torch
 import queue
-
 from elmo_server import ElmoServer
 from emoshow_logger import EmoShowLogger
-
 from collections import Counter
+from fastapi import FastAPI
+from uvicorn import Config, Server
 
 
 class LockedValue:
@@ -47,7 +47,7 @@ PODCAST_ID = 0
 VAD_THRESHOLD = 0.05
 
 # Global variables
-global elmo_ip, elmo_port, client_ip, robot_angles
+global elmo_ip, elmo_port, client_ip, robot_angles, rest_api_input, api_server
 elmo_ip = None
 elmo_port = None
 client_ip = None
@@ -61,6 +61,10 @@ robot_angles = LockedValue({0: [-35, -3], 1: [-35, -3], 2: [None, None], 3: [35,
 # Robot command queue
 robot_command_queue = queue.Queue()
 
+flag = LockedValue(True)
+rest_api_input = LockedValue([None, None, None, None, None, None])
+api_server = None
+app = FastAPI()
 
 def signal_handler(signum, frame):
     """Handle Ctrl+C gracefully"""
@@ -200,7 +204,7 @@ def robot_command_executor(elmo, logger):
     while not shutdown_event.is_set():
         try:
             # Get command from queue (timeout to check shutdown_event)
-            command_data = robot_command_queue.get()
+            command_data = robot_command_queue.get(timeout=0.5)
             #
             print(current)
             command_type = command_data.get('type')
@@ -239,8 +243,8 @@ def robot_command_executor(elmo, logger):
             elif command_type == 'toggle_behaviour':
                 elmo.toggle_behaviour()
                 logger.info(f"Toggle behaviour")
-                current[0] = elmo.get_current_pan_angle()
-                current[1] = elmo.get_current_tilt_angle()
+                #current[0] = elmo.get_current_pan_angle()
+                #current[1] = elmo.get_current_tilt_angle()
                 print(f"Toggle behaviour")
                 if delay_after > 0:
                     time.sleep(delay_after)
@@ -254,7 +258,17 @@ def robot_command_executor(elmo, logger):
                     print(f"Set image: {image}")
                     if delay_after > 0:
                         time.sleep(delay_after)
+                    
+                    if image == "wink-2.gif":
+                        elmo.set_image("blink.gif")
+                        time.sleep(1)
                 
+            elif command_type == 'toggle_motors':
+                elmo.toggle_motors()
+                logger.info(f"Toggle motors")
+                print(f"Toggle motors")
+                if delay_after > 0:
+                    time.sleep(delay_after)
             
         
         except queue.Empty:
@@ -280,7 +294,7 @@ def add_robot_command(command_type, delay_after=2, **kwargs):
 
 
 def nvb_autonomous_control(elmo):
-    global elmo_ip, elmo_port, client_ip, robot_angles
+    global elmo_ip, elmo_port, client_ip, robot_angles, flag, rest_api_input
     logger = setup_logger(f"nvd_autonomous")
     
     logger.info("Autonomous control initialized")
@@ -304,78 +318,183 @@ def nvb_autonomous_control(elmo):
 
     try:
         while not shutdown_event.is_set():
-            levels = loudness_levels.get()
-            detections = speech_detected.get()
-            probabilities = speech_probability.get()
-            
-            # Find loudest speaker among those speaking
-            speaking_speakers = [i for i in range(4) if detections[i]]
-            
-            if speaking_speakers:
-                loudest_speaker = max(speaking_speakers, key=lambda i: levels[i])
-            else:
-                loudest_speaker = -1
-
-            tiny_memory = (tiny_memory[-10:] if len(tiny_memory) >= 10 else tiny_memory) + [loudest_speaker]
-            #print(f"Memory: {tiny_memory}, Current: {loudest_speaker}, Time talking: {current_speaker_start_time}")
-            
-            loudest_speaker = Counter(tiny_memory).most_common(1)[0][0]
-            print(Counter(tiny_memory).most_common(1))
-            #print(loudest_speaker)
-
-            # Robot is speaking (speaker 2)
-            if loudest_speaker == 2:
-                if not robot_speaking:
-                    do_nothing = False
-                    add_robot_command('set_icon', delay_after=0, icon='speaking.png')
-                    logger.info(f"Robot start talking")
-                    print(f"Robot start talking")
-                    robot_speaking = True
-                    current_speaker_start_time = None
-            
-            # Someone else is speaking (not robot, not silence)
-            elif loudest_speaker != -1 and loudest_speaker != 2:
-                robot_speaking = False
-                do_nothing = False
+            if flag.get():
+                levels = loudness_levels.get()
+                detections = speech_detected.get()
+                probabilities = speech_probability.get()
                 
-                # NEW SPEAKER DETECTED
-                if loudest_speaker != previous or current_speaker_start_time is None:
-                    current_speaker_start_time = time.time()
-                    add_robot_command('set_icon', delay_after=0, icon='listening.png')
-                    logger.info(f"Start Talking: {loudest_speaker}")
-                    print(f"Start Talking: {loudest_speaker}")
-                    add_robot_command('move_pan', delay_after=2, angle=robot_angles.get(loudest_speaker)[0])
-                    add_robot_command('move_tilt', delay_after=2, angle=robot_angles.get(loudest_speaker)[1])
-                    logger.info(f"Move to: {robot_angles.get(loudest_speaker)}")
-                    #print(f"Move to: {robot_angles.get(loudest_speaker)}")
-                    last_backchannel_time = time.time()
+                # Find loudest speaker among those speaking
+                speaking_speakers = [i for i in range(4) if detections[i]]
                 
-                # SAME SPEAKER TALKING - Check for backchannel after 7 seconds
-                elif current_speaker_start_time is not None:
-                    time_talking = time.time() - current_speaker_start_time
-                    time_since_last_backchannel = time.time() - last_backchannel_time
-                    
-                    if time_talking >= 5 and time_since_last_backchannel >= backchannel_interval:
-                        add_robot_command('toggle_behaviour', delay_after=4)
-                        add_robot_command('toggle_behaviour', delay_after=0)
-                        logger.info(f"Backchanneling to: {robot_angles.get(loudest_speaker)}")
-                        #print(f"Backchanneling to speaker {loudest_speaker} after {time_talking:.1f}s")
-                        last_backchannel_time = time.time()
-            
-            # SILENCE
-            if loudest_speaker == -1 and previous == -1:
-                if not do_nothing:
+                if speaking_speakers:
+                    loudest_speaker = max(speaking_speakers, key=lambda i: levels[i])
+                else:
+                    loudest_speaker = -1
+
+                tiny_memory = (tiny_memory[-10:] if len(tiny_memory) >= 10 else tiny_memory) + [loudest_speaker]
+                #print(f"Memory: {tiny_memory}, Current: {loudest_speaker}, Time talking: {current_speaker_start_time}")
+                
+                loudest_speaker = Counter(tiny_memory).most_common(1)[0][0]
+                print(Counter(tiny_memory).most_common(1))
+                #print(loudest_speaker)
+
+                # Robot is speaking (speaker 2)
+                if loudest_speaker == 2:
+                    if not robot_speaking:
+                        do_nothing = False
+                        add_robot_command('set_icon', delay_after=0, icon='speaking.png')
+                        logger.info(f"Robot start talking")
+                        print(f"Robot start talking")
+                        robot_speaking = True
+                        current_speaker_start_time = None
+                
+                # Someone else is speaking (not robot, not silence)
+                elif loudest_speaker != -1 and loudest_speaker != 2:
                     robot_speaking = False
-                    add_robot_command('set_icon', delay_after=0, icon='black.png')
-                    do_nothing = True
-                    logger.info(f"No one talking")
-                    current_speaker_start_time = None
+                    do_nothing = False
+                    
+                    # NEW SPEAKER DETECTED
+                    if loudest_speaker != previous or current_speaker_start_time is None:
+                        current_speaker_start_time = time.time()
+                        add_robot_command('set_icon', delay_after=0, icon='listening.png')
+                        logger.info(f"Start Talking: {loudest_speaker}")
+                        print(f"Start Talking: {loudest_speaker}")
+                        add_robot_command('move_pan', delay_after=2, angle=robot_angles.get(loudest_speaker)[0])
+                        add_robot_command('move_tilt', delay_after=2, angle=robot_angles.get(loudest_speaker)[1])
+                        logger.info(f"Move to: {robot_angles.get(loudest_speaker)}")
+                        #print(f"Move to: {robot_angles.get(loudest_speaker)}")
+                        last_backchannel_time = time.time()
+                    
+                    # SAME SPEAKER TALKING - Check for backchannel after 7 seconds
+                    elif current_speaker_start_time is not None:
+                        time_talking = time.time() - current_speaker_start_time
+                        time_since_last_backchannel = time.time() - last_backchannel_time
+                        
+                        if time_talking >= 5 and time_since_last_backchannel >= backchannel_interval:
+                            add_robot_command('toggle_behaviour', delay_after=4)
+                            add_robot_command('toggle_behaviour', delay_after=0)
+                            logger.info(f"Backchanneling to: {robot_angles.get(loudest_speaker)}")
+                            #print(f"Backchanneling to speaker {loudest_speaker} after {time_talking:.1f}s")
+                            last_backchannel_time = time.time()
                 
-            previous = loudest_speaker
-            time.sleep(0.2)
-    
+                # SILENCE
+                if loudest_speaker == -1 and previous == -1:
+                    if not do_nothing:
+                        robot_speaking = False
+                        add_robot_command('set_icon', delay_after=0, icon='black.png')
+                        do_nothing = True
+                        logger.info(f"No one talking")
+                        current_speaker_start_time = None
+                    
+                previous = loudest_speaker
+                time.sleep(0.2)
+
+            if not flag.get():
+                flag.setAll(True)
+                print(rest_api_input.get(0))
+                if rest_api_input.get(4) == True:
+                    add_robot_command('toggle_motors', delay_after=2)
+                    logger.info(f"Toggle Motors")
+
+                if rest_api_input.get(5) == True:
+                    add_robot_command('toggle_behaviour', delay_after=2)
+                    logger.info(f"Toggle Behaviour")
+
+                if rest_api_input.get(0) != None:
+                    add_robot_command('move_pan', delay_after=2, angle=rest_api_input.get(0))
+                    logger.info(f"Move pan to: {rest_api_input.get(0)}")
+
+                if rest_api_input.get(1) != None:
+                    add_robot_command('move_tilt', delay_after=2, angle=rest_api_input.get(1))
+                    logger.info(f"Move tilt to: {rest_api_input.get(1)}")
+
+                if rest_api_input.get(2) != None:
+                    add_robot_command('set_image', delay_after=0, image=rest_api_input.get(2))
+                    logger.info(f"Set image to: {rest_api_input.get(2)}")
+
+                if rest_api_input.get(3) != None:
+                    add_robot_command('set_icon', delay_after=0, icon=rest_api_input.get(3))
+                    logger.info(f"Set icon to: {rest_api_input.get(3)}")
+
+                if rest_api_input.getAll() == [None, None, None, None, None, None]:
+                    add_robot_command('toggle_behaviour', delay_after=4)
+                    add_robot_command('toggle_behaviour', delay_after=0)  
+                    logger.info(f"Backchanneling")
+                   
+
     except KeyboardInterrupt:
         pass
+
+
+
+@app.get("/action/{command}/{args}")
+def action(command: str, args:str):
+    global rest_api_input, flag, robot_angles
+    print(f"Received command: {command} / {args}")
+    flag.setAll(False)
+    if command == "s1":
+        rest_api_input.setAll([robot_angles.get(1)[0], robot_angles.get(1)[1], None, None, None, None])
+    elif command == "s2":
+        rest_api_input.setAll([robot_angles.get(2)[0], robot_angles.get(2)[1], None, None, None, None])
+    elif command == "s3":
+        rest_api_input.setAll([robot_angles.get(3)[0], robot_angles.get(3)[1], None, None, None, None])
+    elif command == "backchanneling":
+        rest_api_input.setAll([None, None, None, None, None, None])
+    elif command == "listening":
+        rest_api_input.setAll([None, None, None, "listening.png", None, None])
+    elif command == "speaking":
+        rest_api_input.setAll([None, None, None, "speaking.png", None, None])
+    elif command == "blush":
+        rest_api_input.setAll([None, None, "blush.png", None, None, None])
+    elif command == "cry":
+        rest_api_input.setAll([None, None, "cry.png", None, None, None])
+    elif command == "effort":
+        rest_api_input.setAll([None, None, "effort.png", None, None, None])
+    elif command == "love":
+        rest_api_input.setAll([None, None, "love.png", None, None, None])
+    elif command == "normal":
+        rest_api_input.setAll([None, None, "blink.gif", None, None, None])
+    elif command == "sad":
+        rest_api_input.setAll([None, None, "sad.png", None, None, None])
+    elif command == "star":
+        rest_api_input.setAll([None, None, "star.png", None, None, None])
+    elif command == "thinking":
+        rest_api_input.setAll([None, None, "thinking.png", None, None, None])
+    elif command == "wink":
+        rest_api_input.setAll([None, None, "wink-2.gif", None, None, None])
+    elif command == "idle":
+        rest_api_input.setAll([0, -7, "blink.gif", "black.png", None, None])
+    elif command == "sets1":
+        robot_angles.set(1, [int(args.split(",")[0]), int(args.split(",")[1])])
+        rest_api_input.setAll([robot_angles.get(1)[0], robot_angles.get(1)[1], None, None, None, None])
+    elif command == "sets2":
+        robot_angles.set(2, [int(args.split(",")[0]), int(args.split(",")[1])])
+        rest_api_input.setAll([robot_angles.get(2)[0], robot_angles.get(2)[1], None, None, None, None])
+    elif command == "sets3":
+        robot_angles.set(3, [int(args.split(",")[0]), int(args.split(",")[1])])
+        rest_api_input.setAll([robot_angles.get(3)[0], robot_angles.get(3)[1], None, None, None, None])
+    elif command == "toggle_motors":
+        rest_api_input.setAll([None, None, None, None, True, None])
+    elif command == "toggle_behaviour":
+        rest_api_input.setAll([None, None, None, None, None, True])
+    else:
+        pass
+    return {"status": "ok", "command": command, "args": args}
+
+@app.get("/stop")
+def stop():
+    shutdown_event.set()
+    global api_server
+    if api_server is not None:
+        api_server.should_exit = True
+    return {"status": "stopping"}
+
+def run_rest_api(host="0.0.0.0", port=8000, log_level="warning"):
+    global api_server
+    config = Config(app=app, host=host, port=port, log_level=log_level, loop="asyncio")
+    api_server = Server(config=config)
+    # this call blocks until server.should_exit becomes True
+    api_server.run()
 
 
 def main():
@@ -446,6 +565,11 @@ def main():
         # Start autonomous control thread
         control_thread = threading.Thread(target=nvb_autonomous_control, args=(elmo,), daemon=True)
         control_thread.start()
+
+        #Start interface thread
+        rest_api_thread = threading.Thread(target=run_rest_api, args=(), daemon=True)
+        rest_api_thread.start()
+        logger.info("Started interface control thread")
 
         # Start audio stream
         with sd.InputStream(
