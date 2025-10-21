@@ -234,25 +234,26 @@ with col_center:
     # Gaze Direction Section
     st.markdown("<p class='panel-title'>Gaze Direction</p>", unsafe_allow_html=True)
     
-    col1, col2, col3, col4 = st.columns([1, 1, 1, 1])
+    col1, col2, col3, col4, col5 = st.columns([1, 1.3, 0.5, 1,1])
 
     with col2:
         if st.button(S2, use_container_width=True, key="btn_gaze_down"):
             run_command("s2")
         
 
-    with col3:
-        st.image("images/elmo_icon.png", use_container_width=True)
+    with col4:
+      
+            st.image("images/elmo_icon.png", width=50)
         
     
-    col1, col2, col3, col4 = st.columns([1, 1, 1, 1])
+    col1, col2, col3, col4, col5 = st.columns([1, 1, 0.4, 1,1])
 
     with col1:
         if st.button(S1, use_container_width=True, key="btn_gaze_right"):
             run_command("s1")
 
 
-    with col4:       
+    with col5:
         if st.button(S3, use_container_width=True, key="btn_gaze_left"):
             run_command("s3")
 

@@ -339,7 +339,7 @@ def nvb_autonomous_control(elmo):
                 if loudest_speaker == 2:
                     if not robot_speaking:
                         do_nothing = False
-                        add_robot_command('set_icon', delay_after=2, icon='speaking.png')
+                        add_robot_command('set_icon', delay_after=1, icon='speaking.png')
                         logger.info(f"Robot start talking")
                         print(f"Robot start talking")
                         robot_speaking = True
@@ -353,7 +353,7 @@ def nvb_autonomous_control(elmo):
                     # NEW SPEAKER DETECTED
                     if loudest_speaker != previous or current_speaker_start_time is None:
                         current_speaker_start_time = time.time()
-                        add_robot_command('set_icon', delay_after=2, icon='listening.png')
+                        add_robot_command('set_icon', delay_after=1, icon='listening.png')
                         logger.info(f"Start Talking: {loudest_speaker}")
                         print(f"Start Talking: {loudest_speaker}")
                         add_robot_command('move_pan', delay_after=2, angle=robot_angles.get(loudest_speaker)[0])
@@ -379,7 +379,7 @@ def nvb_autonomous_control(elmo):
                     robot_speaking = False
                     if not do_nothing:
                         robot_speaking = False
-                        add_robot_command('set_icon', delay_after=2, icon='black.png')
+                        add_robot_command('set_icon', delay_after=1, icon='black.png')
                         do_nothing = True
                         logger.info(f"No one talking")
                         current_speaker_start_time = None
@@ -407,23 +407,21 @@ def nvb_autonomous_control(elmo):
                     logger.info(f"Move tilt to: {rest_api_input.get(1)}")
 
                 if rest_api_input.get(2) != None:
-                    add_robot_command('set_image', delay_after=2, image=rest_api_input.get(2))
+                    add_robot_command('set_image', delay_after=1, image=rest_api_input.get(2))
                     logger.info(f"Set image to: {rest_api_input.get(2)}")
 
                 if rest_api_input.get(3) != None:
-                    add_robot_command('set_icon', delay_after=2, icon=rest_api_input.get(3))
+                    add_robot_command('set_icon', delay_after=1, icon=rest_api_input.get(3))
                     logger.info(f"Set icon to: {rest_api_input.get(3)}")
 
                 if rest_api_input.get() == [None, None, None, None, None, None]:
                     add_robot_command('toggle_behaviour', delay_after=4)
-                    add_robot_command('toggle_behaviour', delay_after=2)  
+                    add_robot_command('toggle_behaviour', delay_after=1)  
                     logger.info(f"Backchanneling")
                    
 
     except KeyboardInterrupt:
         pass
-
-
 
 @app.get("/action/{command}/{args}")
 def action(command: str, args:str):
