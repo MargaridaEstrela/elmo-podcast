@@ -112,7 +112,7 @@ def select_device():
             device_type = "H6"
             zoom_devices.append((idx, device_name, device_type, channels))
         if "zoom" in device_name.lower():
-            device_type = "L8"
+            device_type = "ZOOM L-8 Audio"
             zoom_devices.append((idx, device_name, device_type, channels))
     
     if not zoom_devices:
@@ -319,6 +319,8 @@ def nvb_autonomous_control(elmo):
                 levels = loudness_levels.get()
                 detections = speech_detected.get()
                 probabilities = speech_probability.get()
+                #print(probabilities)
+                #print(detections)
                 
                 # Find loudest speaker among those speaking
                 speaking_speakers = [i for i in range(4) if detections[i]]
@@ -328,7 +330,7 @@ def nvb_autonomous_control(elmo):
                 else:
                     loudest_speaker = -1
 
-                tiny_memory = (tiny_memory[-7:] if len(tiny_memory) >= 7 else tiny_memory) + [loudest_speaker]
+                tiny_memory = (tiny_memory[-5:] if len(tiny_memory) >= 5 else tiny_memory) + [loudest_speaker]
                 #print(f"Memory: {tiny_memory}, Current: {loudest_speaker}, Time talking: {current_speaker_start_time}")
                 
                 loudest_speaker = Counter(tiny_memory).most_common(1)[0][0]

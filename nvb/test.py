@@ -1,29 +1,50 @@
-from elmo_server import ElmoServer
-from emoshow_logger import EmoShowLogger
-import os
+import sounddevice as sd
+import numpy as np
 
+def find_l8_device():
+    """Find Zoom LiveTrak L-8 USB device."""
+    devices = sd.query_devices()
+    for idx, device in enumerate(devices):
+        if "LiveTrak" in device["name"] or "L-8" in device["name"]:
+            return idx, device
+    return None, None
 
-elmo_ip = "192.168.0.109"
-elmo_port = 4000
-client_ip = "192.168.0.105"
-debug_mode = False
-connect_mode = False
+def monitor_active_channels(device_index, num_channels, blocksize=1024, threshold=0.01):
+    """
+    Monitor which channels are currently active (signal above threshold).
+    
+    :param device_index: USB input device index
+    :param num_channels: number of USB channels to monitor
+    :param blocksize: samples per read
+    :param threshold: RMS threshold to consider channel "active"
+    """
+    print(f"Monitoring {num_channels} channels for activity... Press Ctrl+C to stop.\n")
+    
+    try:
+        with sd.InputStream(device=device_index,
+                            channels=num_channels,
+                            samplerate=44100,
+                            blocksize=blocksize,
+                            dtype='float32') as stream:
+            while True:
+                audio_block, _ = stream.read(blocksize)
+                # Calculate RMS for each channel
+                rms_per_channel = np.sqrt(np.mean(audio_block**2, axis=0))
+                #print(rms_per_channel)
+                active_channels = [i+1 for i, rms in enumerate(rms_per_channel) if rms > threshold]
+                
+                if active_channels:
+                    print(f"Active channels: {active_channels}", end='\r')
+                else:
+                    print("No channels active                 ", end='\r')
+                    
+    except KeyboardInterrupt:
+        print("\nMonitoring stopped.")
 
-# Start logger
-log_path = "logs/elmo-app.log"
-os.makedirs(os.path.dirname(log_path), exist_ok=True)
-
-# Create the file only if it does not exist
-if not os.path.exists(log_path):
-    with open(log_path, "w") as f:
-        f.write("")
-
-elmo_logger = EmoShowLogger(log_file=log_path)
-
-# Start server
-elmo = ElmoServer(
-    elmo_ip, int(elmo_port), client_ip, elmo_logger, debug_mode, connect_mode
-)
-#elmo.toggle_motors()
-#elmo.toggle_behaviour()
-elmo.set_image("wink.gif")
+if __name__ == "__main__":
+    device_index, device_info = find_l8_device()
+    if device_index is None:
+        print("⚠️  Zoom LiveTrak L-8 not found. Make sure it is connected and in USB Audio I/F mode.")
+    else:
+        print(f"Found L-8: {device_info['name']} with {device_info['max_input_channels']} channels")
+        monitor_active_channels(device_index, device_info['max_input_channels'])
