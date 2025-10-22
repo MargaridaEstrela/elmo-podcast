@@ -79,6 +79,10 @@ class ElmoServer:
         self.current_pan = 0
         self.current_tilt = 0
 
+        self.current_image = "normal.png"
+        self.current_icon = "black.png"
+
+
         self.send_request_command("enable_behaviour", name="look_around", control=False)
         self.send_request_command("enable_behaviour", name="blush", control=False)
         self.send_request_command("set_tilt_torque", control=True)
@@ -208,8 +212,7 @@ class ElmoServer:
         Returns:
             int: The current tilt angle.
         """
-        print(self.send_request_command("tilt", name="current_angle", control=False))
-        return self.send_request_command("tilt", name="current_angle", control=False)
+        return self.current_tilt
     
     def get_current_pan_angle(self):
         """
@@ -218,9 +221,26 @@ class ElmoServer:
         Returns:
             int: The current pan angle.
         """
-        print(self.send_request_command("pan", name="current_angle", control=False))
-        return self.send_request_command("pan", name="current_angle", control=False)
+        return self.current_pan
 
+    def get_current_image(self):
+        """
+        Returns the current image.
+
+        Returns:
+            int: The current image.
+        """
+        return self.current_image
+    
+    def get_current_icon(self):
+        """
+        Returns the current icon.
+
+        Returns:
+            int: The current icon.
+        """
+        return self.current_icon
+    
     def connect_elmo(self):
         """
         Connects to the Elmo robot.
@@ -437,6 +457,7 @@ class ElmoServer:
         Args:
             image_name (str): The source name of the image.
         """
+        self.current_image = image_name
         self.send_message(f"image::{image_name}")
 
     def set_icon(self, icon_name):
@@ -446,6 +467,7 @@ class ElmoServer:
         Args:
             icon_name (str): The source name of the icon.
         """
+        self.current_icon = icon_name
         self.send_message(f"icon::{icon_name}")
 
     def set_forever_icon(self, icon_name):
@@ -465,7 +487,6 @@ class ElmoServer:
             sound (str): The source name of the sound to be played.
         """
         self.send_message(f"sound::{sound}")
-
 
     def center_player(self):
         """
@@ -520,7 +541,6 @@ class ElmoServer:
         self.move_tilt(new_tilt_angle)
 
         print("Olhei para a cara")
-
 
     def close_all(self):
         """

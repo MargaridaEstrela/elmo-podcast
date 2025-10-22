@@ -41,9 +41,10 @@ class LockedValue:
 # Audio parameters
 SAMPLE_RATE = 16000
 CHUNK = 512
-PODCAST_ID = 0
+PODCAST_ID = 1
 
 # VAD threshold (0-1, higher = more strict)
+VAD_THRESHOLD = 0.1
 VAD_THRESHOLD = 0.05
 
 # Global variables
@@ -209,46 +210,60 @@ def robot_command_executor(elmo, logger):
             command_type = command_data.get('type')
             delay_after = command_data.get('delay_after', 0)
             
-            if command_type == 'set_icon':
+            if command_type == 'set_icon' :
                 icon = command_data.get('icon')
-                elmo.set_icon(icon)
-                logger.info(f"Set icon: {icon}")
-                print(f"Set icon: {icon}")
+                if elmo.get_current_icon() != icon:
+                    elmo.set_icon(icon)
+                    logger.info(f"Set icon: {icon}")
+                    print(f"Set icon: {icon}")
+                    if delay_after > 0:
+                        time.sleep(delay_after)
             
-            elif command_type == 'move_pan':
+            if command_type == 'move_pan':
                 angle = command_data.get('angle')
-                elmo.move_pan(angle)
-                logger.info(f"Move pan: {angle}")
-                print(f"Move pan: {angle}")
+                if elmo.get_current_pan_angle() != angle:
+                    elmo.move_pan(angle)
+                    logger.info(f"Move pan: {angle}")
+                    print(f"Move pan: {angle}")
+                    if delay_after > 0:
+                        time.sleep(delay_after)
             
-            elif command_type == 'move_tilt':
+            if command_type == 'move_tilt':
                 angle = command_data.get('angle')
-                
-                elmo.move_tilt(angle)
-                logger.info(f"Move tilt: {angle}")
-                print(f"Move tilt: {angle}")
+                if elmo.get_current_tilt_angle() != angle:   
+                    elmo.move_tilt(angle)
+                    logger.info(f"Move tilt: {angle}")
+                    print(f"Move tilt: {angle}")
+                    if delay_after > 0:
+                        time.sleep(delay_after)
             
-            elif command_type == 'toggle_behaviour':
+            if command_type == 'toggle_behaviour':
                 elmo.toggle_behaviour()
                 logger.info(f"Toggle behaviour")
                 print(f"Toggle behaviour")
+                if delay_after > 0:
+                        time.sleep(delay_after)
             
-            elif command_type == 'set_image':
+            if command_type == 'set_image':
                 image = command_data.get('image')
-                elmo.set_image(image)
-                logger.info(f"Set image: {image}")
-                print(f"Set image: {image}")    
-                if image == "wink-2.gif":
-                    time.sleep(2)
-                    elmo.set_image("blink.gif")
+                if elmo.get_current_image() != image:
+                    elmo.set_image(image)
+                    logger.info(f"Set image: {image}")
+                    print(f"Set image: {image}")    
+                    if image == "wink-2.gif":
+                        time.sleep(2)
+                        elmo.set_image("blink.gif")
+                    if delay_after > 0:
+                        time.sleep(delay_after)
                 
-            elif command_type == 'toggle_motors':
+            if command_type == 'toggle_motors':
                 elmo.toggle_motors()
                 logger.info(f"Toggle motors")
                 print(f"Toggle motors")
+                if delay_after > 0:
+                        time.sleep(delay_after)
             
-            if delay_after > 0:
-                time.sleep(delay_after)
+            
                     
         except queue.Empty:
             continue
@@ -334,18 +349,18 @@ def nvb_autonomous_control(elmo):
                 #print(f"Memory: {tiny_memory}, Current: {loudest_speaker}, Time talking: {current_speaker_start_time}")
                 
                 loudest_speaker = Counter(tiny_memory).most_common(1)[0][0]
-                print(Counter(tiny_memory).most_common(1))
+                #print(Counter(tiny_memory).most_common(1))
                 #print(loudest_speaker)
 
                 # Robot is speaking (speaker 2)
                 if loudest_speaker == 2:
-                    if not robot_speaking:
-                        do_nothing = False
-                        add_robot_command('set_icon', delay_after=1, icon='speaking.png')
-                        logger.info(f"Robot start talking")
-                        print(f"Robot start talking")
-                        robot_speaking = True
-                        current_speaker_start_time = None
+                    
+                    do_nothing = False
+                    add_robot_command('set_icon', delay_after=1, icon='speaking.png')
+                    logger.info(f"Robot start talking")
+                    #print(f"Robot start talking")
+                    robot_speaking = True
+                    current_speaker_start_time = None
                 
                 # Someone else is speaking (not robot, not silence)
                 elif loudest_speaker != -1 and loudest_speaker != 2:
@@ -357,7 +372,7 @@ def nvb_autonomous_control(elmo):
                         current_speaker_start_time = time.time()
                         add_robot_command('set_icon', delay_after=1, icon='listening.png')
                         logger.info(f"Start Talking: {loudest_speaker}")
-                        print(f"Start Talking: {loudest_speaker}")
+                        #print(f"Start Talking: {loudest_speaker}")
                         add_robot_command('move_pan', delay_after=2, angle=robot_angles.get(loudest_speaker)[0])
                         add_robot_command('move_tilt', delay_after=2, angle=robot_angles.get(loudest_speaker)[1])
                         logger.info(f"Move to: {robot_angles.get(loudest_speaker)}")
@@ -391,7 +406,7 @@ def nvb_autonomous_control(elmo):
 
             if not flag.get():
                 flag.setAll(True)
-                print(rest_api_input.get(0))
+                #print(rest_api_input.get(0))
                 if rest_api_input.get(4) == True:
                     add_robot_command('toggle_motors', delay_after=2)
                     logger.info(f"Toggle Motors")
@@ -428,7 +443,7 @@ def nvb_autonomous_control(elmo):
 @app.get("/action/{command}/{args}")
 def action(command: str, args:str):
     global rest_api_input, flag, robot_angles, delay_mode
-    print(f"Received command: {command} / {args}")
+    #print(f"Received command: {command} / {args}")
 
     if command == "delay":
         current_delay_state = delay_mode.get()
