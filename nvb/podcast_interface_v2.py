@@ -227,6 +227,12 @@ with col_left:
 
     if st.button("Delay", use_container_width=True, key="btn_state4"):
         run_command("delay")
+    
+    if st.button("Lupa", use_container_width=True, key="btn_state5"):
+        run_command("lupa")
+
+    if st.button("Clean icons", use_container_width=True, key="btn_state6"):
+        run_command("clean")
 
 
 with col_center:

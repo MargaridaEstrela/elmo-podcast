@@ -3,7 +3,7 @@ import cv2
 import numpy as np
 import requests
 import time
-
+import math
 
 
 class ElmoServer:
@@ -212,6 +212,9 @@ class ElmoServer:
         Returns:
             int: The current tilt angle.
         """
+        angle = self.send_request_command("get_current_tilt_angle")
+        if angle != None:
+            self.current_tilt = float(angle["message"])
         return self.current_tilt
     
     def get_current_pan_angle(self):
@@ -221,6 +224,9 @@ class ElmoServer:
         Returns:
             int: The current pan angle.
         """
+        angle = self.send_request_command("get_current_pan_angle")
+        if angle != None:
+            self.current_pan = float(angle["message"])
         return self.current_pan
 
     def get_current_image(self):
@@ -278,6 +284,8 @@ class ElmoServer:
                 res = requests.post(url, json=kwargs, timeout=1).json()
                 if not res["success"]:
                     return
+                else:
+                    return res
             except Exception as e:
                 return
 

@@ -205,11 +205,14 @@ def robot_command_executor(elmo, logger):
     while not shutdown_event.is_set():
         try:
             # Get command from queue (timeout to check shutdown_event)
+            print(robot_command_queue.qsize())
             command_data = robot_command_queue.get(timeout=0.5)
             #
             command_type = command_data.get('type')
             delay_after = command_data.get('delay_after', 0)
-            
+
+            #print(str(elmo.get_current_pan_angle()) + "\t" + str(elmo.get_current_tilt_angle()))
+
             if command_type == 'set_icon' :
                 icon = command_data.get('icon')
                 if elmo.get_current_icon() != icon:
@@ -221,16 +224,18 @@ def robot_command_executor(elmo, logger):
             
             if command_type == 'move_pan':
                 angle = command_data.get('angle')
-                if elmo.get_current_pan_angle() != angle:
+                cp = elmo.get_current_pan_angle()
+                if angle < cp-2 or angle > cp+2:
                     elmo.move_pan(angle)
                     logger.info(f"Move pan: {angle}")
                     print(f"Move pan: {angle}")
                     if delay_after > 0:
                         time.sleep(delay_after)
-            
+    
             if command_type == 'move_tilt':
                 angle = command_data.get('angle')
-                if elmo.get_current_tilt_angle() != angle:   
+                ct = elmo.get_current_tilt_angle()
+                if angle < ct-4 or angle > ct+4:
                     elmo.move_tilt(angle)
                     logger.info(f"Move tilt: {angle}")
                     print(f"Move tilt: {angle}")
@@ -279,12 +284,23 @@ def add_robot_command(command_type, delay_after=2, **kwargs):
         delay_after: Delay in seconds AFTER executing this command before processing the next one
         **kwargs: Additional arguments specific to the command
     """
-    command_data = {
-        'type': command_type,
-        'delay_after': delay_after,
-        **kwargs
-    }
-    robot_command_queue.put(command_data)
+
+    def clear(q):
+        try:
+            while True:
+                q.get_nowait()
+        except queue.Empty:
+            pass
+
+    if command_type == "clean":
+        clear(robot_command_queue)
+    else: 
+        command_data = {
+            'type': command_type,
+            'delay_after': delay_after,
+            **kwargs
+        }
+        robot_command_queue.put(command_data)
 
 def delay_mode_loop(elmo, logger):
     """Loop that sets delay.gif every 2 seconds while delay_mode is active"""
@@ -349,7 +365,7 @@ def nvb_autonomous_control(elmo):
                 #print(f"Memory: {tiny_memory}, Current: {loudest_speaker}, Time talking: {current_speaker_start_time}")
                 
                 loudest_speaker = Counter(tiny_memory).most_common(1)[0][0]
-                #print(Counter(tiny_memory).most_common(1))
+                print(Counter(tiny_memory).most_common(1))
                 #print(loudest_speaker)
 
                 # Robot is speaking (speaker 2)
@@ -385,7 +401,7 @@ def nvb_autonomous_control(elmo):
                         time_since_last_backchannel = time.time() - last_backchannel_time
                         
                         if time_talking >= 5 and time_since_last_backchannel >= backchannel_interval:
-                            add_robot_command('toggle_behaviour', delay_after=4)
+                            add_robot_command('toggle_behaviour', delay_after=2)
                             add_robot_command('toggle_behaviour', delay_after=1)
                             logger.info(f"Backchanneling to: {robot_angles.get(loudest_speaker)}")
                             #print(f"Backchanneling to speaker {loudest_speaker} after {time_talking:.1f}s")
@@ -406,6 +422,11 @@ def nvb_autonomous_control(elmo):
 
             if not flag.get():
                 flag.setAll(True)
+
+                if rest_api_input.get() == [0, 0, 0, 0, 0, 0]:
+                    add_robot_command('clean', delay_after=0)
+                    logger.info(f"Clean Queue")
+
                 #print(rest_api_input.get(0))
                 if rest_api_input.get(4) == True:
                     add_robot_command('toggle_motors', delay_after=2)
@@ -415,19 +436,19 @@ def nvb_autonomous_control(elmo):
                     add_robot_command('toggle_behaviour', delay_after=2)
                     logger.info(f"Toggle Behaviour")
 
-                if rest_api_input.get(0) != None:
+                if rest_api_input.get(0) != None and rest_api_input.get(0) != 0:
                     add_robot_command('move_pan', delay_after=2, angle=rest_api_input.get(0))
                     logger.info(f"Move pan to: {rest_api_input.get(0)}")
 
-                if rest_api_input.get(1) != None:
+                if rest_api_input.get(1) != None and rest_api_input.get(1) != 0:
                     add_robot_command('move_tilt', delay_after=2, angle=rest_api_input.get(1))
                     logger.info(f"Move tilt to: {rest_api_input.get(1)}")
 
-                if rest_api_input.get(2) != None:
+                if rest_api_input.get(2) != None and rest_api_input.get(2) != 0:
                     add_robot_command('set_image', delay_after=1, image=rest_api_input.get(2))
                     logger.info(f"Set image to: {rest_api_input.get(2)}")
 
-                if rest_api_input.get(3) != None:
+                if rest_api_input.get(3) != None and rest_api_input.get(3) != 0:
                     add_robot_command('set_icon', delay_after=1, icon=rest_api_input.get(3))
                     logger.info(f"Set icon to: {rest_api_input.get(3)}")
 
@@ -443,7 +464,7 @@ def nvb_autonomous_control(elmo):
 @app.get("/action/{command}/{args}")
 def action(command: str, args:str):
     global rest_api_input, flag, robot_angles, delay_mode
-    #print(f"Received command: {command} / {args}")
+    print(f"Received command: {command} / {args}")
 
     if command == "delay":
         current_delay_state = delay_mode.get()
@@ -459,7 +480,10 @@ def action(command: str, args:str):
     
 
     flag.setAll(False)
-    if command == "s1":
+    
+    if command == "clean":
+        rest_api_input.setAll([0, 0, 0, 0, 0, 0])
+    elif command == "s1":
         rest_api_input.setAll([robot_angles.get(0)[0], robot_angles.get(0)[1], None, None, None, None])
     elif command == "s2":
         rest_api_input.setAll([robot_angles.get(1)[0], robot_angles.get(1)[1], None, None, None, None])
@@ -471,6 +495,8 @@ def action(command: str, args:str):
         rest_api_input.setAll([None, None, None, "listening.png", None, None])
     elif command == "speaking":
         rest_api_input.setAll([None, None, None, "speaking.png", None, None])
+    elif command == "lupa":
+        rest_api_input.setAll([None, None, None, "lupa.png", None, None])
     elif command == "cry":
         rest_api_input.setAll([None, None, "cry.png", None, None, None])
     elif command == "effort":
