@@ -41,14 +41,14 @@ class LockedValue:
 # Audio parameters
 SAMPLE_RATE = 16000
 CHUNK = 512
-PODCAST_ID = 1
+PODCAST_ID = 2
 
 # VAD threshold (0-1, higher = more strict)
 VAD_THRESHOLD = 0.1
-VAD_THRESHOLD = 0.001
+VAD_THRESHOLD = 0.05
 
 # Global variables
-global elmo_ip, elmo_port, client_ip, robot_angles, rest_api_input, api_server
+global elmo_ip, elmo_port, client_ip, robot_angles, rest_api_input, api_server, refresh_time
 elmo_ip = None
 elmo_port = None
 client_ip = None
@@ -57,7 +57,7 @@ shutdown_event = threading.Event()
 loudness_levels = LockedValue([0.0, 0.0, 0.0, 0.0])
 speech_detected = LockedValue([False, False, False, False])
 speech_probability = LockedValue([0.0, 0.0, 0.0, 0.0])
-robot_angles = LockedValue({0: [-35, -15], 1: [-35, -15], 2: [None, None], 3: [35, -15]})
+robot_angles = LockedValue({0: [-35, -3], 1: [-35, -3], 2: [None, None], 3: [35, -3]})
 
 # Robot command queue
 robot_command_queue = queue.Queue()
@@ -67,6 +67,8 @@ delay_mode = LockedValue(False)
 rest_api_input = LockedValue([None, None, None, None, None, None])
 api_server = None
 app = FastAPI()
+
+refresh_time = time.time()
 
 def signal_handler(signum, frame):
     """Handle Ctrl+C gracefully"""
@@ -113,7 +115,7 @@ def select_device():
             device_type = "H6"
             zoom_devices.append((idx, device_name, device_type, channels))
         if "zoom" in device_name.lower():
-            device_type = "ZOOM L-12 Audio"
+            device_type = "ZOOM L-8 Audio"
             zoom_devices.append((idx, device_name, device_type, channels))
     
     if not zoom_devices:
@@ -277,6 +279,7 @@ def robot_command_executor(elmo, logger):
 
 
 def add_robot_command(command_type, delay_after=2, **kwargs):
+    global refresh_time
     """Add a command to the robot queue
     
     Args:
@@ -292,8 +295,10 @@ def add_robot_command(command_type, delay_after=2, **kwargs):
         except queue.Empty:
             pass
 
-    if command_type == "clean":
+    if command_type == "clean" or time.time() - refresh_time > 60:
         clear(robot_command_queue)
+        print("1 minute")
+        refresh_time = time.time()
     else: 
         command_data = {
             'type': command_type,
@@ -365,7 +370,7 @@ def nvb_autonomous_control(elmo):
                 #print(f"Memory: {tiny_memory}, Current: {loudest_speaker}, Time talking: {current_speaker_start_time}")
                 
                 loudest_speaker = Counter(tiny_memory).most_common(1)[0][0]
-                print(Counter(tiny_memory).most_common(1))
+                print(str(Counter(tiny_memory).most_common(1))+ "  "+str(robot_command_queue.qsize()))
                 #print(loudest_speaker)
 
                 # Robot is speaking (speaker 2)
@@ -607,7 +612,7 @@ def main():
         )
 
         elmo.set_image("blink.gif")
-        elmo.move_tilt(-15)
+        elmo.move_tilt(-3)
         time.sleep(2)
 
         # Start robot command executor thread

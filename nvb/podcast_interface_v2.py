@@ -12,7 +12,7 @@ if len(sys.argv) == 2:
     S3 = sys.argv[1]
 
 BASE_URL = "http://127.0.0.1:8000"
-PODCAST_ID = 0
+PODCAST_ID = 2
 
 def setup_logger(process_name):
     directory = str(PODCAST_ID)
@@ -342,7 +342,7 @@ with tab2:
     with col1:
         num1s1 = st.number_input("Pan [-40,40]", value=-35, step=1, key="num1_inputs1")
     with col2:
-        num2s1 = st.number_input("Tilt [-15,15]", value=-15, step=1, key="num2_inputs1")
+        num2s1 = st.number_input("Tilt [-15,15]", value=-3, step=1, key="num2_inputs1")
     with col3:
         st.markdown(f"<p></p>", unsafe_allow_html=True)
         if st.button("Submit Numbers", use_container_width=True, key="btn_submit_numberss1"):
@@ -357,7 +357,7 @@ with tab2:
     with col1:
         num1s2 = st.number_input("Pan [-40,40]", value=-35, step=1, key="num1_inputs2")
     with col2:
-        num2s2 = st.number_input("Tilt [-15,15]", value=-15, step=1, key="num2_inputs2")
+        num2s2 = st.number_input("Tilt [-15,15]", value=-3, step=1, key="num2_inputs2")
     with col3:
         st.markdown(f"<p></p>", unsafe_allow_html=True)
 
@@ -373,7 +373,7 @@ with tab2:
     with col1:
         num1s3 = st.number_input("Pan [-40,40]", value=35, step=1, key="num1_inputs3")
     with col2:
-        num2s3 = st.number_input("Tilt [-15,15]", value=-15, step=1, key="num2_inputs3")
+        num2s3 = st.number_input("Tilt [-15,15]", value=-3, step=1, key="num2_inputs3")
     with col3:
         st.markdown(f"<p></p>", unsafe_allow_html=True)
         if st.button("Submit Numbers", use_container_width=True, key="btn_submit_numberss3"):
