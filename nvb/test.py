@@ -5,7 +5,7 @@ def find_l8_device():
     """Find Zoom LiveTrak L-8 USB device."""
     devices = sd.query_devices()
     for idx, device in enumerate(devices):
-        if "LiveTrak" in device["name"] or "L-8" in device["name"]:
+        if "LiveTrak" in device["name"] or "L-12" in device["name"]:
             return idx, device
     return None, None
 
@@ -44,7 +44,7 @@ def monitor_active_channels(device_index, num_channels, blocksize=1024, threshol
 if __name__ == "__main__":
     device_index, device_info = find_l8_device()
     if device_index is None:
-        print("⚠️  Zoom LiveTrak L-8 not found. Make sure it is connected and in USB Audio I/F mode.")
+        print("⚠️  Zoom LiveTrak L-12 not found. Make sure it is connected and in USB Audio I/F mode.")
     else:
         print(f"Found L-8: {device_info['name']} with {device_info['max_input_channels']} channels")
         monitor_active_channels(device_index, device_info['max_input_channels'])

@@ -346,80 +346,6 @@ def nvb_autonomous_control(elmo):
                 time.sleep(0.5)
                 continue
 
-            if flag.get():
-                levels = loudness_levels.get()
-                detections = speech_detected.get()
-                probabilities = speech_probability.get()
-                #print(probabilities)
-                #print(detections)
-                
-                # Find loudest speaker among those speaking
-                speaking_speakers = [i for i in range(4) if detections[i]]
-                
-                if speaking_speakers:
-                    loudest_speaker = max(speaking_speakers, key=lambda i: levels[i])
-                else:
-                    loudest_speaker = -1
-
-                tiny_memory = (tiny_memory[-5:] if len(tiny_memory) >= 5 else tiny_memory) + [loudest_speaker]
-                #print(f"Memory: {tiny_memory}, Current: {loudest_speaker}, Time talking: {current_speaker_start_time}")
-                
-                loudest_speaker = Counter(tiny_memory).most_common(1)[0][0]
-                print(Counter(tiny_memory).most_common(1))
-                #print(loudest_speaker)
-
-                # Robot is speaking (speaker 2)
-                if loudest_speaker == 2:
-                    
-                    do_nothing = False
-                    add_robot_command('set_icon', delay_after=1, icon='speaking.png')
-                    logger.info(f"Robot start talking")
-                    #print(f"Robot start talking")
-                    robot_speaking = True
-                    current_speaker_start_time = None
-                
-                # Someone else is speaking (not robot, not silence)
-                elif loudest_speaker != -1 and loudest_speaker != 2:
-                    robot_speaking = False
-                    do_nothing = False
-                    
-                    # NEW SPEAKER DETECTED
-                    if loudest_speaker != previous or current_speaker_start_time is None:
-                        current_speaker_start_time = time.time()
-                        add_robot_command('set_icon', delay_after=0.5, icon='listening.png')
-                        logger.info(f"Start Talking: {loudest_speaker}")
-                        #print(f"Start Talking: {loudest_speaker}")
-                        add_robot_command('move_pan', delay_after=1, angle=robot_angles.get(loudest_speaker)[0])
-                        add_robot_command('move_tilt', delay_after=1, angle=robot_angles.get(loudest_speaker)[1])
-                        logger.info(f"Move to: {robot_angles.get(loudest_speaker)}")
-                        #print(f"Move to: {robot_angles.get(loudest_speaker)}")
-                        last_backchannel_time = time.time()
-                    
-                    # SAME SPEAKER TALKING - Check for backchannel after 7 seconds
-                    elif current_speaker_start_time is not None:
-                        time_talking = time.time() - current_speaker_start_time
-                        time_since_last_backchannel = time.time() - last_backchannel_time
-                        
-                        if time_talking >= 5 and time_since_last_backchannel >= backchannel_interval:
-                            add_robot_command('toggle_behaviour', delay_after=2)
-                            add_robot_command('toggle_behaviour', delay_after=0.5)
-                            logger.info(f"Backchanneling to: {robot_angles.get(loudest_speaker)}")
-                            #print(f"Backchanneling to speaker {loudest_speaker} after {time_talking:.1f}s")
-                            last_backchannel_time = time.time()
-                
-                # SILENCE
-                if loudest_speaker == -1 and previous == -1:
-                    robot_speaking = False
-                    if not do_nothing:
-                        robot_speaking = False
-                        add_robot_command('set_icon', delay_after=0.5, icon='black.png')
-                        do_nothing = True
-                        logger.info(f"No one talking")
-                        current_speaker_start_time = None
-                    
-                previous = loudest_speaker
-                time.sleep(0.2)
-
             if not flag.get():
                 flag.setAll(True)
 
@@ -567,30 +493,6 @@ def main():
     signal.signal(signal.SIGINT, signal_handler)
 
     try:
-        print("Loading VAD model...")
-        vad_model, _ = torch.hub.load("snakers4/silero-vad", "silero_vad")
-        print("VAD model loaded!\n")
-        logger.info("VAD model loaded")
-        
-        # Display available devices
-        devices = sd.query_devices()
-        input_devices = [device for device in devices if device["max_input_channels"] > 0]
-
-        print("Available Input Devices:")
-        for idx, device in enumerate(input_devices):
-            print(f"Device {idx}: {device['name']} -> {device['max_input_channels']}")
-
-        # Select device (H6 or L8)
-        input_device_index, device_type, num_total_channels = select_device()
-        
-        if input_device_index is None:
-            print("No device selected.")
-            logger.error("No device selected.")
-            return 1
-
-        print(f"Using: {device_type} (index: {input_device_index}, channels: {num_total_channels})")
-        logger.info(f"Using: {device_type} (index: {input_device_index}, channels: {num_total_channels})")
-        print("Monitoring speech activity... Press Ctrl+C to stop.\n")
 
         # Initialize Elmo server
         debug_mode = False
@@ -627,20 +529,11 @@ def main():
         rest_api_thread.start()
         logger.info("Started interface control thread")
 
-        # Start audio stream
-        with sd.InputStream(
-            device=input_device_index,
-            samplerate=SAMPLE_RATE,
-            channels=num_total_channels,
-            blocksize=CHUNK,
-            callback=lambda indata, frames, time_info, status: audio_callback(indata, frames, time_info, status, vad_model, channel_offset=2)
-        ):
-            while not shutdown_event.is_set():
-                time.sleep(0.1)
 
-        print("\n\nApplication shut down successfully.")
-        logger.info("=== Application Terminated ===")
-        return 0
+
+        #print("\n\nApplication shut down successfully.")
+        #logger.info("=== Application Terminated ===")
+        #return 0
 
     except KeyboardInterrupt:
         print("\nShutting down...")

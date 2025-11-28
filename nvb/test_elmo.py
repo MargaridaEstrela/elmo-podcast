@@ -4,7 +4,7 @@ import os
 import time
 import math
 
-elmo_ip = "192.168.0.109"
+elmo_ip = "192.168.0.107"
 elmo_port = 4000
 client_ip = "192.168.0.101"
 
@@ -24,20 +24,21 @@ elmo = ElmoServer(
 )
 
 #elmo.toggle_motors()
-
-elmo.set_image("blink.gif")
-time.sleep(2)
-
+elmo.move_tilt(-5)
+elmo.move_pan(0)
+elmo.set_image("star.png")
+#time.sleep(2)
+#elmo.set_icon("lupa.png")
 
 
 
 
 
     
-elmo.move_tilt(-1)
+#elmo.move_tilt(-1)
 
-time.sleep(5)
-print(elmo.get_current_tilt_angle())
+#time.sleep(5)
+#print(elmo.get_current_tilt_angle())
 
 #elmo.toggle_behaviour()
 
