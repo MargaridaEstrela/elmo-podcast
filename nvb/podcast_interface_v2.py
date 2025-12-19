@@ -12,7 +12,7 @@ if len(sys.argv) == 2:
     S3 = sys.argv[1]
 
 BASE_URL = "http://127.0.0.1:8000"
-PODCAST_ID = 2
+PODCAST_ID = 3
 
 def setup_logger(process_name):
     directory = str(PODCAST_ID)
@@ -280,26 +280,34 @@ with col_right:
     st.markdown("<p class='panel-title'>Eyes Emotions</p>", unsafe_allow_html=True)
     
     # Emotions Grid 4x2
-    col1, col2, col3, col4 = st.columns([1, 3, 3, 1])
-    with col2:
+    col1, col2, col3 = st.columns([1, 1, 1])
+    with col1:
         st.image("images/sad.png", use_container_width=False)
         if st.button("Sad", use_container_width=True, key="btn_sad"):
             run_command("sad")
-    with col3:
+    with col2:
         st.image("images/cry.png", use_container_width=True)
         if st.button("Cry", use_container_width=True, key="btn_cry"):
             run_command("cry")
+    with col3:
+        st.image("images/love.png", use_container_width=True)
+        if st.button("Love", use_container_width=True, key="btn_love"):
+            run_command("love")
     
     
-    col1, col2, col3, col4 = st.columns([1, 3, 3, 1])
-    with col2:
+    col1, col2, col3 = st.columns([1, 1, 1])
+    with col1:
         st.image("images/effort.png", use_container_width=True)
         if st.button("Smile", use_container_width=True, key="btn_effort"):
             run_command("effort")
-    with col3:
+    with col2:
         st.image("images/wink.png", use_container_width=True)
         if st.button("Wink", use_container_width=True, key="btn_wink"):
             run_command("wink")
+    with col3:
+        st.image("images/star.png", use_container_width=True)
+        if st.button("Star", use_container_width=True, key="btn_star"):
+            run_command("star")
         
         
     col1, col2, col3, col4 = st.columns([1, 3, 3, 1])

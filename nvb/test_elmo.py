@@ -4,9 +4,9 @@ import os
 import time
 import math
 
-elmo_ip = "192.168.0.107"
+elmo_ip = "192.168.0.101"
 elmo_port = 4000
-client_ip = "192.168.0.101"
+client_ip = "192.168.0.100"
 
 
 # Initialize Elmo server
@@ -26,7 +26,7 @@ elmo = ElmoServer(
 #elmo.toggle_motors()
 elmo.move_tilt(-5)
 elmo.move_pan(0)
-elmo.set_image("star.png")
+elmo.set_image("normal.png")
 #time.sleep(2)
 #elmo.set_icon("lupa.png")
 

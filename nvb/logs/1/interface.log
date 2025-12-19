@@ -1,0 +1,11 @@
+2025-11-28 11:08:37,650 - interface - INFO - send: front : None
+2025-11-28 11:08:41,876 - interface - INFO - send: backchanneling : None
+2025-11-28 11:08:49,839 - interface - INFO - send: lupa : None
+2025-11-28 11:08:53,808 - interface - INFO - send: clean : None
+2025-11-28 11:08:58,269 - interface - INFO - send: delay : None
+2025-11-28 11:09:03,077 - interface - INFO - send: delay : None
+2025-11-28 11:09:05,934 - interface - INFO - send: effort : None
+2025-11-28 11:09:08,567 - interface - INFO - send: wink : None
+2025-11-28 11:09:12,907 - interface - INFO - send: sad : None
+2025-11-28 11:09:16,626 - interface - INFO - send: wink : None
+2025-11-28 11:09:25,149 - interface - INFO - send: idle : None

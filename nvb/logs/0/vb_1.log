@@ -1,0 +1,17 @@
+2025-10-20 13:31:12,367 - vb_1 - INFO - VAD model loaded.
+2025-10-20 13:31:12,492 - vb_1 - INFO - Listening...
+2025-10-20 13:31:12,862 - vb_1 - INFO - {0: False, 1: False, 2: False, 3: False}
+2025-10-20 13:31:13,010 - vb_1 - INFO - {0: False, 1: False, 2: False, 3: False}
+2025-10-20 13:31:13,031 - vb_1 - INFO - {0: False, 1: True, 2: False, 3: False}
+2025-10-20 13:31:13,056 - vb_1 - INFO - {0: False, 1: True, 2: False, 3: False}
+2025-10-20 13:31:13,058 - vb_1 - INFO - {0: False, 1: True, 2: False, 3: False}
+2025-10-20 13:31:13,060 - vb_1 - INFO - {0: False, 1: True, 2: False, 3: False}
+2025-10-20 13:31:13,064 - vb_1 - INFO - {0: False, 1: True, 2: False, 3: False}
+2025-10-20 13:31:13,095 - vb_1 - INFO - {0: False, 1: True, 2: False, 3: False}
+2025-10-20 13:31:13,124 - vb_1 - INFO - {0: False, 1: True, 2: False, 3: False}
+2025-10-20 13:31:13,154 - vb_1 - INFO - {0: False, 1: True, 2: False, 3: False}
+2025-10-20 13:31:13,184 - vb_1 - INFO - {0: False, 1: True, 2: False, 3: False}
+2025-10-20 13:31:13,224 - vb_1 - INFO - {0: False, 1: True, 2: False, 3: False}
+2025-10-20 13:31:13,255 - vb_1 - INFO - {0: False, 1: True, 2: False, 3: False}
+2025-10-20 13:31:13,284 - vb_1 - INFO - {0: False, 1: True, 2: False, 3: False}
+2025-10-20 13:31:13,315 - vb_1 - INFO - {0: False, 1: True, 2: False, 3: False}

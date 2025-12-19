@@ -41,11 +41,11 @@ class LockedValue:
 # Audio parameters
 SAMPLE_RATE = 16000
 CHUNK = 512
-PODCAST_ID = 2
+PODCAST_ID = 3
 
 # VAD threshold (0-1, higher = more strict)
 VAD_THRESHOLD = 0.1
-VAD_THRESHOLD = 0.05
+VAD_THRESHOLD = 0.01
 
 # Global variables
 global elmo_ip, elmo_port, client_ip, robot_angles, rest_api_input, api_server, refresh_time
@@ -177,6 +177,10 @@ def audio_callback(indata, frames, time_info, status, vad_model, channel_offset=
     # Process each of 4 speakers
     for speaker in range(4):
         ch = channel_offset + speaker
+        
+        #if speaker == 2:
+        #    ch = channel_offset + 12
+
         if ch < indata.shape[1]:
             audio = indata[:, ch]
             
@@ -295,7 +299,7 @@ def add_robot_command(command_type, delay_after=2, **kwargs):
         except queue.Empty:
             pass
 
-    if command_type == "clean" or time.time() - refresh_time > 60:
+    if command_type == "clean" or time.time() - refresh_time > 30 or robot_command_queue.qsize() > 10:
         clear(robot_command_queue)
         print("1 minute")
         refresh_time = time.time()
@@ -505,6 +509,10 @@ def action(command: str, args:str):
         rest_api_input.setAll([None, None, None, "lupa.png", None, None])
     elif command == "cry":
         rest_api_input.setAll([None, None, "cry.png", None, None, None])
+    elif command == "love":
+        rest_api_input.setAll([None, None, "love.png", None, None, None])
+    elif command == "star":
+        rest_api_input.setAll([None, None, "star.png", None, None, None])
     elif command == "effort":
         rest_api_input.setAll([None, None, "effort.png", None, None, None])
     elif command == "normal":
@@ -514,7 +522,7 @@ def action(command: str, args:str):
     elif command == "wink":
         rest_api_input.setAll([None, None, "wink-2.gif", None, None, None])
     elif command == "idle":
-        rest_api_input.setAll([0, -7, "blink.gif", "black.png", None, None])
+        rest_api_input.setAll([0, -3, "blink.gif", "black.png", None, None])
     elif command == "sets1":
         robot_angles.set(1, [int(args.split(",")[0]), int(args.split(",")[1])])
         rest_api_input.setAll([robot_angles.get(0)[0], robot_angles.get(0)[1], None, None, None, None])
@@ -529,7 +537,7 @@ def action(command: str, args:str):
     elif command == "toggle_behaviour":
         rest_api_input.setAll([None, None, None, None, None, True])
     elif command == "front":
-        rest_api_input.setAll([0, -7, None, None, None, None])
+        rest_api_input.setAll([0, -3, None, None, None, None])
     else:
         pass
     return {"status": "ok", "command": command, "args": args}
