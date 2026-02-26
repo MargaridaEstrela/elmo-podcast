@@ -1,0 +1,904 @@
+2026-02-20 18:03:57,380 - nvd_autonomous - INFO - Autonomous control initialized
+2026-02-20 18:04:02,393 - nvd_autonomous - INFO - Robot start talking
+2026-02-20 18:04:02,594 - nvd_autonomous - INFO - Robot start talking
+2026-02-20 18:04:02,795 - nvd_autonomous - INFO - Robot start talking
+2026-02-20 18:04:03,197 - nvd_autonomous - INFO - No one talking
+2026-02-20 18:04:04,805 - nvd_autonomous - INFO - Start Talking: 3
+2026-02-20 18:04:04,805 - nvd_autonomous - INFO - Move to: [35, -3]
+2026-02-20 18:04:05,006 - nvd_autonomous - INFO - Start Talking: 0
+2026-02-20 18:04:05,006 - nvd_autonomous - INFO - Move to: [-35, -3]
+2026-02-20 18:04:06,012 - nvd_autonomous - INFO - Start Talking: 1
+2026-02-20 18:04:06,012 - nvd_autonomous - INFO - Move to: [-35, -3]
+2026-02-20 18:04:07,218 - nvd_autonomous - INFO - Robot start talking
+2026-02-20 18:04:07,620 - nvd_autonomous - INFO - No one talking
+2026-02-20 18:04:09,227 - nvd_autonomous - INFO - Start Talking: 1
+2026-02-20 18:04:09,227 - nvd_autonomous - INFO - Move to: [-35, -3]
+2026-02-20 18:04:11,841 - nvd_autonomous - INFO - No one talking
+2026-02-20 18:04:13,046 - nvd_autonomous - INFO - Start Talking: 1
+2026-02-20 18:04:13,047 - nvd_autonomous - INFO - Move to: [-35, -3]
+2026-02-20 18:04:14,052 - nvd_autonomous - INFO - No one talking
+2026-02-20 18:04:14,857 - nvd_autonomous - INFO - Start Talking: 1
+2026-02-20 18:04:14,858 - nvd_autonomous - INFO - Move to: [-35, -3]
+2026-02-20 18:04:19,281 - nvd_autonomous - INFO - Start Talking: 0
+2026-02-20 18:04:19,281 - nvd_autonomous - INFO - Move to: [-35, -3]
+2026-02-20 18:04:19,482 - nvd_autonomous - INFO - Start Talking: 1
+2026-02-20 18:04:19,482 - nvd_autonomous - INFO - Move to: [-35, -3]
+2026-02-20 18:04:19,884 - nvd_autonomous - INFO - No one talking
+2026-02-20 18:04:20,286 - nvd_autonomous - INFO - Start Talking: 1
+2026-02-20 18:04:20,286 - nvd_autonomous - INFO - Move to: [-35, -3]
+2026-02-20 18:04:22,295 - nvd_autonomous - INFO - Start Talking: 0
+2026-02-20 18:04:22,295 - nvd_autonomous - INFO - Move to: [-35, -3]
+2026-02-20 18:04:24,304 - nvd_autonomous - INFO - No one talking
+2026-02-20 18:04:27,520 - nvd_autonomous - INFO - Start Talking: 0
+2026-02-20 18:04:27,520 - nvd_autonomous - INFO - Move to: [-35, -3]
+2026-02-20 18:04:30,737 - nvd_autonomous - INFO - Robot start talking
+2026-02-20 18:04:30,938 - nvd_autonomous - INFO - Start Talking: 1
+2026-02-20 18:04:30,938 - nvd_autonomous - INFO - Move to: [-35, -3]
+2026-02-20 18:04:31,139 - nvd_autonomous - INFO - Robot start talking
+2026-02-20 18:04:31,340 - nvd_autonomous - INFO - Robot start talking
+2026-02-20 18:04:31,541 - nvd_autonomous - INFO - Robot start talking
+2026-02-20 18:04:31,742 - nvd_autonomous - INFO - Robot start talking
+2026-02-20 18:04:31,943 - nvd_autonomous - INFO - Robot start talking
+2026-02-20 18:04:32,144 - nvd_autonomous - INFO - Robot start talking
+2026-02-20 18:04:32,345 - nvd_autonomous - INFO - Robot start talking
+2026-02-20 18:04:32,547 - nvd_autonomous - INFO - Robot start talking
+2026-02-20 18:04:32,748 - nvd_autonomous - INFO - Robot start talking
+2026-02-20 18:04:32,949 - nvd_autonomous - INFO - Robot start talking
+2026-02-20 18:04:33,150 - nvd_autonomous - INFO - Start Talking: 3
+2026-02-20 18:04:33,150 - nvd_autonomous - INFO - Move to: [35, -3]
+2026-02-20 18:04:33,753 - nvd_autonomous - INFO - Start Talking: 1
+2026-02-20 18:04:33,753 - nvd_autonomous - INFO - Move to: [-35, -3]
+2026-02-20 18:04:37,773 - nvd_autonomous - INFO - Start Talking: 3
+2026-02-20 18:04:37,773 - nvd_autonomous - INFO - Move to: [35, -3]
+2026-02-20 18:04:38,376 - nvd_autonomous - INFO - Start Talking: 0
+2026-02-20 18:04:38,376 - nvd_autonomous - INFO - Move to: [-35, -3]
+2026-02-20 18:04:41,592 - nvd_autonomous - INFO - Robot start talking
+2026-02-20 18:04:41,793 - nvd_autonomous - INFO - Start Talking: 0
+2026-02-20 18:04:41,793 - nvd_autonomous - INFO - Move to: [-35, -3]
+2026-02-20 18:04:41,994 - nvd_autonomous - INFO - Start Talking: 1
+2026-02-20 18:04:41,994 - nvd_autonomous - INFO - Move to: [-35, -3]
+2026-02-20 18:04:44,004 - nvd_autonomous - INFO - No one talking
+2026-02-20 18:04:45,612 - nvd_autonomous - INFO - Start Talking: 1
+2026-02-20 18:04:45,612 - nvd_autonomous - INFO - Move to: [-35, -3]
+2026-02-20 18:04:47,421 - nvd_autonomous - INFO - No one talking
+2026-02-20 18:04:53,251 - nvd_autonomous - INFO - Start Talking: 1
+2026-02-20 18:04:53,251 - nvd_autonomous - INFO - Move to: [-35, -3]
+2026-02-20 18:04:54,458 - nvd_autonomous - INFO - Robot start talking
+2026-02-20 18:04:54,659 - nvd_autonomous - INFO - Robot start talking
+2026-02-20 18:04:54,860 - nvd_autonomous - INFO - Start Talking: 1
+2026-02-20 18:04:54,911 - nvd_autonomous - INFO - Move to: [-35, -3]
+2026-02-20 18:04:55,514 - nvd_autonomous - INFO - No one talking
+2026-02-20 18:04:55,916 - nvd_autonomous - INFO - Start Talking: 1
+2026-02-20 18:04:55,916 - nvd_autonomous - INFO - Move to: [-35, -3]
+2026-02-20 18:04:56,117 - nvd_autonomous - INFO - Robot start talking
+2026-02-20 18:04:56,519 - nvd_autonomous - INFO - Start Talking: 1
+2026-02-20 18:04:56,519 - nvd_autonomous - INFO - Move to: [-35, -3]
+2026-02-20 18:04:56,720 - nvd_autonomous - INFO - Robot start talking
+2026-02-20 18:04:56,921 - nvd_autonomous - INFO - Robot start talking
+2026-02-20 18:04:57,123 - nvd_autonomous - INFO - Robot start talking
+2026-02-20 18:04:57,324 - nvd_autonomous - INFO - Start Talking: 1
+2026-02-20 18:04:57,324 - nvd_autonomous - INFO - Move to: [-35, -3]
+2026-02-20 18:04:58,529 - nvd_autonomous - INFO - Robot start talking
+2026-02-20 18:04:58,730 - nvd_autonomous - INFO - Robot start talking
+2026-02-20 18:04:58,931 - nvd_autonomous - INFO - Start Talking: 1
+2026-02-20 18:04:58,931 - nvd_autonomous - INFO - Move to: [-35, -3]
+2026-02-20 18:04:59,333 - nvd_autonomous - INFO - Robot start talking
+2026-02-20 18:04:59,535 - nvd_autonomous - INFO - Robot start talking
+2026-02-20 18:04:59,735 - nvd_autonomous - INFO - Start Talking: 1
+2026-02-20 18:04:59,735 - nvd_autonomous - INFO - Move to: [-35, -3]
+2026-02-20 18:05:00,137 - nvd_autonomous - INFO - Robot start talking
+2026-02-20 18:05:00,338 - nvd_autonomous - INFO - Robot start talking
+2026-02-20 18:05:00,539 - nvd_autonomous - INFO - Start Talking: 1
+2026-02-20 18:05:00,539 - nvd_autonomous - INFO - Move to: [-35, -3]
+2026-02-20 18:05:00,741 - nvd_autonomous - INFO - Robot start talking
+2026-02-20 18:05:00,943 - nvd_autonomous - INFO - Start Talking: 1
+2026-02-20 18:05:00,943 - nvd_autonomous - INFO - Move to: [-35, -3]
+2026-02-20 18:05:01,345 - nvd_autonomous - INFO - Robot start talking
+2026-02-20 18:05:01,547 - nvd_autonomous - INFO - Start Talking: 1
+2026-02-20 18:05:01,547 - nvd_autonomous - INFO - Move to: [-35, -3]
+2026-02-20 18:05:01,748 - nvd_autonomous - INFO - Robot start talking
+2026-02-20 18:05:01,949 - nvd_autonomous - INFO - Robot start talking
+2026-02-20 18:05:02,150 - nvd_autonomous - INFO - Start Talking: 1
+2026-02-20 18:05:02,150 - nvd_autonomous - INFO - Move to: [-35, -3]
+2026-02-20 18:05:02,753 - nvd_autonomous - INFO - Robot start talking
+2026-02-20 18:05:02,954 - nvd_autonomous - INFO - Robot start talking
+2026-02-20 18:05:03,155 - nvd_autonomous - INFO - Start Talking: 1
+2026-02-20 18:05:03,156 - nvd_autonomous - INFO - Move to: [-35, -3]
+2026-02-20 18:05:05,769 - nvd_autonomous - INFO - Robot start talking
+2026-02-20 18:05:05,970 - nvd_autonomous - INFO - Start Talking: 1
+2026-02-20 18:05:05,970 - nvd_autonomous - INFO - Move to: [-35, -3]
+2026-02-20 18:05:06,172 - nvd_autonomous - INFO - Robot start talking
+2026-02-20 18:05:06,373 - nvd_autonomous - INFO - Start Talking: 1
+2026-02-20 18:05:06,373 - nvd_autonomous - INFO - Move to: [-35, -3]
+2026-02-20 18:05:06,775 - nvd_autonomous - INFO - Robot start talking
+2026-02-20 18:05:06,975 - nvd_autonomous - INFO - Start Talking: 1
+2026-02-20 18:05:06,975 - nvd_autonomous - INFO - Move to: [-35, -3]
+2026-02-20 18:05:07,176 - nvd_autonomous - INFO - Robot start talking
+2026-02-20 18:05:07,377 - nvd_autonomous - INFO - Start Talking: 1
+2026-02-20 18:05:07,378 - nvd_autonomous - INFO - Move to: [-35, -3]
+2026-02-20 18:05:11,398 - nvd_autonomous - INFO - Robot start talking
+2026-02-20 18:05:11,599 - nvd_autonomous - INFO - Start Talking: 1
+2026-02-20 18:05:11,599 - nvd_autonomous - INFO - Move to: [-35, -3]
+2026-02-20 18:05:13,207 - nvd_autonomous - INFO - No one talking
+2026-02-20 18:05:14,011 - nvd_autonomous - INFO - Start Talking: 1
+2026-02-20 18:05:14,011 - nvd_autonomous - INFO - Move to: [-35, -3]
+2026-02-20 18:05:15,619 - nvd_autonomous - INFO - Robot start talking
+2026-02-20 18:05:15,820 - nvd_autonomous - INFO - Start Talking: 1
+2026-02-20 18:05:15,820 - nvd_autonomous - INFO - Move to: [-35, -3]
+2026-02-20 18:05:17,227 - nvd_autonomous - INFO - Robot start talking
+2026-02-20 18:05:17,428 - nvd_autonomous - INFO - Start Talking: 1
+2026-02-20 18:05:17,428 - nvd_autonomous - INFO - Move to: [-35, -3]
+2026-02-20 18:05:17,629 - nvd_autonomous - INFO - Robot start talking
+2026-02-20 18:05:18,031 - nvd_autonomous - INFO - No one talking
+2026-02-20 18:05:19,253 - nvd_autonomous - INFO - Start Talking: 0
+2026-02-20 18:05:19,253 - nvd_autonomous - INFO - Move to: [-35, -3]
+2026-02-20 18:05:20,861 - nvd_autonomous - INFO - No one talking
+2026-02-20 18:05:21,464 - nvd_autonomous - INFO - Start Talking: 0
+2026-02-20 18:05:21,464 - nvd_autonomous - INFO - Move to: [-35, -3]
+2026-02-20 18:05:22,469 - nvd_autonomous - INFO - No one talking
+2026-02-20 18:05:24,077 - nvd_autonomous - INFO - Start Talking: 0
+2026-02-20 18:05:24,077 - nvd_autonomous - INFO - Move to: [-35, -3]
+2026-02-20 18:05:24,479 - nvd_autonomous - INFO - Start Talking: 0
+2026-02-20 18:05:24,480 - nvd_autonomous - INFO - Move to: [-35, -3]
+2026-02-20 18:05:24,883 - nvd_autonomous - INFO - Start Talking: 0
+2026-02-20 18:05:24,883 - nvd_autonomous - INFO - Move to: [-35, -3]
+2026-02-20 18:05:25,285 - nvd_autonomous - INFO - No one talking
+2026-02-20 18:05:25,888 - nvd_autonomous - INFO - Start Talking: 0
+2026-02-20 18:05:25,888 - nvd_autonomous - INFO - Move to: [-35, -3]
+2026-02-20 18:05:27,094 - nvd_autonomous - INFO - No one talking
+2026-02-20 18:05:27,697 - nvd_autonomous - INFO - Start Talking: 0
+2026-02-20 18:05:27,697 - nvd_autonomous - INFO - Move to: [-35, -3]
+2026-02-20 18:05:28,702 - nvd_autonomous - INFO - No one talking
+2026-02-20 18:05:35,335 - nvd_autonomous - INFO - Start Talking: 1
+2026-02-20 18:05:35,335 - nvd_autonomous - INFO - Move to: [-35, -3]
+2026-02-20 18:05:36,742 - nvd_autonomous - INFO - Robot start talking
+2026-02-20 18:05:37,145 - nvd_autonomous - INFO - No one talking
+2026-02-20 18:05:37,346 - nvd_autonomous - INFO - Start Talking: 1
+2026-02-20 18:05:37,346 - nvd_autonomous - INFO - Move to: [-35, -3]
+2026-02-20 18:05:37,949 - nvd_autonomous - INFO - Start Talking: 1
+2026-02-20 18:05:37,949 - nvd_autonomous - INFO - Move to: [-35, -3]
+2026-02-20 18:05:38,150 - nvd_autonomous - INFO - Robot start talking
+2026-02-20 18:05:38,351 - nvd_autonomous - INFO - Robot start talking
+2026-02-20 18:05:38,552 - nvd_autonomous - INFO - Robot start talking
+2026-02-20 18:05:38,753 - nvd_autonomous - INFO - Robot start talking
+2026-02-20 18:05:38,955 - nvd_autonomous - INFO - Robot start talking
+2026-02-20 18:05:39,157 - nvd_autonomous - INFO - Robot start talking
+2026-02-20 18:05:39,358 - nvd_autonomous - INFO - Start Talking: 1
+2026-02-20 18:05:39,360 - nvd_autonomous - INFO - Move to: [-35, -3]
+2026-02-20 18:05:41,370 - nvd_autonomous - INFO - Robot start talking
+2026-02-20 18:05:41,572 - nvd_autonomous - INFO - Move pan to: 0
+2026-02-20 18:05:41,572 - nvd_autonomous - INFO - Move tilt to: -3
+2026-02-20 18:05:41,572 - nvd_autonomous - INFO - Start Talking: 1
+2026-02-20 18:05:41,572 - nvd_autonomous - INFO - Move to: [-35, -3]
+2026-02-20 18:05:43,179 - nvd_autonomous - INFO - Robot start talking
+2026-02-20 18:05:43,380 - nvd_autonomous - INFO - Start Talking: 1
+2026-02-20 18:05:43,380 - nvd_autonomous - INFO - Move to: [-35, -3]
+2026-02-20 18:05:44,184 - nvd_autonomous - INFO - Robot start talking
+2026-02-20 18:05:44,385 - nvd_autonomous - INFO - Start Talking: 1
+2026-02-20 18:05:44,385 - nvd_autonomous - INFO - Move to: [-35, -3]
+2026-02-20 18:05:44,787 - nvd_autonomous - INFO - Robot start talking
+2026-02-20 18:05:44,989 - nvd_autonomous - INFO - Start Talking: 1
+2026-02-20 18:05:44,990 - nvd_autonomous - INFO - Move to: [-35, -3]
+2026-02-20 18:05:45,997 - nvd_autonomous - INFO - Robot start talking
+2026-02-20 18:05:46,198 - nvd_autonomous - INFO - Robot start talking
+2026-02-20 18:05:46,399 - nvd_autonomous - INFO - Robot start talking
+2026-02-20 18:05:46,600 - nvd_autonomous - INFO - Robot start talking
+2026-02-20 18:05:46,801 - nvd_autonomous - INFO - Robot start talking
+2026-02-20 18:05:47,002 - nvd_autonomous - INFO - Robot start talking
+2026-02-20 18:05:47,203 - nvd_autonomous - INFO - Robot start talking
+2026-02-20 18:05:47,404 - nvd_autonomous - INFO - Robot start talking
+2026-02-20 18:05:47,605 - nvd_autonomous - INFO - Robot start talking
+2026-02-20 18:05:47,806 - nvd_autonomous - INFO - Robot start talking
+2026-02-20 18:05:48,007 - nvd_autonomous - INFO - Robot start talking
+2026-02-20 18:05:48,208 - nvd_autonomous - INFO - Start Talking: 1
+2026-02-20 18:05:48,209 - nvd_autonomous - INFO - Move to: [-35, -3]
+2026-02-20 18:05:49,013 - nvd_autonomous - INFO - Robot start talking
+2026-02-20 18:05:49,214 - nvd_autonomous - INFO - Start Talking: 1
+2026-02-20 18:05:49,214 - nvd_autonomous - INFO - Move to: [-35, -3]
+2026-02-20 18:05:49,416 - nvd_autonomous - INFO - Robot start talking
+2026-02-20 18:05:49,617 - nvd_autonomous - INFO - Start Talking: 1
+2026-02-20 18:05:49,617 - nvd_autonomous - INFO - Move to: [-35, -3]
+2026-02-20 18:05:49,818 - nvd_autonomous - INFO - Robot start talking
+2026-02-20 18:05:50,019 - nvd_autonomous - INFO - Start Talking: 1
+2026-02-20 18:05:50,019 - nvd_autonomous - INFO - Move to: [-35, -3]
+2026-02-20 18:05:50,221 - nvd_autonomous - INFO - Robot start talking
+2026-02-20 18:05:50,422 - nvd_autonomous - INFO - Robot start talking
+2026-02-20 18:05:50,623 - nvd_autonomous - INFO - Start Talking: 1
+2026-02-20 18:05:50,623 - nvd_autonomous - INFO - Move to: [-35, -3]
+2026-02-20 18:05:53,437 - nvd_autonomous - INFO - Move pan to: 0
+2026-02-20 18:05:53,437 - nvd_autonomous - INFO - Move tilt to: -3
+2026-02-20 18:05:54,242 - nvd_autonomous - INFO - Robot start talking
+2026-02-20 18:05:54,443 - nvd_autonomous - INFO - Robot start talking
+2026-02-20 18:05:54,644 - nvd_autonomous - INFO - Start Talking: 1
+2026-02-20 18:05:54,644 - nvd_autonomous - INFO - Move to: [-35, -3]
+2026-02-20 18:05:55,247 - nvd_autonomous - INFO - Robot start talking
+2026-02-20 18:05:55,448 - nvd_autonomous - INFO - Robot start talking
+2026-02-20 18:05:55,649 - nvd_autonomous - INFO - Robot start talking
+2026-02-20 18:05:56,051 - nvd_autonomous - INFO - No one talking
+2026-02-20 18:05:57,257 - nvd_autonomous - INFO - Start Talking: 1
+2026-02-20 18:05:57,257 - nvd_autonomous - INFO - Move to: [-35, -3]
+2026-02-20 18:05:57,659 - nvd_autonomous - INFO - Start Talking: 1
+2026-02-20 18:05:57,660 - nvd_autonomous - INFO - Move to: [-35, -3]
+2026-02-20 18:06:04,092 - nvd_autonomous - INFO - No one talking
+2026-02-20 18:06:05,298 - nvd_autonomous - INFO - Start Talking: 0
+2026-02-20 18:06:05,298 - nvd_autonomous - INFO - Move to: [-35, -3]
+2026-02-20 18:06:06,705 - nvd_autonomous - INFO - Start Talking: 0
+2026-02-20 18:06:06,705 - nvd_autonomous - INFO - Move to: [-35, -3]
+2026-02-20 18:06:07,107 - nvd_autonomous - INFO - No one talking
+2026-02-20 18:06:12,549 - nvd_autonomous - INFO - Start Talking: 1
+2026-02-20 18:06:12,549 - nvd_autonomous - INFO - Move to: [-35, -3]
+2026-02-20 18:06:15,966 - nvd_autonomous - INFO - Robot start talking
+2026-02-20 18:06:16,167 - nvd_autonomous - INFO - Robot start talking
+2026-02-20 18:06:16,368 - nvd_autonomous - INFO - Robot start talking
+2026-02-20 18:06:16,569 - nvd_autonomous - INFO - Robot start talking
+2026-02-20 18:06:16,770 - nvd_autonomous - INFO - Robot start talking
+2026-02-20 18:06:16,972 - nvd_autonomous - INFO - Start Talking: 1
+2026-02-20 18:06:16,972 - nvd_autonomous - INFO - Move to: [-35, -3]
+2026-02-20 18:06:18,379 - nvd_autonomous - INFO - Move pan to: 0
+2026-02-20 18:06:18,379 - nvd_autonomous - INFO - Move tilt to: -3
+2026-02-20 18:06:20,994 - nvd_autonomous - INFO - Robot start talking
+2026-02-20 18:06:21,195 - nvd_autonomous - INFO - Start Talking: 1
+2026-02-20 18:06:21,195 - nvd_autonomous - INFO - Move to: [-35, -3]
+2026-02-20 18:06:24,812 - nvd_autonomous - INFO - Robot start talking
+2026-02-20 18:06:25,013 - nvd_autonomous - INFO - Start Talking: 1
+2026-02-20 18:06:25,013 - nvd_autonomous - INFO - Move to: [-35, -3]
+2026-02-20 18:06:25,415 - nvd_autonomous - INFO - Robot start talking
+2026-02-20 18:06:25,616 - nvd_autonomous - INFO - Robot start talking
+2026-02-20 18:06:25,817 - nvd_autonomous - INFO - Robot start talking
+2026-02-20 18:06:26,018 - nvd_autonomous - INFO - Robot start talking
+2026-02-20 18:06:26,219 - nvd_autonomous - INFO - Robot start talking
+2026-02-20 18:06:26,420 - nvd_autonomous - INFO - Robot start talking
+2026-02-20 18:06:26,621 - nvd_autonomous - INFO - Robot start talking
+2026-02-20 18:06:26,822 - nvd_autonomous - INFO - Robot start talking
+2026-02-20 18:06:27,023 - nvd_autonomous - INFO - Robot start talking
+2026-02-20 18:06:27,224 - nvd_autonomous - INFO - Start Talking: 1
+2026-02-20 18:06:27,225 - nvd_autonomous - INFO - Move to: [-35, -3]
+2026-02-20 18:06:27,426 - nvd_autonomous - INFO - Start Talking: 0
+2026-02-20 18:06:27,426 - nvd_autonomous - INFO - Move to: [-35, -3]
+2026-02-20 18:06:28,029 - nvd_autonomous - INFO - Start Talking: 1
+2026-02-20 18:06:28,029 - nvd_autonomous - INFO - Move to: [-35, -3]
+2026-02-20 18:06:30,039 - nvd_autonomous - INFO - Robot start talking
+2026-02-20 18:06:30,240 - nvd_autonomous - INFO - Start Talking: 1
+2026-02-20 18:06:30,240 - nvd_autonomous - INFO - Move to: [-35, -3]
+2026-02-20 18:06:30,642 - nvd_autonomous - INFO - Robot start talking
+2026-02-20 18:06:30,843 - nvd_autonomous - INFO - Start Talking: 1
+2026-02-20 18:06:30,843 - nvd_autonomous - INFO - Move to: [-35, -3]
+2026-02-20 18:06:31,446 - nvd_autonomous - INFO - Robot start talking
+2026-02-20 18:06:31,848 - nvd_autonomous - INFO - No one talking
+2026-02-20 18:06:32,652 - nvd_autonomous - INFO - Start Talking: 0
+2026-02-20 18:06:32,652 - nvd_autonomous - INFO - Move to: [-35, -3]
+2026-02-20 18:06:37,074 - nvd_autonomous - INFO - No one talking
+2026-02-20 18:06:37,678 - nvd_autonomous - INFO - Start Talking: 0
+2026-02-20 18:06:37,678 - nvd_autonomous - INFO - Move to: [-35, -3]
+2026-02-20 18:06:38,683 - nvd_autonomous - INFO - No one talking
+2026-02-20 18:06:43,305 - nvd_autonomous - INFO - Move pan to: 35
+2026-02-20 18:06:43,305 - nvd_autonomous - INFO - Move tilt to: -3
+2026-02-20 18:06:43,909 - nvd_autonomous - INFO - Start Talking: 3
+2026-02-20 18:06:43,909 - nvd_autonomous - INFO - Move to: [35, -3]
+2026-02-20 18:06:44,512 - nvd_autonomous - INFO - Start Talking: 3
+2026-02-20 18:06:44,512 - nvd_autonomous - INFO - Move to: [35, -3]
+2026-02-20 18:06:44,915 - nvd_autonomous - INFO - Start Talking: 3
+2026-02-20 18:06:44,915 - nvd_autonomous - INFO - Move to: [35, -3]
+2026-02-20 18:06:47,327 - nvd_autonomous - INFO - Start Talking: 3
+2026-02-20 18:06:47,327 - nvd_autonomous - INFO - Move to: [35, -3]
+2026-02-20 18:06:49,337 - nvd_autonomous - INFO - No one talking
+2026-02-20 18:06:51,146 - nvd_autonomous - INFO - Start Talking: 0
+2026-02-20 18:06:51,146 - nvd_autonomous - INFO - Move to: [-35, -3]
+2026-02-20 18:06:51,950 - nvd_autonomous - INFO - Start Talking: 0
+2026-02-20 18:06:51,950 - nvd_autonomous - INFO - Move to: [-35, -3]
+2026-02-20 18:06:53,759 - nvd_autonomous - INFO - No one talking
+2026-02-20 18:06:55,167 - nvd_autonomous - INFO - Start Talking: 1
+2026-02-20 18:06:55,167 - nvd_autonomous - INFO - Move to: [-35, -3]
+2026-02-20 18:06:57,580 - nvd_autonomous - INFO - No one talking
+2026-02-20 18:06:59,590 - nvd_autonomous - INFO - Start Talking: 1
+2026-02-20 18:06:59,590 - nvd_autonomous - INFO - Move to: [-35, -3]
+2026-02-20 18:06:59,992 - nvd_autonomous - INFO - Robot start talking
+2026-02-20 18:07:00,193 - nvd_autonomous - INFO - Start Talking: 1
+2026-02-20 18:07:00,193 - nvd_autonomous - INFO - Move to: [-35, -3]
+2026-02-20 18:07:01,198 - nvd_autonomous - INFO - No one talking
+2026-02-20 18:07:01,600 - nvd_autonomous - INFO - Start Talking: 1
+2026-02-20 18:07:01,600 - nvd_autonomous - INFO - Move to: [-35, -3]
+2026-02-20 18:07:02,002 - nvd_autonomous - INFO - No one talking
+2026-02-20 18:07:02,404 - nvd_autonomous - INFO - Start Talking: 1
+2026-02-20 18:07:02,404 - nvd_autonomous - INFO - Move to: [-35, -3]
+2026-02-20 18:07:03,007 - nvd_autonomous - INFO - No one talking
+2026-02-20 18:07:05,017 - nvd_autonomous - INFO - Start Talking: 1
+2026-02-20 18:07:05,017 - nvd_autonomous - INFO - Move to: [-35, -3]
+2026-02-20 18:07:06,223 - nvd_autonomous - INFO - No one talking
+2026-02-20 18:07:10,444 - nvd_autonomous - INFO - Start Talking: 1
+2026-02-20 18:07:10,444 - nvd_autonomous - INFO - Move to: [-35, -3]
+2026-02-20 18:07:11,449 - nvd_autonomous - INFO - No one talking
+2026-02-20 18:07:12,052 - nvd_autonomous - INFO - Start Talking: 1
+2026-02-20 18:07:12,052 - nvd_autonomous - INFO - Move to: [-35, -3]
+2026-02-20 18:07:14,664 - nvd_autonomous - INFO - No one talking
+2026-02-20 18:07:19,889 - nvd_autonomous - INFO - Start Talking: 1
+2026-02-20 18:07:19,889 - nvd_autonomous - INFO - Move to: [-35, -3]
+2026-02-20 18:07:20,291 - nvd_autonomous - INFO - No one talking
+2026-02-20 18:07:22,301 - nvd_autonomous - INFO - Start Talking: 1
+2026-02-20 18:07:22,301 - nvd_autonomous - INFO - Move to: [-35, -3]
+2026-02-20 18:07:23,105 - nvd_autonomous - INFO - Start Talking: 1
+2026-02-20 18:07:23,105 - nvd_autonomous - INFO - Move to: [-35, -3]
+2026-02-20 18:07:26,321 - nvd_autonomous - INFO - No one talking
+2026-02-20 18:07:27,527 - nvd_autonomous - INFO - Start Talking: 1
+2026-02-20 18:07:27,527 - nvd_autonomous - INFO - Move to: [-35, -3]
+2026-02-20 18:07:29,739 - nvd_autonomous - INFO - No one talking
+2026-02-20 18:07:30,945 - nvd_autonomous - INFO - Start Talking: 0
+2026-02-20 18:07:30,945 - nvd_autonomous - INFO - Move to: [-35, -3]
+2026-02-20 18:07:31,548 - nvd_autonomous - INFO - No one talking
+2026-02-20 18:07:31,749 - nvd_autonomous - INFO - Start Talking: 0
+2026-02-20 18:07:31,749 - nvd_autonomous - INFO - Move to: [-35, -3]
+2026-02-20 18:07:32,553 - nvd_autonomous - INFO - No one talking
+2026-02-20 18:07:32,754 - nvd_autonomous - INFO - Start Talking: 0
+2026-02-20 18:07:32,754 - nvd_autonomous - INFO - Move to: [-35, -3]
+2026-02-20 18:07:35,166 - nvd_autonomous - INFO - Start Talking: 0
+2026-02-20 18:07:35,166 - nvd_autonomous - INFO - Move to: [-35, -3]
+2026-02-20 18:07:35,568 - nvd_autonomous - INFO - No one talking
+2026-02-20 18:07:35,970 - nvd_autonomous - INFO - Start Talking: 1
+2026-02-20 18:07:35,970 - nvd_autonomous - INFO - Move to: [-35, -3]
+2026-02-20 18:07:43,005 - nvd_autonomous - INFO - Backchanneling to: [-35, -3]
+2026-02-20 18:07:50,040 - nvd_autonomous - INFO - Backchanneling to: [-35, -3]
+2026-02-20 18:07:53,859 - nvd_autonomous - INFO - Start Talking: 1
+2026-02-20 18:07:53,859 - nvd_autonomous - INFO - Move to: [-35, -3]
+2026-02-20 18:07:54,462 - nvd_autonomous - INFO - Start Talking: 1
+2026-02-20 18:07:54,462 - nvd_autonomous - INFO - Move to: [-35, -3]
+2026-02-20 18:08:01,497 - nvd_autonomous - INFO - Backchanneling to: [-35, -3]
+2026-02-20 18:08:02,301 - nvd_autonomous - INFO - No one talking
+2026-02-20 18:08:02,703 - nvd_autonomous - INFO - Start Talking: 1
+2026-02-20 18:08:02,703 - nvd_autonomous - INFO - Move to: [-35, -3]
+2026-02-20 18:08:05,316 - nvd_autonomous - INFO - No one talking
+2026-02-20 18:08:05,718 - nvd_autonomous - INFO - Start Talking: 1
+2026-02-20 18:08:05,718 - nvd_autonomous - INFO - Move to: [-35, -3]
+2026-02-20 18:08:10,139 - nvd_autonomous - INFO - No one talking
+2026-02-20 18:08:11,144 - nvd_autonomous - INFO - Start Talking: 1
+2026-02-20 18:08:11,144 - nvd_autonomous - INFO - Move to: [-35, -3]
+2026-02-20 18:08:11,546 - nvd_autonomous - INFO - Start Talking: 1
+2026-02-20 18:08:11,546 - nvd_autonomous - INFO - Move to: [-35, -3]
+2026-02-20 18:08:16,571 - nvd_autonomous - INFO - No one talking
+2026-02-20 18:08:17,375 - nvd_autonomous - INFO - Start Talking: 1
+2026-02-20 18:08:17,375 - nvd_autonomous - INFO - Move to: [-35, -3]
+2026-02-20 18:08:18,782 - nvd_autonomous - INFO - No one talking
+2026-02-20 18:08:19,586 - nvd_autonomous - INFO - Start Talking: 1
+2026-02-20 18:08:19,586 - nvd_autonomous - INFO - Move to: [-35, -3]
+2026-02-20 18:08:26,420 - nvd_autonomous - INFO - No one talking
+2026-02-20 18:08:26,621 - nvd_autonomous - INFO - Start Talking: 1
+2026-02-20 18:08:26,621 - nvd_autonomous - INFO - Move to: [-35, -3]
+2026-02-20 18:08:27,023 - nvd_autonomous - INFO - No one talking
+2026-02-20 18:08:28,229 - nvd_autonomous - INFO - Start Talking: 1
+2026-02-20 18:08:28,229 - nvd_autonomous - INFO - Move to: [-35, -3]
+2026-02-20 18:08:30,842 - nvd_autonomous - INFO - No one talking
+2026-02-20 18:08:31,445 - nvd_autonomous - INFO - Start Talking: 1
+2026-02-20 18:08:31,445 - nvd_autonomous - INFO - Move to: [-35, -3]
+2026-02-20 18:08:38,481 - nvd_autonomous - INFO - Backchanneling to: [-35, -3]
+2026-02-20 18:08:40,492 - nvd_autonomous - INFO - Robot start talking
+2026-02-20 18:08:40,693 - nvd_autonomous - INFO - Robot start talking
+2026-02-20 18:08:40,894 - nvd_autonomous - INFO - Robot start talking
+2026-02-20 18:08:41,095 - nvd_autonomous - INFO - Start Talking: 1
+2026-02-20 18:08:41,095 - nvd_autonomous - INFO - Move to: [-35, -3]
+2026-02-20 18:08:44,712 - nvd_autonomous - INFO - No one talking
+2026-02-20 18:08:45,517 - nvd_autonomous - INFO - Start Talking: 1
+2026-02-20 18:08:45,517 - nvd_autonomous - INFO - Move to: [-35, -3]
+2026-02-20 18:08:46,121 - nvd_autonomous - INFO - No one talking
+2026-02-20 18:08:47,729 - nvd_autonomous - INFO - Start Talking: 1
+2026-02-20 18:08:47,729 - nvd_autonomous - INFO - Move to: [-35, -3]
+2026-02-20 18:08:54,763 - nvd_autonomous - INFO - Backchanneling to: [-35, -3]
+2026-02-20 18:09:01,798 - nvd_autonomous - INFO - Backchanneling to: [-35, -3]
+2026-02-20 18:09:05,014 - nvd_autonomous - INFO - No one talking
+2026-02-20 18:09:06,019 - nvd_autonomous - INFO - Start Talking: 0
+2026-02-20 18:09:06,019 - nvd_autonomous - INFO - Move to: [-35, -3]
+2026-02-20 18:09:07,829 - nvd_autonomous - INFO - No one talking
+2026-02-20 18:09:08,836 - nvd_autonomous - INFO - Start Talking: 0
+2026-02-20 18:09:08,837 - nvd_autonomous - INFO - Move to: [-35, -3]
+2026-02-20 18:09:13,460 - nvd_autonomous - INFO - No one talking
+2026-02-20 18:09:14,465 - nvd_autonomous - INFO - Start Talking: 0
+2026-02-20 18:09:14,465 - nvd_autonomous - INFO - Move to: [-35, -3]
+2026-02-20 18:09:15,872 - nvd_autonomous - INFO - Start Talking: 0
+2026-02-20 18:09:15,872 - nvd_autonomous - INFO - Move to: [-35, -3]
+2026-02-20 18:09:16,274 - nvd_autonomous - INFO - No one talking
+2026-02-20 18:09:18,887 - nvd_autonomous - INFO - Start Talking: 3
+2026-02-20 18:09:18,887 - nvd_autonomous - INFO - Move to: [35, -3]
+2026-02-20 18:09:19,289 - nvd_autonomous - INFO - Move pan to: 35
+2026-02-20 18:09:19,289 - nvd_autonomous - INFO - Move tilt to: -3
+2026-02-20 18:09:19,691 - nvd_autonomous - INFO - No one talking
+2026-02-20 18:09:20,897 - nvd_autonomous - INFO - Start Talking: 3
+2026-02-20 18:09:20,897 - nvd_autonomous - INFO - Move to: [35, -3]
+2026-02-20 18:09:22,103 - nvd_autonomous - INFO - No one talking
+2026-02-20 18:09:24,314 - nvd_autonomous - INFO - Start Talking: 3
+2026-02-20 18:09:24,314 - nvd_autonomous - INFO - Move to: [35, -3]
+2026-02-20 18:09:25,721 - nvd_autonomous - INFO - No one talking
+2026-02-20 18:09:29,339 - nvd_autonomous - INFO - Start Talking: 3
+2026-02-20 18:09:29,339 - nvd_autonomous - INFO - Move to: [35, -3]
+2026-02-20 18:09:32,153 - nvd_autonomous - INFO - Start Talking: 3
+2026-02-20 18:09:32,153 - nvd_autonomous - INFO - Move to: [35, -3]
+2026-02-20 18:09:32,757 - nvd_autonomous - INFO - Start Talking: 3
+2026-02-20 18:09:32,757 - nvd_autonomous - INFO - Move to: [35, -3]
+2026-02-20 18:09:35,370 - nvd_autonomous - INFO - Start Talking: 3
+2026-02-20 18:09:35,370 - nvd_autonomous - INFO - Move to: [35, -3]
+2026-02-20 18:09:35,773 - nvd_autonomous - INFO - Start Talking: 3
+2026-02-20 18:09:35,773 - nvd_autonomous - INFO - Move to: [35, -3]
+2026-02-20 18:09:37,582 - nvd_autonomous - INFO - Robot start talking
+2026-02-20 18:09:37,984 - nvd_autonomous - INFO - No one talking
+2026-02-20 18:09:38,185 - nvd_autonomous - INFO - Start Talking: 3
+2026-02-20 18:09:38,185 - nvd_autonomous - INFO - Move to: [35, -3]
+2026-02-20 18:09:40,998 - nvd_autonomous - INFO - No one talking
+2026-02-20 18:09:41,199 - nvd_autonomous - INFO - Start Talking: 3
+2026-02-20 18:09:41,199 - nvd_autonomous - INFO - Move to: [35, -3]
+2026-02-20 18:09:41,802 - nvd_autonomous - INFO - No one talking
+2026-02-20 18:09:42,405 - nvd_autonomous - INFO - Start Talking: 3
+2026-02-20 18:09:42,439 - nvd_autonomous - INFO - Move to: [35, -3]
+2026-02-20 18:09:42,841 - nvd_autonomous - INFO - No one talking
+2026-02-20 18:09:43,445 - nvd_autonomous - INFO - Start Talking: 3
+2026-02-20 18:09:43,445 - nvd_autonomous - INFO - Move to: [35, -3]
+2026-02-20 18:09:44,651 - nvd_autonomous - INFO - No one talking
+2026-02-20 18:09:45,254 - nvd_autonomous - INFO - Start Talking: 3
+2026-02-20 18:09:45,254 - nvd_autonomous - INFO - Move to: [35, -3]
+2026-02-20 18:09:47,264 - nvd_autonomous - INFO - Robot start talking
+2026-02-20 18:09:47,465 - nvd_autonomous - INFO - Robot start talking
+2026-02-20 18:09:47,867 - nvd_autonomous - INFO - No one talking
+2026-02-20 18:09:48,068 - nvd_autonomous - INFO - Start Talking: 3
+2026-02-20 18:09:48,068 - nvd_autonomous - INFO - Move to: [35, -3]
+2026-02-20 18:09:55,102 - nvd_autonomous - INFO - Backchanneling to: [35, -3]
+2026-02-20 18:09:57,313 - nvd_autonomous - INFO - No one talking
+2026-02-20 18:09:58,318 - nvd_autonomous - INFO - Start Talking: 3
+2026-02-20 18:09:58,319 - nvd_autonomous - INFO - Move to: [35, -3]
+2026-02-20 18:09:59,525 - nvd_autonomous - INFO - No one talking
+2026-02-20 18:10:00,329 - nvd_autonomous - INFO - Start Talking: 3
+2026-02-20 18:10:00,329 - nvd_autonomous - INFO - Move to: [35, -3]
+2026-02-20 18:10:01,334 - nvd_autonomous - INFO - No one talking
+2026-02-20 18:10:02,540 - nvd_autonomous - INFO - Start Talking: 3
+2026-02-20 18:10:02,540 - nvd_autonomous - INFO - Move to: [35, -3]
+2026-02-20 18:10:05,957 - nvd_autonomous - INFO - No one talking
+2026-02-20 18:10:10,178 - nvd_autonomous - INFO - Start Talking: 3
+2026-02-20 18:10:10,178 - nvd_autonomous - INFO - Move to: [35, -3]
+2026-02-20 18:10:10,580 - nvd_autonomous - INFO - No one talking
+2026-02-20 18:10:14,200 - nvd_autonomous - INFO - Start Talking: 3
+2026-02-20 18:10:14,200 - nvd_autonomous - INFO - Move to: [35, -3]
+2026-02-20 18:10:16,009 - nvd_autonomous - INFO - No one talking
+2026-02-20 18:10:17,617 - nvd_autonomous - INFO - Start Talking: 3
+2026-02-20 18:10:17,617 - nvd_autonomous - INFO - Move to: [35, -3]
+2026-02-20 18:10:20,230 - nvd_autonomous - INFO - No one talking
+2026-02-20 18:10:22,240 - nvd_autonomous - INFO - Start Talking: 3
+2026-02-20 18:10:22,240 - nvd_autonomous - INFO - Move to: [35, -3]
+2026-02-20 18:10:22,642 - nvd_autonomous - INFO - No one talking
+2026-02-20 18:10:22,843 - nvd_autonomous - INFO - Start Talking: 3
+2026-02-20 18:10:22,843 - nvd_autonomous - INFO - Move to: [35, -3]
+2026-02-20 18:10:23,848 - nvd_autonomous - INFO - No one talking
+2026-02-20 18:10:25,859 - nvd_autonomous - INFO - Start Talking: 3
+2026-02-20 18:10:25,859 - nvd_autonomous - INFO - Move to: [35, -3]
+2026-02-20 18:10:27,466 - nvd_autonomous - INFO - No one talking
+2026-02-20 18:10:28,471 - nvd_autonomous - INFO - Start Talking: 3
+2026-02-20 18:10:28,471 - nvd_autonomous - INFO - Move to: [35, -3]
+2026-02-20 18:10:30,481 - nvd_autonomous - INFO - No one talking
+2026-02-20 18:10:31,285 - nvd_autonomous - INFO - Start Talking: 1
+2026-02-20 18:10:31,285 - nvd_autonomous - INFO - Move to: [-35, -3]
+2026-02-20 18:10:31,687 - nvd_autonomous - INFO - Start Talking: 3
+2026-02-20 18:10:31,687 - nvd_autonomous - INFO - Move to: [35, -3]
+2026-02-20 18:10:33,898 - nvd_autonomous - INFO - No one talking
+2026-02-20 18:10:34,501 - nvd_autonomous - INFO - Start Talking: 3
+2026-02-20 18:10:34,501 - nvd_autonomous - INFO - Move to: [35, -3]
+2026-02-20 18:10:36,511 - nvd_autonomous - INFO - Start Talking: 0
+2026-02-20 18:10:36,511 - nvd_autonomous - INFO - Move to: [-35, -3]
+2026-02-20 18:10:36,913 - nvd_autonomous - INFO - No one talking
+2026-02-20 18:10:37,918 - nvd_autonomous - INFO - Start Talking: 3
+2026-02-20 18:10:37,919 - nvd_autonomous - INFO - Move to: [35, -3]
+2026-02-20 18:10:40,531 - nvd_autonomous - INFO - No one talking
+2026-02-20 18:10:44,149 - nvd_autonomous - INFO - Start Talking: 3
+2026-02-20 18:10:44,149 - nvd_autonomous - INFO - Move to: [35, -3]
+2026-02-20 18:10:50,581 - nvd_autonomous - INFO - No one talking
+2026-02-20 18:10:50,984 - nvd_autonomous - INFO - Start Talking: 3
+2026-02-20 18:10:50,984 - nvd_autonomous - INFO - Move to: [35, -3]
+2026-02-20 18:10:53,396 - nvd_autonomous - INFO - Start Talking: 3
+2026-02-20 18:10:53,396 - nvd_autonomous - INFO - Move to: [35, -3]
+2026-02-20 18:10:55,004 - nvd_autonomous - INFO - No one talking
+2026-02-20 18:10:55,407 - nvd_autonomous - INFO - Start Talking: 3
+2026-02-20 18:10:55,407 - nvd_autonomous - INFO - Move to: [35, -3]
+2026-02-20 18:10:55,809 - nvd_autonomous - INFO - Start Talking: 3
+2026-02-20 18:10:55,809 - nvd_autonomous - INFO - Move to: [35, -3]
+2026-02-20 18:10:58,622 - nvd_autonomous - INFO - No one talking
+2026-02-20 18:10:59,225 - nvd_autonomous - INFO - Start Talking: 3
+2026-02-20 18:10:59,225 - nvd_autonomous - INFO - Move to: [35, -3]
+2026-02-20 18:11:01,637 - nvd_autonomous - INFO - No one talking
+2026-02-20 18:11:02,240 - nvd_autonomous - INFO - Start Talking: 3
+2026-02-20 18:11:02,240 - nvd_autonomous - INFO - Move to: [35, -3]
+2026-02-20 18:11:04,250 - nvd_autonomous - INFO - No one talking
+2026-02-20 18:11:05,457 - nvd_autonomous - INFO - Start Talking: 3
+2026-02-20 18:11:05,457 - nvd_autonomous - INFO - Move to: [35, -3]
+2026-02-20 18:11:08,070 - nvd_autonomous - INFO - Start Talking: 3
+2026-02-20 18:11:08,070 - nvd_autonomous - INFO - Move to: [35, -3]
+2026-02-20 18:11:08,472 - nvd_autonomous - INFO - Start Talking: 3
+2026-02-20 18:11:08,472 - nvd_autonomous - INFO - Move to: [35, -3]
+2026-02-20 18:11:08,874 - nvd_autonomous - INFO - No one talking
+2026-02-20 18:11:09,879 - nvd_autonomous - INFO - Start Talking: 3
+2026-02-20 18:11:09,879 - nvd_autonomous - INFO - Move to: [35, -3]
+2026-02-20 18:11:12,894 - nvd_autonomous - INFO - No one talking
+2026-02-20 18:11:14,100 - nvd_autonomous - INFO - Start Talking: 3
+2026-02-20 18:11:14,100 - nvd_autonomous - INFO - Move to: [35, -3]
+2026-02-20 18:11:21,134 - nvd_autonomous - INFO - Backchanneling to: [35, -3]
+2026-02-20 18:11:21,537 - nvd_autonomous - INFO - No one talking
+2026-02-20 18:11:21,738 - nvd_autonomous - INFO - Start Talking: 3
+2026-02-20 18:11:21,738 - nvd_autonomous - INFO - Move to: [35, -3]
+2026-02-20 18:11:22,140 - nvd_autonomous - INFO - Start Talking: 0
+2026-02-20 18:11:22,140 - nvd_autonomous - INFO - Move to: [-35, -3]
+2026-02-20 18:11:22,542 - nvd_autonomous - INFO - Start Talking: 3
+2026-02-20 18:11:22,542 - nvd_autonomous - INFO - Move to: [35, -3]
+2026-02-20 18:11:22,743 - nvd_autonomous - INFO - Start Talking: 0
+2026-02-20 18:11:22,743 - nvd_autonomous - INFO - Move to: [-35, -3]
+2026-02-20 18:11:23,347 - nvd_autonomous - INFO - Start Talking: 3
+2026-02-20 18:11:23,347 - nvd_autonomous - INFO - Move to: [35, -3]
+2026-02-20 18:11:29,176 - nvd_autonomous - INFO - Start Talking: 3
+2026-02-20 18:11:29,176 - nvd_autonomous - INFO - Move to: [35, -3]
+2026-02-20 18:11:30,784 - nvd_autonomous - INFO - Start Talking: 3
+2026-02-20 18:11:30,784 - nvd_autonomous - INFO - Move to: [35, -3]
+2026-02-20 18:11:31,186 - nvd_autonomous - INFO - Start Talking: 3
+2026-02-20 18:11:31,186 - nvd_autonomous - INFO - Move to: [35, -3]
+2026-02-20 18:11:34,000 - nvd_autonomous - INFO - Start Talking: 3
+2026-02-20 18:11:34,000 - nvd_autonomous - INFO - Move to: [35, -3]
+2026-02-20 18:11:35,609 - nvd_autonomous - INFO - Robot start talking
+2026-02-20 18:11:35,810 - nvd_autonomous - INFO - Robot start talking
+2026-02-20 18:11:36,011 - nvd_autonomous - INFO - Robot start talking
+2026-02-20 18:11:36,212 - nvd_autonomous - INFO - Robot start talking
+2026-02-20 18:11:36,413 - nvd_autonomous - INFO - Robot start talking
+2026-02-20 18:11:36,614 - nvd_autonomous - INFO - Robot start talking
+2026-02-20 18:11:36,815 - nvd_autonomous - INFO - Start Talking: 3
+2026-02-20 18:11:36,815 - nvd_autonomous - INFO - Move to: [35, -3]
+2026-02-20 18:11:39,629 - nvd_autonomous - INFO - No one talking
+2026-02-20 18:11:41,036 - nvd_autonomous - INFO - Start Talking: 3
+2026-02-20 18:11:41,036 - nvd_autonomous - INFO - Move to: [35, -3]
+2026-02-20 18:11:41,840 - nvd_autonomous - INFO - No one talking
+2026-02-20 18:11:42,645 - nvd_autonomous - INFO - Start Talking: 3
+2026-02-20 18:11:42,645 - nvd_autonomous - INFO - Move to: [35, -3]
+2026-02-20 18:11:44,253 - nvd_autonomous - INFO - No one talking
+2026-02-20 18:11:47,469 - nvd_autonomous - INFO - Start Talking: 0
+2026-02-20 18:11:47,469 - nvd_autonomous - INFO - Move to: [-35, -3]
+2026-02-20 18:11:49,680 - nvd_autonomous - INFO - No one talking
+2026-02-20 18:11:50,484 - nvd_autonomous - INFO - Start Talking: 0
+2026-02-20 18:11:50,484 - nvd_autonomous - INFO - Move to: [-35, -3]
+2026-02-20 18:11:52,293 - nvd_autonomous - INFO - No one talking
+2026-02-20 18:11:52,494 - nvd_autonomous - INFO - Start Talking: 0
+2026-02-20 18:11:52,494 - nvd_autonomous - INFO - Move to: [-35, -3]
+2026-02-20 18:11:52,695 - nvd_autonomous - INFO - Start Talking: 1
+2026-02-20 18:11:52,695 - nvd_autonomous - INFO - Move to: [-35, -3]
+2026-02-20 18:11:55,107 - nvd_autonomous - INFO - Start Talking: 1
+2026-02-20 18:11:55,107 - nvd_autonomous - INFO - Move to: [-35, -3]
+2026-02-20 18:11:55,509 - nvd_autonomous - INFO - No one talking
+2026-02-20 18:11:56,514 - nvd_autonomous - INFO - Start Talking: 1
+2026-02-20 18:11:56,514 - nvd_autonomous - INFO - Move to: [-35, -3]
+2026-02-20 18:11:58,926 - nvd_autonomous - INFO - No one talking
+2026-02-20 18:11:59,328 - nvd_autonomous - INFO - Start Talking: 1
+2026-02-20 18:11:59,328 - nvd_autonomous - INFO - Move to: [-35, -3]
+2026-02-20 18:11:59,931 - nvd_autonomous - INFO - Start Talking: 1
+2026-02-20 18:11:59,931 - nvd_autonomous - INFO - Move to: [-35, -3]
+2026-02-20 18:12:00,735 - nvd_autonomous - INFO - No one talking
+2026-02-20 18:12:01,137 - nvd_autonomous - INFO - Start Talking: 1
+2026-02-20 18:12:01,137 - nvd_autonomous - INFO - Move to: [-35, -3]
+2026-02-20 18:12:01,740 - nvd_autonomous - INFO - No one talking
+2026-02-20 18:12:03,148 - nvd_autonomous - INFO - Start Talking: 1
+2026-02-20 18:12:03,148 - nvd_autonomous - INFO - Move to: [-35, -3]
+2026-02-20 18:12:04,153 - nvd_autonomous - INFO - No one talking
+2026-02-20 18:12:04,957 - nvd_autonomous - INFO - Start Talking: 1
+2026-02-20 18:12:04,957 - nvd_autonomous - INFO - Move to: [-35, -3]
+2026-02-20 18:12:06,766 - nvd_autonomous - INFO - Start Talking: 1
+2026-02-20 18:12:06,766 - nvd_autonomous - INFO - Move to: [-35, -3]
+2026-02-20 18:12:07,570 - nvd_autonomous - INFO - Start Talking: 1
+2026-02-20 18:12:07,570 - nvd_autonomous - INFO - Move to: [-35, -3]
+2026-02-20 18:12:08,374 - nvd_autonomous - INFO - No one talking
+2026-02-20 18:12:09,580 - nvd_autonomous - INFO - Start Talking: 1
+2026-02-20 18:12:09,580 - nvd_autonomous - INFO - Move to: [-35, -3]
+2026-02-20 18:12:10,384 - nvd_autonomous - INFO - No one talking
+2026-02-20 18:12:12,193 - nvd_autonomous - INFO - Start Talking: 1
+2026-02-20 18:12:12,193 - nvd_autonomous - INFO - Move to: [-35, -3]
+2026-02-20 18:12:12,796 - nvd_autonomous - INFO - No one talking
+2026-02-20 18:12:14,605 - nvd_autonomous - INFO - Start Talking: 1
+2026-02-20 18:12:14,605 - nvd_autonomous - INFO - Move to: [-35, -3]
+2026-02-20 18:12:16,213 - nvd_autonomous - INFO - Start Talking: 1
+2026-02-20 18:12:16,213 - nvd_autonomous - INFO - Move to: [-35, -3]
+2026-02-20 18:12:16,816 - nvd_autonomous - INFO - Start Talking: 1
+2026-02-20 18:12:16,816 - nvd_autonomous - INFO - Move to: [-35, -3]
+2026-02-20 18:12:23,046 - nvd_autonomous - INFO - No one talking
+2026-02-20 18:12:27,469 - nvd_autonomous - INFO - Start Talking: 1
+2026-02-20 18:12:27,469 - nvd_autonomous - INFO - Move to: [-35, -3]
+2026-02-20 18:12:30,684 - nvd_autonomous - INFO - No one talking
+2026-02-20 18:12:32,091 - nvd_autonomous - INFO - Start Talking: 1
+2026-02-20 18:12:32,091 - nvd_autonomous - INFO - Move to: [-35, -3]
+2026-02-20 18:12:36,311 - nvd_autonomous - INFO - No one talking
+2026-02-20 18:12:37,316 - nvd_autonomous - INFO - Start Talking: 1
+2026-02-20 18:12:37,316 - nvd_autonomous - INFO - Move to: [-35, -3]
+2026-02-20 18:12:37,718 - nvd_autonomous - INFO - No one talking
+2026-02-20 18:12:38,321 - nvd_autonomous - INFO - Start Talking: 1
+2026-02-20 18:12:38,321 - nvd_autonomous - INFO - Move to: [-35, -3]
+2026-02-20 18:12:38,723 - nvd_autonomous - INFO - No one talking
+2026-02-20 18:12:39,930 - nvd_autonomous - INFO - Start Talking: 1
+2026-02-20 18:12:39,930 - nvd_autonomous - INFO - Move to: [-35, -3]
+2026-02-20 18:12:40,734 - nvd_autonomous - INFO - No one talking
+2026-02-20 18:12:43,950 - nvd_autonomous - INFO - Start Talking: 0
+2026-02-20 18:12:43,950 - nvd_autonomous - INFO - Move to: [-35, -3]
+2026-02-20 18:12:44,151 - nvd_autonomous - INFO - Start Talking: 1
+2026-02-20 18:12:44,151 - nvd_autonomous - INFO - Move to: [-35, -3]
+2026-02-20 18:12:46,763 - nvd_autonomous - INFO - No one talking
+2026-02-20 18:12:52,191 - nvd_autonomous - INFO - Start Talking: 1
+2026-02-20 18:12:52,191 - nvd_autonomous - INFO - Move to: [-35, -3]
+2026-02-20 18:12:52,593 - nvd_autonomous - INFO - No one talking
+2026-02-20 18:12:52,794 - nvd_autonomous - INFO - Start Talking: 1
+2026-02-20 18:12:52,794 - nvd_autonomous - INFO - Move to: [-35, -3]
+2026-02-20 18:12:53,196 - nvd_autonomous - INFO - No one talking
+2026-02-20 18:12:54,804 - nvd_autonomous - INFO - Start Talking: 1
+2026-02-20 18:12:54,805 - nvd_autonomous - INFO - Move to: [-35, -3]
+2026-02-20 18:13:00,633 - nvd_autonomous - INFO - No one talking
+2026-02-20 18:13:01,839 - nvd_autonomous - INFO - Start Talking: 1
+2026-02-20 18:13:01,840 - nvd_autonomous - INFO - Move to: [-35, -3]
+2026-02-20 18:13:02,242 - nvd_autonomous - INFO - No one talking
+2026-02-20 18:13:02,644 - nvd_autonomous - INFO - Start Talking: 0
+2026-02-20 18:13:02,644 - nvd_autonomous - INFO - Move to: [-35, -3]
+2026-02-20 18:13:03,247 - nvd_autonomous - INFO - Start Talking: 1
+2026-02-20 18:13:03,247 - nvd_autonomous - INFO - Move to: [-35, -3]
+2026-02-20 18:13:03,448 - nvd_autonomous - INFO - Start Talking: 0
+2026-02-20 18:13:03,448 - nvd_autonomous - INFO - Move to: [-35, -3]
+2026-02-20 18:13:03,649 - nvd_autonomous - INFO - Start Talking: 1
+2026-02-20 18:13:03,649 - nvd_autonomous - INFO - Move to: [-35, -3]
+2026-02-20 18:13:05,256 - nvd_autonomous - INFO - No one talking
+2026-02-20 18:13:05,859 - nvd_autonomous - INFO - Start Talking: 0
+2026-02-20 18:13:05,859 - nvd_autonomous - INFO - Move to: [-35, -3]
+2026-02-20 18:13:06,060 - nvd_autonomous - INFO - Start Talking: 1
+2026-02-20 18:13:06,060 - nvd_autonomous - INFO - Move to: [-35, -3]
+2026-02-20 18:13:07,469 - nvd_autonomous - INFO - No one talking
+2026-02-20 18:13:08,474 - nvd_autonomous - INFO - Start Talking: 1
+2026-02-20 18:13:08,474 - nvd_autonomous - INFO - Move to: [-35, -3]
+2026-02-20 18:13:09,077 - nvd_autonomous - INFO - No one talking
+2026-02-20 18:13:09,479 - nvd_autonomous - INFO - Start Talking: 1
+2026-02-20 18:13:09,481 - nvd_autonomous - INFO - Move to: [-35, -3]
+2026-02-20 18:13:10,687 - nvd_autonomous - INFO - No one talking
+2026-02-20 18:13:11,692 - nvd_autonomous - INFO - Start Talking: 1
+2026-02-20 18:13:11,692 - nvd_autonomous - INFO - Move to: [-35, -3]
+2026-02-20 18:13:12,295 - nvd_autonomous - INFO - Start Talking: 1
+2026-02-20 18:13:12,295 - nvd_autonomous - INFO - Move to: [-35, -3]
+2026-02-20 18:13:16,717 - nvd_autonomous - INFO - No one talking
+2026-02-20 18:13:18,526 - nvd_autonomous - INFO - Start Talking: 1
+2026-02-20 18:13:18,526 - nvd_autonomous - INFO - Move to: [-35, -3]
+2026-02-20 18:13:18,928 - nvd_autonomous - INFO - No one talking
+2026-02-20 18:13:19,330 - nvd_autonomous - INFO - Start Talking: 1
+2026-02-20 18:13:19,330 - nvd_autonomous - INFO - Move to: [-35, -3]
+2026-02-20 18:13:20,737 - nvd_autonomous - INFO - No one talking
+2026-02-20 18:13:23,351 - nvd_autonomous - INFO - Start Talking: 1
+2026-02-20 18:13:23,351 - nvd_autonomous - INFO - Move to: [-35, -3]
+2026-02-20 18:13:26,366 - nvd_autonomous - INFO - Start Talking: 1
+2026-02-20 18:13:26,366 - nvd_autonomous - INFO - Move to: [-35, -3]
+2026-02-20 18:13:26,768 - nvd_autonomous - INFO - No one talking
+2026-02-20 18:13:29,180 - nvd_autonomous - INFO - Start Talking: 1
+2026-02-20 18:13:29,180 - nvd_autonomous - INFO - Move to: [-35, -3]
+2026-02-20 18:13:29,582 - nvd_autonomous - INFO - No one talking
+2026-02-20 18:13:31,190 - nvd_autonomous - INFO - Start Talking: 1
+2026-02-20 18:13:31,190 - nvd_autonomous - INFO - Move to: [-35, -3]
+2026-02-20 18:13:32,999 - nvd_autonomous - INFO - Start Talking: 1
+2026-02-20 18:13:32,999 - nvd_autonomous - INFO - Move to: [-35, -3]
+2026-02-20 18:13:33,401 - nvd_autonomous - INFO - No one talking
+2026-02-20 18:13:34,606 - nvd_autonomous - INFO - Start Talking: 1
+2026-02-20 18:13:34,606 - nvd_autonomous - INFO - Move to: [-35, -3]
+2026-02-20 18:13:35,813 - nvd_autonomous - INFO - No one talking
+2026-02-20 18:13:36,215 - nvd_autonomous - INFO - Start Talking: 0
+2026-02-20 18:13:36,215 - nvd_autonomous - INFO - Move to: [-35, -3]
+2026-02-20 18:13:40,637 - nvd_autonomous - INFO - No one talking
+2026-02-20 18:13:43,250 - nvd_autonomous - INFO - Start Talking: 0
+2026-02-20 18:13:43,250 - nvd_autonomous - INFO - Move to: [-35, -3]
+2026-02-20 18:13:44,456 - nvd_autonomous - INFO - No one talking
+2026-02-20 18:13:45,461 - nvd_autonomous - INFO - Start Talking: 0
+2026-02-20 18:13:45,461 - nvd_autonomous - INFO - Move to: [-35, -3]
+2026-02-20 18:13:46,064 - nvd_autonomous - INFO - No one talking
+2026-02-20 18:13:46,667 - nvd_autonomous - INFO - Start Talking: 0
+2026-02-20 18:13:46,667 - nvd_autonomous - INFO - Move to: [-35, -3]
+2026-02-20 18:13:47,069 - nvd_autonomous - INFO - Start Talking: 0
+2026-02-20 18:13:47,069 - nvd_autonomous - INFO - Move to: [-35, -3]
+2026-02-20 18:13:47,471 - nvd_autonomous - INFO - Start Talking: 0
+2026-02-20 18:13:47,471 - nvd_autonomous - INFO - Move to: [-35, -3]
+2026-02-20 18:13:50,484 - nvd_autonomous - INFO - No one talking
+2026-02-20 18:13:54,906 - nvd_autonomous - INFO - Start Talking: 1
+2026-02-20 18:13:54,906 - nvd_autonomous - INFO - Move to: [-35, -3]
+2026-02-20 18:13:57,518 - nvd_autonomous - INFO - Move pan to: 0
+2026-02-20 18:13:57,518 - nvd_autonomous - INFO - Move tilt to: -3
+2026-02-20 18:13:59,327 - nvd_autonomous - INFO - No one talking
+2026-02-20 18:14:01,538 - nvd_autonomous - INFO - Start Talking: 1
+2026-02-20 18:14:01,538 - nvd_autonomous - INFO - Move to: [-35, -3]
+2026-02-20 18:14:01,940 - nvd_autonomous - INFO - No one talking
+2026-02-20 18:14:02,543 - nvd_autonomous - INFO - Move pan to: 0
+2026-02-20 18:14:02,543 - nvd_autonomous - INFO - Move tilt to: -3
+2026-02-20 18:14:03,146 - nvd_autonomous - INFO - Start Talking: 1
+2026-02-20 18:14:03,146 - nvd_autonomous - INFO - Move to: [-35, -3]
+2026-02-20 18:14:09,377 - nvd_autonomous - INFO - No one talking
+2026-02-20 18:14:09,980 - nvd_autonomous - INFO - Start Talking: 1
+2026-02-20 18:14:09,980 - nvd_autonomous - INFO - Move to: [-35, -3]
+2026-02-20 18:14:12,593 - nvd_autonomous - INFO - Move pan to: 0
+2026-02-20 18:14:12,593 - nvd_autonomous - INFO - Move tilt to: -3
+2026-02-20 18:14:17,015 - nvd_autonomous - INFO - Backchanneling to: [-35, -3]
+2026-02-20 18:14:20,833 - nvd_autonomous - INFO - No one talking
+2026-02-20 18:14:22,040 - nvd_autonomous - INFO - Start Talking: 1
+2026-02-20 18:14:22,040 - nvd_autonomous - INFO - Move to: [-35, -3]
+2026-02-20 18:14:23,648 - nvd_autonomous - INFO - Robot start talking
+2026-02-20 18:14:23,849 - nvd_autonomous - INFO - Start Talking: 1
+2026-02-20 18:14:23,849 - nvd_autonomous - INFO - Move to: [-35, -3]
+2026-02-20 18:14:24,251 - nvd_autonomous - INFO - Robot start talking
+2026-02-20 18:14:24,452 - nvd_autonomous - INFO - Start Talking: 0
+2026-02-20 18:14:24,452 - nvd_autonomous - INFO - Move to: [-35, -3]
+2026-02-20 18:14:26,663 - nvd_autonomous - INFO - Start Talking: 0
+2026-02-20 18:14:26,663 - nvd_autonomous - INFO - Move to: [-35, -3]
+2026-02-20 18:14:27,266 - nvd_autonomous - INFO - No one talking
+2026-02-20 18:14:27,668 - nvd_autonomous - INFO - Start Talking: 1
+2026-02-20 18:14:27,668 - nvd_autonomous - INFO - Move to: [-35, -3]
+2026-02-20 18:14:30,079 - nvd_autonomous - INFO - No one talking
+2026-02-20 18:14:30,481 - nvd_autonomous - INFO - Start Talking: 1
+2026-02-20 18:14:30,481 - nvd_autonomous - INFO - Move to: [-35, -3]
+2026-02-20 18:14:31,285 - nvd_autonomous - INFO - Start Talking: 0
+2026-02-20 18:14:31,285 - nvd_autonomous - INFO - Move to: [-35, -3]
+2026-02-20 18:14:31,687 - nvd_autonomous - INFO - No one talking
+2026-02-20 18:14:32,893 - nvd_autonomous - INFO - Start Talking: 1
+2026-02-20 18:14:32,893 - nvd_autonomous - INFO - Move to: [-35, -3]
+2026-02-20 18:14:33,496 - nvd_autonomous - INFO - Start Talking: 1
+2026-02-20 18:14:33,496 - nvd_autonomous - INFO - Move to: [-35, -3]
+2026-02-20 18:14:34,502 - nvd_autonomous - INFO - No one talking
+2026-02-20 18:14:35,507 - nvd_autonomous - INFO - Start Talking: 1
+2026-02-20 18:14:35,507 - nvd_autonomous - INFO - Move to: [-35, -3]
+2026-02-20 18:14:37,517 - nvd_autonomous - INFO - No one talking
+2026-02-20 18:14:38,119 - nvd_autonomous - INFO - Start Talking: 1
+2026-02-20 18:14:38,119 - nvd_autonomous - INFO - Move to: [-35, -3]
+2026-02-20 18:14:39,727 - nvd_autonomous - INFO - Start Talking: 1
+2026-02-20 18:14:39,727 - nvd_autonomous - INFO - Move to: [-35, -3]
+2026-02-20 18:14:40,129 - nvd_autonomous - INFO - Start Talking: 1
+2026-02-20 18:14:40,129 - nvd_autonomous - INFO - Move to: [-35, -3]
+2026-02-20 18:14:40,531 - nvd_autonomous - INFO - Start Talking: 1
+2026-02-20 18:14:40,531 - nvd_autonomous - INFO - Move to: [-35, -3]
+2026-02-20 18:14:42,541 - nvd_autonomous - INFO - No one talking
+2026-02-20 18:14:43,546 - nvd_autonomous - INFO - Start Talking: 3
+2026-02-20 18:14:43,546 - nvd_autonomous - INFO - Move to: [35, -3]
+2026-02-20 18:14:43,747 - nvd_autonomous - INFO - Start Talking: 1
+2026-02-20 18:14:43,747 - nvd_autonomous - INFO - Move to: [-35, -3]
+2026-02-20 18:14:44,551 - nvd_autonomous - INFO - No one talking
+2026-02-20 18:14:45,355 - nvd_autonomous - INFO - Start Talking: 1
+2026-02-20 18:14:45,355 - nvd_autonomous - INFO - Move to: [-35, -3]
+2026-02-20 18:14:47,767 - nvd_autonomous - INFO - Start Talking: 0
+2026-02-20 18:14:47,767 - nvd_autonomous - INFO - Move to: [-35, -3]
+2026-02-20 18:14:51,988 - nvd_autonomous - INFO - No one talking
+2026-02-20 18:14:52,591 - nvd_autonomous - INFO - Start Talking: 0
+2026-02-20 18:14:52,591 - nvd_autonomous - INFO - Move to: [-35, -3]
+2026-02-20 18:14:52,993 - nvd_autonomous - INFO - No one talking
+2026-02-20 18:14:53,194 - nvd_autonomous - INFO - Start Talking: 0
+2026-02-20 18:14:53,194 - nvd_autonomous - INFO - Move to: [-35, -3]
+2026-02-20 18:14:54,199 - nvd_autonomous - INFO - Start Talking: 0
+2026-02-20 18:14:54,199 - nvd_autonomous - INFO - Move to: [-35, -3]
+2026-02-20 18:14:55,606 - nvd_autonomous - INFO - No one talking
+2026-02-20 18:14:59,425 - nvd_autonomous - INFO - Start Talking: 0
+2026-02-20 18:14:59,425 - nvd_autonomous - INFO - Move to: [-35, -3]
+2026-02-20 18:15:00,429 - nvd_autonomous - INFO - No one talking
+2026-02-20 18:15:00,831 - nvd_autonomous - INFO - Start Talking: 0
+2026-02-20 18:15:00,831 - nvd_autonomous - INFO - Move to: [-35, -3]
+2026-02-20 18:15:01,836 - nvd_autonomous - INFO - No one talking
+2026-02-20 18:15:04,850 - nvd_autonomous - INFO - Move pan to: 0
+2026-02-20 18:15:04,850 - nvd_autonomous - INFO - Move tilt to: -3
+2026-02-20 18:15:08,268 - nvd_autonomous - INFO - Start Talking: 1
+2026-02-20 18:15:08,268 - nvd_autonomous - INFO - Move to: [-35, -3]
+2026-02-20 18:15:09,072 - nvd_autonomous - INFO - No one talking
+2026-02-20 18:15:09,675 - nvd_autonomous - INFO - Start Talking: 1
+2026-02-20 18:15:09,675 - nvd_autonomous - INFO - Move to: [-35, -3]
+2026-02-20 18:15:11,886 - nvd_autonomous - INFO - No one talking
+2026-02-20 18:15:12,489 - nvd_autonomous - INFO - Start Talking: 1
+2026-02-20 18:15:12,489 - nvd_autonomous - INFO - Move to: [-35, -3]
+2026-02-20 18:15:12,690 - nvd_autonomous - INFO - Move pan to: 0
+2026-02-20 18:15:12,690 - nvd_autonomous - INFO - Move tilt to: -3
+2026-02-20 18:15:15,504 - nvd_autonomous - INFO - Move pan to: 35
+2026-02-20 18:15:15,505 - nvd_autonomous - INFO - Move tilt to: -3
+2026-02-20 18:15:15,707 - nvd_autonomous - INFO - Robot start talking
+2026-02-20 18:15:15,908 - nvd_autonomous - INFO - Robot start talking
+2026-02-20 18:15:16,109 - nvd_autonomous - INFO - Start Talking: 1
+2026-02-20 18:15:16,109 - nvd_autonomous - INFO - Move to: [-35, -3]
+2026-02-20 18:15:23,143 - nvd_autonomous - INFO - Backchanneling to: [-35, -3]
+2026-02-20 18:15:23,746 - nvd_autonomous - INFO - Robot start talking
+2026-02-20 18:15:23,947 - nvd_autonomous - INFO - Start Talking: 1
+2026-02-20 18:15:23,947 - nvd_autonomous - INFO - Move to: [-35, -3]
+2026-02-20 18:15:24,349 - nvd_autonomous - INFO - Move pan to: 35
+2026-02-20 18:15:24,349 - nvd_autonomous - INFO - Move tilt to: -3
+2026-02-20 18:15:24,349 - nvd_autonomous - INFO - Start Talking: 1
+2026-02-20 18:15:24,349 - nvd_autonomous - INFO - Move to: [-35, -3]
+2026-02-20 18:15:25,354 - nvd_autonomous - INFO - Robot start talking
+2026-02-20 18:15:25,555 - nvd_autonomous - INFO - Robot start talking
+2026-02-20 18:15:25,957 - nvd_autonomous - INFO - No one talking
+2026-02-20 18:15:27,364 - nvd_autonomous - INFO - Start Talking: 0
+2026-02-20 18:15:27,364 - nvd_autonomous - INFO - Move to: [-35, -3]
+2026-02-20 18:15:31,385 - nvd_autonomous - INFO - No one talking
+2026-02-20 18:15:31,988 - nvd_autonomous - INFO - Start Talking: 0
+2026-02-20 18:15:31,988 - nvd_autonomous - INFO - Move to: [-35, -3]
+2026-02-20 18:15:32,390 - nvd_autonomous - INFO - Start Talking: 0
+2026-02-20 18:15:32,390 - nvd_autonomous - INFO - Move to: [-35, -3]
+2026-02-20 18:15:36,409 - nvd_autonomous - INFO - Start Talking: 1
+2026-02-20 18:15:36,409 - nvd_autonomous - INFO - Move to: [-35, -3]
+2026-02-20 18:15:36,811 - nvd_autonomous - INFO - No one talking
+2026-02-20 18:15:37,012 - nvd_autonomous - INFO - Start Talking: 0
+2026-02-20 18:15:37,012 - nvd_autonomous - INFO - Move to: [-35, -3]
+2026-02-20 18:15:38,018 - nvd_autonomous - INFO - Start Talking: 0
+2026-02-20 18:15:38,018 - nvd_autonomous - INFO - Move to: [-35, -3]
+2026-02-20 18:15:38,420 - nvd_autonomous - INFO - Start Talking: 0
+2026-02-20 18:15:38,420 - nvd_autonomous - INFO - Move to: [-35, -3]
+2026-02-20 18:15:41,837 - nvd_autonomous - INFO - Start Talking: 0
+2026-02-20 18:15:41,837 - nvd_autonomous - INFO - Move to: [-35, -3]
+2026-02-20 18:15:42,239 - nvd_autonomous - INFO - Start Talking: 0
+2026-02-20 18:15:42,239 - nvd_autonomous - INFO - Move to: [-35, -3]
+2026-02-20 18:15:44,249 - nvd_autonomous - INFO - No one talking
+2026-02-20 18:15:45,455 - nvd_autonomous - INFO - Start Talking: 0
+2026-02-20 18:15:45,455 - nvd_autonomous - INFO - Move to: [-35, -3]
+2026-02-20 18:15:46,259 - nvd_autonomous - INFO - Start Talking: 0
+2026-02-20 18:15:46,259 - nvd_autonomous - INFO - Move to: [-35, -3]
+2026-02-20 18:15:46,862 - nvd_autonomous - INFO - Start Talking: 0
+2026-02-20 18:15:46,862 - nvd_autonomous - INFO - Move to: [-35, -3]
+2026-02-20 18:15:47,666 - nvd_autonomous - INFO - No one talking
+2026-02-20 18:15:49,474 - nvd_autonomous - INFO - Robot start talking
+2026-02-20 18:15:49,675 - nvd_autonomous - INFO - Robot start talking
+2026-02-20 18:15:49,876 - nvd_autonomous - INFO - Robot start talking
+2026-02-20 18:15:50,077 - nvd_autonomous - INFO - Robot start talking
+2026-02-20 18:15:50,278 - nvd_autonomous - INFO - Robot start talking
+2026-02-20 18:15:50,479 - nvd_autonomous - INFO - Robot start talking
+2026-02-20 18:15:50,680 - nvd_autonomous - INFO - Robot start talking
+2026-02-20 18:15:50,881 - nvd_autonomous - INFO - Robot start talking
+2026-02-20 18:15:51,082 - nvd_autonomous - INFO - Robot start talking
+2026-02-20 18:15:51,283 - nvd_autonomous - INFO - Robot start talking
+2026-02-20 18:15:51,484 - nvd_autonomous - INFO - Robot start talking
+2026-02-20 18:15:51,685 - nvd_autonomous - INFO - Robot start talking
+2026-02-20 18:15:51,886 - nvd_autonomous - INFO - Robot start talking
+2026-02-20 18:15:52,087 - nvd_autonomous - INFO - Robot start talking
+2026-02-20 18:15:52,288 - nvd_autonomous - INFO - Robot start talking
+2026-02-20 18:15:52,489 - nvd_autonomous - INFO - Robot start talking
+2026-02-20 18:15:52,690 - nvd_autonomous - INFO - Robot start talking
+2026-02-20 18:15:52,891 - nvd_autonomous - INFO - Robot start talking
+2026-02-20 18:15:53,092 - nvd_autonomous - INFO - Robot start talking
+2026-02-20 18:15:53,293 - nvd_autonomous - INFO - Robot start talking
+2026-02-20 18:15:53,494 - nvd_autonomous - INFO - Robot start talking
+2026-02-20 18:15:53,695 - nvd_autonomous - INFO - Robot start talking
+2026-02-20 18:15:53,896 - nvd_autonomous - INFO - Robot start talking
+2026-02-20 18:15:54,097 - nvd_autonomous - INFO - Robot start talking
+2026-02-20 18:15:54,298 - nvd_autonomous - INFO - Robot start talking
+2026-02-20 18:15:54,499 - nvd_autonomous - INFO - Robot start talking
+2026-02-20 18:15:54,700 - nvd_autonomous - INFO - Robot start talking
+2026-02-20 18:15:54,901 - nvd_autonomous - INFO - Robot start talking
+2026-02-20 18:15:55,102 - nvd_autonomous - INFO - Robot start talking
+2026-02-20 18:15:55,303 - nvd_autonomous - INFO - Robot start talking
+2026-02-20 18:15:55,504 - nvd_autonomous - INFO - Robot start talking
+2026-02-20 18:15:55,705 - nvd_autonomous - INFO - Robot start talking
+2026-02-20 18:15:55,906 - nvd_autonomous - INFO - Robot start talking
+2026-02-20 18:15:56,107 - nvd_autonomous - INFO - Robot start talking
+2026-02-20 18:15:56,308 - nvd_autonomous - INFO - Robot start talking
+2026-02-20 18:15:56,509 - nvd_autonomous - INFO - Robot start talking
+2026-02-20 18:15:56,710 - nvd_autonomous - INFO - Robot start talking
+2026-02-20 18:15:56,911 - nvd_autonomous - INFO - Robot start talking
+2026-02-20 18:15:57,112 - nvd_autonomous - INFO - Robot start talking
+2026-02-20 18:15:57,313 - nvd_autonomous - INFO - Robot start talking
+2026-02-20 18:15:57,514 - nvd_autonomous - INFO - Robot start talking
+2026-02-20 18:15:57,715 - nvd_autonomous - INFO - Robot start talking
+2026-02-20 18:15:57,916 - nvd_autonomous - INFO - Robot start talking
+2026-02-20 18:15:58,117 - nvd_autonomous - INFO - Robot start talking
+2026-02-20 18:15:58,318 - nvd_autonomous - INFO - Robot start talking
+2026-02-20 18:15:58,721 - nvd_autonomous - INFO - No one talking
+2026-02-20 18:15:59,927 - nvd_autonomous - INFO - Start Talking: 0
+2026-02-20 18:15:59,927 - nvd_autonomous - INFO - Move to: [-35, -3]
+2026-02-20 18:16:00,329 - nvd_autonomous - INFO - Robot start talking
+2026-02-20 18:16:00,530 - nvd_autonomous - INFO - Robot start talking
+2026-02-20 18:16:00,731 - nvd_autonomous - INFO - Robot start talking
+2026-02-20 18:16:00,932 - nvd_autonomous - INFO - Robot start talking
+2026-02-20 18:16:01,133 - nvd_autonomous - INFO - Robot start talking
+2026-02-20 18:16:01,334 - nvd_autonomous - INFO - Robot start talking
+2026-02-20 18:16:01,535 - nvd_autonomous - INFO - Robot start talking
+2026-02-20 18:16:01,736 - nvd_autonomous - INFO - Robot start talking
+2026-02-20 18:16:01,937 - nvd_autonomous - INFO - Robot start talking
+2026-02-20 18:16:02,138 - nvd_autonomous - INFO - Robot start talking
+2026-02-20 18:16:02,339 - nvd_autonomous - INFO - Robot start talking
+2026-02-20 18:16:02,540 - nvd_autonomous - INFO - Start Talking: 0
+2026-02-20 18:16:02,540 - nvd_autonomous - INFO - Move to: [-35, -3]
+2026-02-20 18:16:03,947 - nvd_autonomous - INFO - Start Talking: 1
+2026-02-20 18:16:03,947 - nvd_autonomous - INFO - Move to: [-35, -3]
+2026-02-20 18:16:05,957 - nvd_autonomous - INFO - No one talking
+2026-02-20 18:16:10,781 - nvd_autonomous - INFO - Start Talking: 0
+2026-02-20 18:16:10,781 - nvd_autonomous - INFO - Move to: [-35, -3]
+2026-02-20 18:16:15,001 - nvd_autonomous - INFO - Robot start talking
+2026-02-20 18:16:15,202 - nvd_autonomous - INFO - Robot start talking
+2026-02-20 18:16:15,403 - nvd_autonomous - INFO - Robot start talking
+2026-02-20 18:16:15,604 - nvd_autonomous - INFO - Robot start talking
+2026-02-20 18:16:16,006 - nvd_autonomous - INFO - Robot start talking
+2026-02-20 18:16:16,408 - nvd_autonomous - INFO - No one talking
+2026-02-20 18:16:18,217 - nvd_autonomous - INFO - Start Talking: 1
+2026-02-20 18:16:18,217 - nvd_autonomous - INFO - Move to: [-35, -3]
+2026-02-20 18:16:19,021 - nvd_autonomous - INFO - Start Talking: 0
+2026-02-20 18:16:19,021 - nvd_autonomous - INFO - Move to: [-35, -3]
+2026-02-20 18:16:21,433 - nvd_autonomous - INFO - No one talking

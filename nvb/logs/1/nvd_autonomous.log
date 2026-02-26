@@ -1,286 +1,35 @@
-2025-11-28 11:06:33,882 - nvd_autonomous - INFO - Autonomous control initialized
-2025-11-28 11:06:38,906 - nvd_autonomous - INFO - Start Talking: 1
-2025-11-28 11:06:38,906 - nvd_autonomous - INFO - Move to: [-35, -3]
-2025-11-28 11:06:42,961 - nvd_autonomous - INFO - Start Talking: 1
-2025-11-28 11:06:42,961 - nvd_autonomous - INFO - Move to: [-35, -3]
-2025-11-28 11:06:46,584 - nvd_autonomous - INFO - Start Talking: 1
-2025-11-28 11:06:46,584 - nvd_autonomous - INFO - Move to: [-35, -3]
-2025-11-28 11:06:47,838 - nvd_autonomous - INFO - No one talking
-2025-11-28 11:06:48,889 - nvd_autonomous - INFO - Start Talking: 1
-2025-11-28 11:06:48,892 - nvd_autonomous - INFO - Move to: [-35, -3]
-2025-11-28 11:06:50,595 - nvd_autonomous - INFO - Start Talking: 1
-2025-11-28 11:06:50,595 - nvd_autonomous - INFO - Move to: [-35, -3]
-2025-11-28 11:06:52,519 - nvd_autonomous - INFO - No one talking
-2025-11-28 11:06:53,145 - nvd_autonomous - INFO - Start Talking: 1
-2025-11-28 11:06:53,146 - nvd_autonomous - INFO - Move to: [-35, -3]
-2025-11-28 11:06:55,263 - nvd_autonomous - INFO - Start Talking: 1
-2025-11-28 11:06:55,263 - nvd_autonomous - INFO - Move to: [-35, -3]
-2025-11-28 11:06:55,903 - nvd_autonomous - INFO - No one talking
-2025-11-28 11:06:56,119 - nvd_autonomous - INFO - Start Talking: 1
-2025-11-28 11:06:56,119 - nvd_autonomous - INFO - Move to: [-35, -3]
-2025-11-28 11:06:56,963 - nvd_autonomous - INFO - Start Talking: 1
-2025-11-28 11:06:56,963 - nvd_autonomous - INFO - Move to: [-35, -3]
-2025-11-28 11:06:59,712 - nvd_autonomous - INFO - No one talking
-2025-11-28 11:07:02,666 - nvd_autonomous - INFO - Robot start talking
-2025-11-28 11:07:02,878 - nvd_autonomous - INFO - Robot start talking
-2025-11-28 11:07:03,082 - nvd_autonomous - INFO - Robot start talking
-2025-11-28 11:07:03,293 - nvd_autonomous - INFO - Robot start talking
-2025-11-28 11:07:03,498 - nvd_autonomous - INFO - Robot start talking
-2025-11-28 11:07:03,721 - nvd_autonomous - INFO - Robot start talking
-2025-11-28 11:07:03,937 - nvd_autonomous - INFO - Robot start talking
-2025-11-28 11:07:04,152 - nvd_autonomous - INFO - Robot start talking
-2025-11-28 11:07:04,368 - nvd_autonomous - INFO - Robot start talking
-2025-11-28 11:07:04,584 - nvd_autonomous - INFO - Robot start talking
-2025-11-28 11:07:04,801 - nvd_autonomous - INFO - Robot start talking
-2025-11-28 11:07:05,025 - nvd_autonomous - INFO - Robot start talking
-2025-11-28 11:07:05,241 - nvd_autonomous - INFO - Robot start talking
-2025-11-28 11:07:05,457 - nvd_autonomous - INFO - Robot start talking
-2025-11-28 11:07:05,674 - nvd_autonomous - INFO - Robot start talking
-2025-11-28 11:07:05,889 - nvd_autonomous - INFO - Robot start talking
-2025-11-28 11:07:06,104 - nvd_autonomous - INFO - Robot start talking
-2025-11-28 11:07:06,307 - nvd_autonomous - INFO - Robot start talking
-2025-11-28 11:07:06,746 - nvd_autonomous - INFO - No one talking
-2025-11-28 11:07:08,013 - nvd_autonomous - INFO - Robot start talking
-2025-11-28 11:07:08,243 - nvd_autonomous - INFO - Robot start talking
-2025-11-28 11:07:08,452 - nvd_autonomous - INFO - Robot start talking
-2025-11-28 11:07:08,653 - nvd_autonomous - INFO - Robot start talking
-2025-11-28 11:07:09,095 - nvd_autonomous - INFO - Robot start talking
-2025-11-28 11:07:09,301 - nvd_autonomous - INFO - Robot start talking
-2025-11-28 11:07:09,517 - nvd_autonomous - INFO - Robot start talking
-2025-11-28 11:07:09,740 - nvd_autonomous - INFO - Robot start talking
-2025-11-28 11:07:09,956 - nvd_autonomous - INFO - Robot start talking
-2025-11-28 11:07:10,161 - nvd_autonomous - INFO - Robot start talking
-2025-11-28 11:07:10,374 - nvd_autonomous - INFO - Robot start talking
-2025-11-28 11:07:10,590 - nvd_autonomous - INFO - Robot start talking
-2025-11-28 11:07:10,807 - nvd_autonomous - INFO - Robot start talking
-2025-11-28 11:07:11,021 - nvd_autonomous - INFO - Robot start talking
-2025-11-28 11:07:11,245 - nvd_autonomous - INFO - Robot start talking
-2025-11-28 11:07:11,461 - nvd_autonomous - INFO - Robot start talking
-2025-11-28 11:07:11,677 - nvd_autonomous - INFO - Robot start talking
-2025-11-28 11:07:11,878 - nvd_autonomous - INFO - Robot start talking
-2025-11-28 11:07:12,094 - nvd_autonomous - INFO - Robot start talking
-2025-11-28 11:07:12,308 - nvd_autonomous - INFO - Robot start talking
-2025-11-28 11:07:12,510 - nvd_autonomous - INFO - Robot start talking
-2025-11-28 11:07:12,711 - nvd_autonomous - INFO - Robot start talking
-2025-11-28 11:07:12,927 - nvd_autonomous - INFO - Robot start talking
-2025-11-28 11:07:13,150 - nvd_autonomous - INFO - Robot start talking
-2025-11-28 11:07:13,366 - nvd_autonomous - INFO - Robot start talking
-2025-11-28 11:07:13,582 - nvd_autonomous - INFO - Robot start talking
-2025-11-28 11:07:13,798 - nvd_autonomous - INFO - Robot start talking
-2025-11-28 11:07:14,014 - nvd_autonomous - INFO - Robot start talking
-2025-11-28 11:07:14,231 - nvd_autonomous - INFO - Robot start talking
-2025-11-28 11:07:14,454 - nvd_autonomous - INFO - Robot start talking
-2025-11-28 11:07:14,670 - nvd_autonomous - INFO - Robot start talking
-2025-11-28 11:07:14,886 - nvd_autonomous - INFO - Robot start talking
-2025-11-28 11:07:15,101 - nvd_autonomous - INFO - Robot start talking
-2025-11-28 11:07:15,319 - nvd_autonomous - INFO - Robot start talking
-2025-11-28 11:07:15,535 - nvd_autonomous - INFO - Robot start talking
-2025-11-28 11:07:15,758 - nvd_autonomous - INFO - Robot start talking
-2025-11-28 11:07:15,965 - nvd_autonomous - INFO - Robot start talking
-2025-11-28 11:07:16,173 - nvd_autonomous - INFO - Robot start talking
-2025-11-28 11:07:16,389 - nvd_autonomous - INFO - Robot start talking
-2025-11-28 11:07:16,605 - nvd_autonomous - INFO - Robot start talking
-2025-11-28 11:07:16,821 - nvd_autonomous - INFO - Robot start talking
-2025-11-28 11:07:17,044 - nvd_autonomous - INFO - Robot start talking
-2025-11-28 11:07:17,259 - nvd_autonomous - INFO - Robot start talking
-2025-11-28 11:07:17,481 - nvd_autonomous - INFO - Robot start talking
-2025-11-28 11:07:17,698 - nvd_autonomous - INFO - Robot start talking
-2025-11-28 11:07:17,914 - nvd_autonomous - INFO - Robot start talking
-2025-11-28 11:07:18,126 - nvd_autonomous - INFO - Robot start talking
-2025-11-28 11:07:18,331 - nvd_autonomous - INFO - Robot start talking
-2025-11-28 11:07:18,546 - nvd_autonomous - INFO - Robot start talking
-2025-11-28 11:07:18,762 - nvd_autonomous - INFO - Robot start talking
-2025-11-28 11:07:18,985 - nvd_autonomous - INFO - Robot start talking
-2025-11-28 11:07:19,191 - nvd_autonomous - INFO - Robot start talking
-2025-11-28 11:07:19,401 - nvd_autonomous - INFO - Robot start talking
-2025-11-28 11:07:19,618 - nvd_autonomous - INFO - Robot start talking
-2025-11-28 11:07:19,834 - nvd_autonomous - INFO - Robot start talking
-2025-11-28 11:07:20,050 - nvd_autonomous - INFO - Robot start talking
-2025-11-28 11:07:20,259 - nvd_autonomous - INFO - Robot start talking
-2025-11-28 11:07:20,667 - nvd_autonomous - INFO - Robot start talking
-2025-11-28 11:07:21,106 - nvd_autonomous - INFO - Robot start talking
-2025-11-28 11:07:21,321 - nvd_autonomous - INFO - Robot start talking
-2025-11-28 11:07:21,538 - nvd_autonomous - INFO - Robot start talking
-2025-11-28 11:07:21,754 - nvd_autonomous - INFO - Robot start talking
-2025-11-28 11:07:21,968 - nvd_autonomous - INFO - Robot start talking
-2025-11-28 11:07:22,170 - nvd_autonomous - INFO - Robot start talking
-2025-11-28 11:07:22,376 - nvd_autonomous - INFO - Robot start talking
-2025-11-28 11:07:22,593 - nvd_autonomous - INFO - Robot start talking
-2025-11-28 11:07:22,810 - nvd_autonomous - INFO - Robot start talking
-2025-11-28 11:07:23,025 - nvd_autonomous - INFO - Robot start talking
-2025-11-28 11:07:23,241 - nvd_autonomous - INFO - Robot start talking
-2025-11-28 11:07:23,457 - nvd_autonomous - INFO - Robot start talking
-2025-11-28 11:07:23,673 - nvd_autonomous - INFO - Robot start talking
-2025-11-28 11:07:23,897 - nvd_autonomous - INFO - Robot start talking
-2025-11-28 11:07:24,111 - nvd_autonomous - INFO - Robot start talking
-2025-11-28 11:07:24,328 - nvd_autonomous - INFO - Robot start talking
-2025-11-28 11:07:24,544 - nvd_autonomous - INFO - Robot start talking
-2025-11-28 11:07:24,977 - nvd_autonomous - INFO - Robot start talking
-2025-11-28 11:07:25,199 - nvd_autonomous - INFO - Robot start talking
-2025-11-28 11:07:25,415 - nvd_autonomous - INFO - Robot start talking
-2025-11-28 11:07:25,631 - nvd_autonomous - INFO - Robot start talking
-2025-11-28 11:07:25,847 - nvd_autonomous - INFO - Robot start talking
-2025-11-28 11:07:26,060 - nvd_autonomous - INFO - Robot start talking
-2025-11-28 11:07:26,265 - nvd_autonomous - INFO - Robot start talking
-2025-11-28 11:07:26,480 - nvd_autonomous - INFO - Robot start talking
-2025-11-28 11:07:26,696 - nvd_autonomous - INFO - Robot start talking
-2025-11-28 11:07:26,912 - nvd_autonomous - INFO - Robot start talking
-2025-11-28 11:07:27,114 - nvd_autonomous - INFO - Robot start talking
-2025-11-28 11:07:27,336 - nvd_autonomous - INFO - Robot start talking
-2025-11-28 11:07:27,551 - nvd_autonomous - INFO - Robot start talking
-2025-11-28 11:07:27,767 - nvd_autonomous - INFO - Robot start talking
-2025-11-28 11:07:27,983 - nvd_autonomous - INFO - Robot start talking
-2025-11-28 11:07:28,193 - nvd_autonomous - INFO - Robot start talking
-2025-11-28 11:07:28,400 - nvd_autonomous - INFO - Robot start talking
-2025-11-28 11:07:28,616 - nvd_autonomous - INFO - Robot start talking
-2025-11-28 11:07:28,838 - nvd_autonomous - INFO - Robot start talking
-2025-11-28 11:07:29,054 - nvd_autonomous - INFO - Robot start talking
-2025-11-28 11:07:29,270 - nvd_autonomous - INFO - Robot start talking
-2025-11-28 11:07:29,487 - nvd_autonomous - INFO - Robot start talking
-2025-11-28 11:07:29,704 - nvd_autonomous - INFO - Robot start talking
-2025-11-28 11:07:29,919 - nvd_autonomous - INFO - Robot start talking
-2025-11-28 11:07:30,142 - nvd_autonomous - INFO - Robot start talking
-2025-11-28 11:07:30,358 - nvd_autonomous - INFO - Robot start talking
-2025-11-28 11:07:30,574 - nvd_autonomous - INFO - Robot start talking
-2025-11-28 11:07:30,790 - nvd_autonomous - INFO - Robot start talking
-2025-11-28 11:07:31,007 - nvd_autonomous - INFO - Robot start talking
-2025-11-28 11:07:31,221 - nvd_autonomous - INFO - Robot start talking
-2025-11-28 11:07:31,426 - nvd_autonomous - INFO - Robot start talking
-2025-11-28 11:07:31,645 - nvd_autonomous - INFO - Robot start talking
-2025-11-28 11:07:31,862 - nvd_autonomous - INFO - Robot start talking
-2025-11-28 11:07:32,077 - nvd_autonomous - INFO - Robot start talking
-2025-11-28 11:07:32,293 - nvd_autonomous - INFO - Robot start talking
-2025-11-28 11:07:32,509 - nvd_autonomous - INFO - Robot start talking
-2025-11-28 11:07:32,725 - nvd_autonomous - INFO - Robot start talking
-2025-11-28 11:07:32,948 - nvd_autonomous - INFO - Robot start talking
-2025-11-28 11:07:33,164 - nvd_autonomous - INFO - Robot start talking
-2025-11-28 11:07:33,380 - nvd_autonomous - INFO - Robot start talking
-2025-11-28 11:07:33,596 - nvd_autonomous - INFO - Robot start talking
-2025-11-28 11:07:33,797 - nvd_autonomous - INFO - Robot start talking
-2025-11-28 11:07:34,212 - nvd_autonomous - INFO - No one talking
-2025-11-28 11:07:36,739 - nvd_autonomous - INFO - Robot start talking
-2025-11-28 11:07:36,941 - nvd_autonomous - INFO - Robot start talking
-2025-11-28 11:07:37,162 - nvd_autonomous - INFO - Robot start talking
-2025-11-28 11:07:37,373 - nvd_autonomous - INFO - Robot start talking
-2025-11-28 11:07:37,589 - nvd_autonomous - INFO - Robot start talking
-2025-11-28 11:07:37,805 - nvd_autonomous - INFO - Robot start talking
-2025-11-28 11:07:38,021 - nvd_autonomous - INFO - Robot start talking
-2025-11-28 11:07:38,243 - nvd_autonomous - INFO - Robot start talking
-2025-11-28 11:07:38,459 - nvd_autonomous - INFO - Robot start talking
-2025-11-28 11:07:38,675 - nvd_autonomous - INFO - Robot start talking
-2025-11-28 11:07:38,892 - nvd_autonomous - INFO - Robot start talking
-2025-11-28 11:07:39,093 - nvd_autonomous - INFO - Robot start talking
-2025-11-28 11:07:39,295 - nvd_autonomous - INFO - Robot start talking
-2025-11-28 11:07:39,511 - nvd_autonomous - INFO - Robot start talking
-2025-11-28 11:07:39,718 - nvd_autonomous - INFO - Robot start talking
-2025-11-28 11:07:39,928 - nvd_autonomous - INFO - Robot start talking
-2025-11-28 11:07:40,144 - nvd_autonomous - INFO - Robot start talking
-2025-11-28 11:07:40,345 - nvd_autonomous - INFO - Robot start talking
-2025-11-28 11:07:40,566 - nvd_autonomous - INFO - Robot start talking
-2025-11-28 11:07:40,767 - nvd_autonomous - INFO - Robot start talking
-2025-11-28 11:07:40,983 - nvd_autonomous - INFO - Robot start talking
-2025-11-28 11:07:41,200 - nvd_autonomous - INFO - Robot start talking
-2025-11-28 11:07:41,412 - nvd_autonomous - INFO - Robot start talking
-2025-11-28 11:07:41,616 - nvd_autonomous - INFO - Robot start talking
-2025-11-28 11:07:41,833 - nvd_autonomous - INFO - Robot start talking
-2025-11-28 11:07:42,049 - nvd_autonomous - INFO - Robot start talking
-2025-11-28 11:07:42,250 - nvd_autonomous - INFO - Robot start talking
-2025-11-28 11:07:42,462 - nvd_autonomous - INFO - Robot start talking
-2025-11-28 11:07:42,674 - nvd_autonomous - INFO - Robot start talking
-2025-11-28 11:07:42,890 - nvd_autonomous - INFO - Robot start talking
-2025-11-28 11:07:43,105 - nvd_autonomous - INFO - Robot start talking
-2025-11-28 11:07:43,321 - nvd_autonomous - INFO - Robot start talking
-2025-11-28 11:07:43,529 - nvd_autonomous - INFO - Robot start talking
-2025-11-28 11:07:43,738 - nvd_autonomous - INFO - Robot start talking
-2025-11-28 11:07:43,954 - nvd_autonomous - INFO - Robot start talking
-2025-11-28 11:07:44,156 - nvd_autonomous - INFO - Robot start talking
-2025-11-28 11:07:44,377 - nvd_autonomous - INFO - Robot start talking
-2025-11-28 11:07:44,594 - nvd_autonomous - INFO - Robot start talking
-2025-11-28 11:07:44,808 - nvd_autonomous - INFO - Robot start talking
-2025-11-28 11:07:45,024 - nvd_autonomous - INFO - Robot start talking
-2025-11-28 11:07:45,240 - nvd_autonomous - INFO - Robot start talking
-2025-11-28 11:07:45,456 - nvd_autonomous - INFO - Robot start talking
-2025-11-28 11:07:45,661 - nvd_autonomous - INFO - Robot start talking
-2025-11-28 11:07:45,878 - nvd_autonomous - INFO - Robot start talking
-2025-11-28 11:07:46,094 - nvd_autonomous - INFO - Robot start talking
-2025-11-28 11:07:46,311 - nvd_autonomous - INFO - Robot start talking
-2025-11-28 11:07:46,519 - nvd_autonomous - INFO - Robot start talking
-2025-11-28 11:07:46,727 - nvd_autonomous - INFO - Robot start talking
-2025-11-28 11:07:46,943 - nvd_autonomous - INFO - Robot start talking
-2025-11-28 11:07:47,159 - nvd_autonomous - INFO - Robot start talking
-2025-11-28 11:07:47,382 - nvd_autonomous - INFO - Robot start talking
-2025-11-28 11:07:47,599 - nvd_autonomous - INFO - Robot start talking
-2025-11-28 11:07:47,810 - nvd_autonomous - INFO - Robot start talking
-2025-11-28 11:07:48,232 - nvd_autonomous - INFO - No one talking
-2025-11-28 11:07:49,752 - nvd_autonomous - INFO - Start Talking: 3
-2025-11-28 11:07:49,752 - nvd_autonomous - INFO - Move to: [35, -3]
-2025-11-28 11:07:51,024 - nvd_autonomous - INFO - No one talking
-2025-11-28 11:07:51,658 - nvd_autonomous - INFO - Start Talking: 3
-2025-11-28 11:07:51,658 - nvd_autonomous - INFO - Move to: [35, -3]
-2025-11-28 11:07:53,768 - nvd_autonomous - INFO - No one talking
-2025-11-28 11:07:54,191 - nvd_autonomous - INFO - Start Talking: 3
-2025-11-28 11:07:54,191 - nvd_autonomous - INFO - Move to: [35, -3]
-2025-11-28 11:07:54,619 - nvd_autonomous - INFO - Start Talking: 3
-2025-11-28 11:07:54,619 - nvd_autonomous - INFO - Move to: [35, -3]
-2025-11-28 11:08:01,135 - nvd_autonomous - INFO - Start Talking: 0
-2025-11-28 11:08:01,135 - nvd_autonomous - INFO - Move to: [-35, -3]
-2025-11-28 11:08:03,023 - nvd_autonomous - INFO - Start Talking: 3
-2025-11-28 11:08:03,023 - nvd_autonomous - INFO - Move to: [35, -3]
-2025-11-28 11:08:04,260 - nvd_autonomous - INFO - No one talking
-2025-11-28 11:08:04,675 - nvd_autonomous - INFO - Start Talking: 3
-2025-11-28 11:08:04,675 - nvd_autonomous - INFO - Move to: [35, -3]
-2025-11-28 11:08:05,093 - nvd_autonomous - INFO - No one talking
-2025-11-28 11:08:05,309 - nvd_autonomous - INFO - Start Talking: 3
-2025-11-28 11:08:05,309 - nvd_autonomous - INFO - Move to: [35, -3]
-2025-11-28 11:08:08,675 - nvd_autonomous - INFO - Start Talking: 0
-2025-11-28 11:08:08,675 - nvd_autonomous - INFO - Move to: [-35, -3]
-2025-11-28 11:08:08,879 - nvd_autonomous - INFO - Start Talking: 3
-2025-11-28 11:08:08,879 - nvd_autonomous - INFO - Move to: [35, -3]
-2025-11-28 11:08:12,967 - nvd_autonomous - INFO - No one talking
-2025-11-28 11:08:18,239 - nvd_autonomous - INFO - Start Talking: 0
-2025-11-28 11:08:18,239 - nvd_autonomous - INFO - Move to: [-35, -3]
-2025-11-28 11:08:18,660 - nvd_autonomous - INFO - Start Talking: 3
-2025-11-28 11:08:18,661 - nvd_autonomous - INFO - Move to: [35, -3]
-2025-11-28 11:08:19,494 - nvd_autonomous - INFO - Start Talking: 3
-2025-11-28 11:08:19,494 - nvd_autonomous - INFO - Move to: [35, -3]
-2025-11-28 11:08:20,126 - nvd_autonomous - INFO - Start Talking: 0
-2025-11-28 11:08:20,126 - nvd_autonomous - INFO - Move to: [-35, -3]
-2025-11-28 11:08:20,343 - nvd_autonomous - INFO - Start Talking: 3
-2025-11-28 11:08:20,344 - nvd_autonomous - INFO - Move to: [35, -3]
-2025-11-28 11:08:20,752 - nvd_autonomous - INFO - Start Talking: 0
-2025-11-28 11:08:20,752 - nvd_autonomous - INFO - Move to: [-35, -3]
-2025-11-28 11:08:21,161 - nvd_autonomous - INFO - Start Talking: 0
-2025-11-28 11:08:21,161 - nvd_autonomous - INFO - Move to: [-35, -3]
-2025-11-28 11:08:21,579 - nvd_autonomous - INFO - No one talking
-2025-11-28 11:08:21,995 - nvd_autonomous - INFO - Start Talking: 3
-2025-11-28 11:08:21,995 - nvd_autonomous - INFO - Move to: [35, -3]
-2025-11-28 11:08:23,838 - nvd_autonomous - INFO - No one talking
-2025-11-28 11:08:31,929 - nvd_autonomous - INFO - Start Talking: 0
-2025-11-28 11:08:31,929 - nvd_autonomous - INFO - Move to: [-35, -3]
-2025-11-28 11:08:32,543 - nvd_autonomous - INFO - No one talking
-2025-11-28 11:08:37,832 - nvd_autonomous - INFO - Move pan to: 0
-2025-11-28 11:08:37,832 - nvd_autonomous - INFO - Move tilt to: -7
-2025-11-28 11:08:41,999 - nvd_autonomous - INFO - Backchanneling
-2025-11-28 11:08:42,215 - nvd_autonomous - INFO - Start Talking: 0
-2025-11-28 11:08:42,216 - nvd_autonomous - INFO - Move to: [-35, -3]
-2025-11-28 11:08:44,127 - nvd_autonomous - INFO - No one talking
-2025-11-28 11:08:50,043 - nvd_autonomous - INFO - Set icon to: lupa.png
-2025-11-28 11:08:53,824 - nvd_autonomous - INFO - Clean Queue
-2025-11-28 11:08:56,310 - nvd_autonomous - INFO - Start Talking: 0
-2025-11-28 11:08:56,312 - nvd_autonomous - INFO - Move to: [-35, -3]
-2025-11-28 11:08:57,576 - nvd_autonomous - INFO - No one talking
-2025-11-28 11:08:58,392 - nvd_autonomous - INFO - Clean Queue
-2025-11-28 11:09:05,973 - nvd_autonomous - INFO - Set image to: effort.png
-2025-11-28 11:09:08,677 - nvd_autonomous - INFO - Set image to: wink-2.gif
-2025-11-28 11:09:13,042 - nvd_autonomous - INFO - Set image to: sad.png
-2025-11-28 11:09:16,795 - nvd_autonomous - INFO - Set image to: wink-2.gif
-2025-11-28 11:09:19,549 - nvd_autonomous - INFO - Start Talking: 0
-2025-11-28 11:09:19,549 - nvd_autonomous - INFO - Move to: [-35, -3]
-2025-11-28 11:09:20,204 - nvd_autonomous - INFO - No one talking
-2025-11-28 11:09:20,420 - nvd_autonomous - INFO - Start Talking: 0
-2025-11-28 11:09:20,420 - nvd_autonomous - INFO - Move to: [-35, -3]
-2025-11-28 11:09:21,285 - nvd_autonomous - INFO - No one talking
-2025-11-28 11:09:25,275 - nvd_autonomous - INFO - Move pan to: 0
-2025-11-28 11:09:25,276 - nvd_autonomous - INFO - Move tilt to: -7
-2025-11-28 11:09:25,276 - nvd_autonomous - INFO - Set image to: blink.gif
-2025-11-28 11:09:25,276 - nvd_autonomous - INFO - Set icon to: black.png
+2026-02-26 11:14:31,699 - nvd_autonomous - INFO - Autonomous control initialized
+2026-02-26 11:14:44,111 - nvd_autonomous - INFO - Set image to: sad.png
+2026-02-26 11:14:49,276 - nvd_autonomous - INFO - Set image to: cry.png
+2026-02-26 11:14:51,026 - nvd_autonomous - INFO - Set image to: love.png
+2026-02-26 11:14:52,974 - nvd_autonomous - INFO - Set image to: effort.png
+2026-02-26 11:14:54,878 - nvd_autonomous - INFO - Set image to: wink-2.gif
+2026-02-26 11:14:58,011 - nvd_autonomous - INFO - Set image to: star.png
+2026-02-26 11:15:00,793 - nvd_autonomous - INFO - Set image to: blink.gif
+2026-02-26 11:15:05,866 - nvd_autonomous - INFO - Move pan to: 0
+2026-02-26 11:15:05,867 - nvd_autonomous - INFO - Move tilt to: -7
+2026-02-26 11:15:05,867 - nvd_autonomous - INFO - Set image to: blink.gif
+2026-02-26 11:15:05,867 - nvd_autonomous - INFO - Set icon to: black.png
+2026-02-26 11:15:08,867 - nvd_autonomous - INFO - Move pan to: 0
+2026-02-26 11:15:08,867 - nvd_autonomous - INFO - Move tilt to: -7
+2026-02-26 11:15:11,327 - nvd_autonomous - INFO - Move pan to: -35
+2026-02-26 11:15:11,327 - nvd_autonomous - INFO - Move tilt to: -15
+2026-02-26 11:15:14,976 - nvd_autonomous - INFO - Move pan to: 35
+2026-02-26 11:15:14,976 - nvd_autonomous - INFO - Move tilt to: -15
+2026-02-26 11:15:22,950 - nvd_autonomous - INFO - Set icon to: lupa.png
+2026-02-26 11:15:32,476 - nvd_autonomous - INFO - Set icon to: listening.png
+2026-02-26 11:15:34,608 - nvd_autonomous - INFO - Set icon to: speaking.png
+2026-02-26 11:15:36,408 - nvd_autonomous - INFO - Backchanneling
+2026-02-26 11:15:47,099 - nvd_autonomous - INFO - Backchanneling
+2026-02-26 11:15:58,742 - nvd_autonomous - INFO - Backchanneling
+2026-02-26 11:16:09,099 - nvd_autonomous - INFO - Backchanneling
+2026-02-26 11:16:14,824 - nvd_autonomous - INFO - Backchanneling
+2026-02-26 11:16:19,750 - nvd_autonomous - INFO - Move pan to: -35
+2026-02-26 11:16:19,750 - nvd_autonomous - INFO - Move tilt to: -15
+2026-02-26 11:16:27,929 - nvd_autonomous - INFO - Move pan to: 35
+2026-02-26 11:16:27,929 - nvd_autonomous - INFO - Move tilt to: -15
+2026-02-26 11:16:31,925 - nvd_autonomous - INFO - Move pan to: 0
+2026-02-26 11:16:31,925 - nvd_autonomous - INFO - Move tilt to: -7
+2026-02-26 11:16:36,074 - nvd_autonomous - INFO - Move pan to: -35
+2026-02-26 11:16:36,074 - nvd_autonomous - INFO - Move tilt to: -15
+2026-02-26 11:17:01,190 - nvd_autonomous - INFO - Set icon to: lupa.png

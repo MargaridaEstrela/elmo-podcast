@@ -41,7 +41,7 @@ class LockedValue:
 # Audio parameters
 SAMPLE_RATE = 16000
 CHUNK = 512
-PODCAST_ID = 3
+PODCAST_ID = 4
 
 # VAD threshold (0-1, higher = more strict)
 VAD_THRESHOLD = 0.1

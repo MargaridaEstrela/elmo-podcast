@@ -3,7 +3,6 @@ import time
 import sounddevice as sd
 import logging
 import threading
-import signal
 import os
 import numpy as np
 import torch
@@ -68,11 +67,6 @@ rest_api_input = LockedValue([None, None, None, None, None, None])
 api_server = None
 app = FastAPI()
 
-def signal_handler(signum, frame):
-    """Handle Ctrl+C gracefully"""
-    print("\nShutdown signal received...")
-    shutdown_event.set()
-
 
 def setup_logger(process_name):
     directory = str(PODCAST_ID)
@@ -92,112 +86,6 @@ def setup_logger(process_name):
         logger.addHandler(file_handler)
     
     return logger
-
-
-def select_device():
-    """Let user choose between Zoom H6 and L-8"""
-    devices = sd.query_devices()
-    input_devices = [d for d in devices if d["max_input_channels"] > 0]
-    
-    print("\n" + "="*60)
-    print("Available Input Devices:")
-    print("="*60)
-    
-    zoom_devices = []
-    for idx, device in enumerate(input_devices):
-        device_name = device['name']
-        channels = device['max_input_channels']
-        print(f"Device {idx}: {device_name} -> {channels} channels")
-        
-        if "h6" in device_name.lower():
-            device_type = "H6"
-            zoom_devices.append((idx, device_name, device_type, channels))
-        if "zoom" in device_name.lower():
-            device_type = "ZOOM L-12 Audio"
-            zoom_devices.append((idx, device_name, device_type, channels))
-    
-    if not zoom_devices:
-        print("\nNo Zoom devices found!")
-        return None, None, None
-    
-    print("\n" + "="*60)
-    print("Zoom Devices Found:")
-    print("="*60)
-    for i, (idx, name, dtype, channels) in enumerate(zoom_devices):
-        print(f"{i}: {name} ({dtype}) - {channels} channels (device index: {idx})")
-    
-    if len(zoom_devices) == 1:
-        choice = 0
-        print(f"\nOnly one Zoom device found, auto-selecting: {zoom_devices[0][1]}")
-    else:
-        while True:
-            try:
-                choice = int(input(f"\nSelect device (0-{len(zoom_devices)-1}): "))
-                if 0 <= choice < len(zoom_devices):
-                    break
-                print("Invalid choice, please try again.")
-            except ValueError:
-                print("Please enter a valid number.")
-    
-    device_index, device_name, device_type, num_channels = zoom_devices[choice]
-    print(f"\nSelected: {device_name} ({device_type})\n")
-    return device_index, device_type, num_channels
-
-
-def detect_speech_vad(audio_chunk, vad_model):
-    """Detect if audio contains speech using Silero VAD"""
-    try:
-        audio_tensor = torch.tensor(audio_chunk, dtype=torch.float32)
-        
-        # Normalize audio
-        max_val = torch.max(torch.abs(audio_tensor))
-        if max_val > 0:
-            audio_tensor = audio_tensor / max_val
-        
-        audio_tensor = audio_tensor.unsqueeze(0)
-        
-        # Get speech probability (0-1)
-        speech_prob = vad_model(audio_tensor, SAMPLE_RATE).item()
-        return speech_prob
-    except Exception as e:
-        return 0.0
-
-
-def audio_callback(indata, frames, time_info, status, vad_model, channel_offset=2):
-    """Callback to calculate loudness and detect speech for each speaker"""
-    if status:
-        print(f"Audio error: {status}")
-    
-    levels = []
-    detections = []
-    probabilities = []
-    
-    # Process each of 4 speakers
-    for speaker in range(4):
-        ch = channel_offset + speaker
-        if ch < indata.shape[1]:
-            audio = indata[:, ch]
-            
-            # Calculate loudness
-            rms = np.sqrt(np.mean(audio ** 2))
-            if rms > 0:
-                db = 20 * np.log10(rms)
-            else:
-                db = -100
-            levels.append(db)
-            
-            # Detect speech using VAD
-            speech_prob = detect_speech_vad(audio, vad_model)
-            probabilities.append(speech_prob)
-            detections.append(speech_prob > VAD_THRESHOLD)
-        else:
-            levels.append(-100)
-            probabilities.append(0.0)
-            detections.append(False)
-    
-    loudness_levels.setAll(levels)
-    speech_detected.setAll(detections)
-    speech_probability.setAll(probabilities)
 
 
 def robot_command_executor(elmo, logger):
@@ -318,7 +206,7 @@ def delay_mode_loop(elmo, logger):
         else:
             time.sleep(0.5)
 
-def nvb_autonomous_control(elmo):
+def nvb_control(elmo):
     global elmo_ip, elmo_port, client_ip, robot_angles, flag, rest_api_input, delay_mode
     logger = setup_logger(f"nvd_autonomous")
     
@@ -329,64 +217,55 @@ def nvb_autonomous_control(elmo):
 
     time.sleep(5)
 
-    loudest_speaker = -1
-    robot_speaking = False
-    previous = -1
-    current_speaker_start_time = None
-    do_nothing = False
-    tiny_memory = []
-    last_backchannel_time = 0
-    backchannel_interval = 7  # seconds between backchannels
     
+    while not shutdown_event.is_set():
+        #print("hello")
+        if delay_mode.get():
+            time.sleep(0.5)
+            continue
 
-    try:
-        while not shutdown_event.is_set():
+        if not flag.get():
+            flag.setAll(True)
 
-            if delay_mode.get():
-                time.sleep(0.5)
-                continue
+            if rest_api_input.get() == [0, 0, 0, 0, 0, 0]:
+                add_robot_command('clean', delay_after=0)
+                logger.info(f"Clean Queue")
 
-            if not flag.get():
-                flag.setAll(True)
+            else:
+                #print(rest_api_input.get(0))
+                if rest_api_input.get(4) == True:
+                    add_robot_command('toggle_motors', delay_after=2)
+                    logger.info(f"Toggle Motors")
 
-                if rest_api_input.get() == [0, 0, 0, 0, 0, 0]:
-                    add_robot_command('clean', delay_after=0)
-                    logger.info(f"Clean Queue")
+                if rest_api_input.get(5) == True:
+                    add_robot_command('toggle_behaviour', delay_after=2)
+                    logger.info(f"Toggle Behaviour")
 
-                else:
-                    #print(rest_api_input.get(0))
-                    if rest_api_input.get(4) == True:
-                        add_robot_command('toggle_motors', delay_after=2)
-                        logger.info(f"Toggle Motors")
+                if rest_api_input.get(0) != None:
+                    add_robot_command('move_pan', delay_after=1, angle=rest_api_input.get(0))
+                    logger.info(f"Move pan to: {rest_api_input.get(0)}")
 
-                    if rest_api_input.get(5) == True:
-                        add_robot_command('toggle_behaviour', delay_after=2)
-                        logger.info(f"Toggle Behaviour")
+                if rest_api_input.get(1) != None:
+                    add_robot_command('move_tilt', delay_after=1, angle=rest_api_input.get(1))
+                    logger.info(f"Move tilt to: {rest_api_input.get(1)}")
 
-                    if rest_api_input.get(0) != None:
-                        add_robot_command('move_pan', delay_after=1, angle=rest_api_input.get(0))
-                        logger.info(f"Move pan to: {rest_api_input.get(0)}")
+                if rest_api_input.get(2) != None:
+                    add_robot_command('set_image', delay_after=0.5, image=rest_api_input.get(2))
+                    logger.info(f"Set image to: {rest_api_input.get(2)}")
 
-                    if rest_api_input.get(1) != None:
-                        add_robot_command('move_tilt', delay_after=1, angle=rest_api_input.get(1))
-                        logger.info(f"Move tilt to: {rest_api_input.get(1)}")
+                if rest_api_input.get(3) != None:
+                    add_robot_command('set_icon', delay_after=0.5, icon=rest_api_input.get(3))
+                    logger.info(f"Set icon to: {rest_api_input.get(3)}")
 
-                    if rest_api_input.get(2) != None:
-                        add_robot_command('set_image', delay_after=0.5, image=rest_api_input.get(2))
-                        logger.info(f"Set image to: {rest_api_input.get(2)}")
+                if rest_api_input.get() == [None, None, None, None, None, None]:
+                    add_robot_command('toggle_behaviour', delay_after=3)
+                    add_robot_command('toggle_behaviour', delay_after=0.5)  
+                    logger.info(f"Backchanneling")
 
-                    if rest_api_input.get(3) != None:
-                        add_robot_command('set_icon', delay_after=0.5, icon=rest_api_input.get(3))
-                        logger.info(f"Set icon to: {rest_api_input.get(3)}")
+        else:
+            continue      
 
-                    if rest_api_input.get() == [None, None, None, None, None, None]:
-                        add_robot_command('toggle_behaviour', delay_after=3)
-                        add_robot_command('toggle_behaviour', delay_after=0.5)  
-                        logger.info(f"Backchanneling")
-                   
-
-    except KeyboardInterrupt:
-        pass
+    
 
 @app.get("/action/{command}/{args}")
 def action(command: str, args:str):
@@ -426,6 +305,10 @@ def action(command: str, args:str):
         rest_api_input.setAll([None, None, None, "lupa.png", None, None])
     elif command == "cry":
         rest_api_input.setAll([None, None, "cry.png", None, None, None])
+    elif command == "love":
+        rest_api_input.setAll([None, None, "love.png", None, None, None])
+    elif command == "star":
+        rest_api_input.setAll([None, None, "star.png", None, None, None])
     elif command == "effort":
         rest_api_input.setAll([None, None, "effort.png", None, None, None])
     elif command == "normal":
@@ -476,7 +359,7 @@ def main():
 
     # Parse command line arguments
     if len(sys.argv) != 4:
-        print("Usage: python3 podcast.py <elmo_ip> <elmo_port> <my_ip>")
+        print("Usage: python3 wizard.py <elmo_ip> <elmo_port> <my_ip>")
         return 1
 
     elmo_ip = sys.argv[1]
@@ -490,7 +373,6 @@ def main():
     logger = setup_logger("main")
     logger.info("=== Application Starting ===")
 
-    signal.signal(signal.SIGINT, signal_handler)
 
     try:
 
@@ -513,19 +395,19 @@ def main():
         time.sleep(2)
 
         # Start robot command executor thread
-        executor_thread = threading.Thread(target=robot_command_executor, args=(elmo, logger), daemon=True)
+        executor_thread = threading.Thread(target=robot_command_executor, args=(elmo, logger))
         executor_thread.start()
 
-        delay_thread = threading.Thread(target=delay_mode_loop, args=(elmo, logger), daemon=True)
+        delay_thread = threading.Thread(target=delay_mode_loop, args=(elmo, logger))
         delay_thread.start()
         logger.info("Started delay mode loop thread")
 
         # Start autonomous control thread
-        control_thread = threading.Thread(target=nvb_autonomous_control, args=(elmo,), daemon=True)
+        control_thread = threading.Thread(target=nvb_control, args=(elmo,))
         control_thread.start()
 
         #Start interface thread
-        rest_api_thread = threading.Thread(target=run_rest_api, args=(), daemon=True)
+        rest_api_thread = threading.Thread(target=run_rest_api, args=())
         rest_api_thread.start()
         logger.info("Started interface control thread")
 

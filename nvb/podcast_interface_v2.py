@@ -12,7 +12,7 @@ if len(sys.argv) == 2:
     S3 = sys.argv[1]
 
 BASE_URL = "http://127.0.0.1:8000"
-PODCAST_ID = 3
+PODCAST_ID = 4
 
 def setup_logger(process_name):
     directory = str(PODCAST_ID)
